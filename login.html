@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SRIJA COMMUNICATION - Login</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#eef4ff}
+.box{width:340px;max-width:92vw;background:#fff;padding:24px;border-radius:14px;box-shadow:0 10px 30px #0002}
+h2{margin-top:0;color:#173b8f}label{display:block;margin:10px 0 5px;font-weight:bold}
+input{width:100%;box-sizing:border-box;padding:10px;border:1px solid #bbb;border-radius:7px}
+button{margin-top:14px;padding:10px 18px;border:0;border-radius:7px;background:#173b8f;color:#fff;cursor:pointer}
+.back{margin-left:8px;background:#666}.msg{margin-top:10px;min-height:20px}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>🔐 Settings Login</h2>
+<label>User ID</label><input id="uid" autocomplete="username">
+<label>Password</label><input id="pw" type="password" autocomplete="current-password">
+<button id="login">Login</button><button class="back" id="back">Back</button>
+<div class="msg" id="msg"></div>
+</div>
+<script>
+document.getElementById("login").onclick=function(){
+var u=document.getElementById("uid").value,p=document.getElementById("pw").value;
+if(u==="srija"&&p==="srija1234"){sessionStorage.setItem("srija_owner_logged_in","1");location.href="./editor.html?v="+Date.now()}
+else document.getElementById("msg").textContent="User ID বা Password ভুল";
+};
+document.getElementById("back").onclick=function(){location.href="./index.html"};
+document.getElementById("uid").focus();
+</script>
+</body>
+</html>
