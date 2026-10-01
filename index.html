@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRIJA COMMUNICATION</title>
+<style>
+*{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f5f7fb;color:#172033}header h1,header p,.hero h2,.hero p,.card h3,.card p,footer,strong{max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+header{background:linear-gradient(135deg,#173b8f,#2457c5);color:white;padding:24px 18px;text-align:center}
+header h1{margin:0;font-size:32px}header p{margin:8px 0 0;font-size:16px}
+nav{background:white;padding:12px;text-align:center;box-shadow:0 2px 8px #0001;position:sticky;top:0;z-index:2}
+nav a{color:#173b8f;text-decoration:none;margin:0 12px;font-weight:bold}
+.hero{max-width:1000px;margin:35px auto;padding:45px 22px;text-align:center;background:white;border-radius:18px;box-shadow:0 8px 30px #0001}
+.hero h2{font-size:30px;margin:0 0 12px}.hero p{font-size:18px;line-height:1.7}
+.btn{display:inline-block;background:#173b8f;color:white;padding:13px 24px;border-radius:8px;text-decoration:none;margin-top:12px}
+.cards{max-width:1000px;margin:20px auto 45px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;padding:0 18px}
+.card{background:white;padding:25px;border-radius:14px;box-shadow:0 5px 20px #0001;text-align:center}.card h3{color:#173b8f}
+footer{text-align:center;background:#172033;color:white;padding:25px;line-height:1.7}
+ .notice{max-width:1000px;margin:20px auto 0;padding:14px 18px;background:#fff;border-radius:14px;box-shadow:0 5px 20px #0001;text-align:center;overflow:hidden}.notice-title{font-weight:bold;color:#173b8f;white-space:nowrap;display:inline-block;animation:srijaNotice 12s linear infinite}@keyframes srijaNotice{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+@media(max-width:600px){header h1{font-size:25px}.hero{margin:20px 12px;padding:30px 16px}.hero h2{font-size:24px}.hero p{font-size:16px}.cards{padding:0 12px}.card{padding:20px}nav a{display:inline-block;margin:5px 7px}.notice{margin:14px 12px 0}.admin-panel{position:fixed;top:20px;right:20px;width:300px;max-height:80vh;overflow-y:auto;background:#fff;border:2px solid #173b8f;border-radius:12px;box-shadow:0 8px 25px #0003;padding:12px;z-index:9999}.admin-panel h3{margin:0 0 8px;color:#173b8f;font-size:20px}.admin-panel label{display:block;margin:6px 0 3px;font-weight:600}.admin-panel input,.admin-panel textarea,.admin-panel select{width:100%;padding:6px;border:1px solid #ccd3df;border-radius:6px}.admin-panel button{margin:4px 3px 4px 0;padding:7px 9px;border:0;border-radius:6px;background:#173b8f;color:#fff;cursor:pointer}.admin-panel hr{border:0;border-top:1px solid #ddd;margin:10px 0}.admin-panel details{margin:6px 0;border:1px solid #d7dce5;border-radius:7px;overflow:hidden;background:#fff}.admin-panel details:not([open])>*:not(summary){display:none!important}.admin-panel summary{padding:9px 10px;background:#f4f6fa;color:#173b8f;font-weight:bold;cursor:pointer;list-style:none}.admin-panel summary::-webkit-details-marker{display:none}.admin-panel summary:before{content:"＋";display:inline-block;margin-right:6px}.admin-panel details[open] summary:before{content:"−"}.admin-panel details>*:not(summary){margin-left:10px;margin-right:10px}.admin-panel details label:first-of-type{margin-top:9px}.admin-panel details button:last-child{margin-bottom:9px}@media(max-width:600px){.admin-panel{top:6px;right:6px;max-height:calc(100vh - 12px);overflow:auto}}}<style id="srija-hand-pointer-fix">#slB,#slB *{cursor:pointer !important}</style></style>
+
+<style id="admin-style">
+.admin-only{display:none}.admin-panel{position:fixed;top:12px;right:12px;width:320px;max-width:calc(100vw - 24px);background:#fff;border-radius:14px;box-shadow:0 10px 35px #0003;padding:18px;z-index:9999;border:1px solid #ddd}.admin-panel h3{margin:0 0 12px;color:#173b8f}.admin-panel label{display:block;margin:9px 0 4px;font-weight:bold;font-size:13px}.admin-panel input,.admin-panel select{width:100%;padding:8px;border:1px solid #ccc;border-radius:7px}.admin-panel button{margin-top:10px;padding:9px 12px;border:0;border-radius:7px;background:#173b8f;color:#fff;cursor:pointer}.admin-help{font-size:12px;color:#555;margin:8px 0}.selected-edit{outline:3px dashed #f59e0b!important;outline-offset:3px}
+
+/* Simple Word/Excel-like private editor ribbon */
+.srija-editing{padding-top:86px!important}.srija-ribbon{position:fixed;top:0;left:0;right:0;z-index:100000;background:#fff;border-bottom:1px solid #ccd3df;box-shadow:0 3px 14px #0002;display:flex;align-items:center;gap:4px;padding:7px 10px;overflow-x:auto;white-space:nowrap}.srija-ribbon button{border:0;background:#f3f5f9;color:#173b8f;padding:9px 13px;border-radius:7px;font-weight:bold;cursor:pointer} .srija-tools button,.srija-tools select,.srija-tools input{cursor:pointer!important}.srija-brand{font-weight:800;color:#173b8f;margin-right:5px}.srija-context{position:fixed;top:48px;left:0;right:0;z-index:99999;min-height:38px;background:#eef4ff;border-bottom:1px solid #ccd3df;padding:6px 10px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap}.srija-tools{display:flex;gap:5px}.srija-tools button{border:0;border-radius:6px;padding:6px 9px;background:#fff;color:#173b8f;font-weight:bold}.srija-tools .danger{background:#b42318;color:#fff}.srija-selected{outline:3px dashed #f59e0b!important;outline-offset:3px;scroll-margin-top:100px}
+#settingsBtn{cursor:pointer!important}.s3login button,#s3loginBtn{cursor:pointer!important}</style><style id="srija-responsive-fix-v1">
+html,body{width:100%;min-width:0}
+body{overflow-x:hidden}
+header,nav,.notice,.hero,.cards,footer{width:auto;max-width:100%;margin-left:auto;margin-right:auto}
+header{padding-left:clamp(12px,4vw,24px);padding-right:clamp(12px,4vw,24px)}
+header h1{font-size:clamp(22px,5vw,32px);line-height:1.2}
+header p{font-size:clamp(14px,3vw,16px)}
+nav{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px;padding:10px 8px}
+nav a{display:inline-block;margin:4px 8px}
+.notice{margin-top:16px;margin-left:clamp(10px,3vw,20px);margin-right:clamp(10px,3vw,20px)}
+.hero{margin-top:24px;margin-bottom:24px;padding:clamp(24px,6vw,45px) clamp(14px,4vw,22px)}
+.hero h2{font-size:clamp(22px,5vw,30px);line-height:1.3}
+.hero p{font-size:clamp(15px,3.5vw,18px)}
+.cards{grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));padding-left:clamp(10px,3vw,18px);padding-right:clamp(10px,3vw,18px)}
+.card{min-width:0;overflow-wrap:anywhere}
+footer{overflow-wrap:anywhere}
+img{max-width:100%;height:auto}
+@media(max-width:768px){
+ .hero,.cards,.notice{width:calc(100% - 20px)}
+ nav a{margin:3px 5px;font-size:14px}
+}
+@media(min-width:769px){
+ .hero,.cards,.notice{width:calc(100% - 36px)}
+}
+</style></head>
+<body>
+<header style="position:relative"><img id="siteLogo" data-edit-id="id:siteLogo" alt="SRIJA COMMUNICATION logo" style="display:none;width:auto;max-width:180px;max-height:100px;height:auto;margin:0 auto 10px;border-radius:10px;object-fit:contain"><h1>SRIJA COMMUNICATION</h1><p>আপনার ডিজিটাল পরিষেবার সহজ ঠিকানা</p></header>
+<nav><a href="./">হোম</a><a href="#contact">যোগাযোগ</a><a href="./" id="settingsBtn">🔐 Login</a></nav>
+<section class="notice" id="notice"><div class="notice-title" id="noticeText">বিজ্ঞপ্তি / আপডেট</div></section>
+<section class="hero" id="home">
+<h2>স্বাগতম SRIJA COMMUNICATION-এ</h2>
+<p>অনলাইন ও ডিজিটাল পরিষেবা সংক্রান্ত কাজে আপনাকে সহজ ও দ্রুত সহায়তা দেওয়ার জন্য আমাদের এই ওয়েবসাইট।</p>
+<a class="btn" href="#contact">যোগাযোগ করুন</a>
+</section>
+<section class="cards" id="services">
+<div class="card"><a href="links.html" style="display:block;color:inherit;text-decoration:none"><h3>🌐 প্রয়োজনীয় ওয়েবসাইট</h3><p>গুরুত্বপূর্ণ সরকারি ও প্রয়োজনীয় ওয়েবসাইট এক জায়গায়।</p></a></div>
+<div class="card"><h3>📝 ডকুমেন্ট সহায়তা</h3><p>ফর্ম, ডকুমেন্ট ও ডিজিটাল কাজের সহায়তা।</p></div>
+<div class="card"><h3>📱 অনলাইন সহায়তা</h3><p>দৈনন্দিন অনলাইন পরিষেবা ব্যবহারে সহায়তা।</p></div>
+</section>
+<footer id="contact"><strong>যোগাযোগ</strong><br>সন্তু প্রামানিক<br>ফোন: 7003979575<br>দক্ষিণ জালখুড়া, বড়ুয়া পাড়া, মহেশতলা, কলকাতা - 700141<br><br>© 2026 SRIJA COMMUNICATION</footer>
+
+<script>
+(function(){
+const key="srija_first_page_styles"; const noticeKey="srija_notice_settings"; const copyKey="srija_copied_element"; const scrollKey="srija_first_page_scroll"; const logoKey="srija_site_logo"; let logoMemory="";
+let selected=null;
+function showLogo(v){if(!v)return;try{localStorage.setItem(logoKey,v)}catch(e){}let img=document.getElementById("siteLogo");const h=document.querySelector("header");if(!img&&h){img=document.createElement("img");img.id="siteLogo";img.alt="SRIJA COMMUNICATION logo";h.insertBefore(img,h.firstChild)}if(img){img.dataset.editId="id:siteLogo";img.src=v;img.style.setProperty("display","block","important");img.style.setProperty("width","auto","important");img.style.setProperty("max-width","180px","important");img.style.setProperty("max-height","100px","important");img.style.setProperty("height","auto","important");img.style.setProperty("margin","0 auto 10px","important");img.style.setProperty("object-fit","contain","important")}return img} function applyLogo(){try{const st=JSON.parse(localStorage.getItem("srija_ribbon_state_v2")||"{}");const v=st.logo||localStorage.getItem(logoKey);if(v)showLogo(v)}catch(e){}} function saveLogoFile(file,done){const rd=new FileReader();rd.onload=()=>{const data=String(rd.result||"");if(!data.startsWith("data:image/")){done(false);return}const put=(v)=>{const img=showLogo(v);if(!img){done(false);return}img.setAttribute("src",v);img.style.setProperty("display","block","important");try{localStorage.setItem(logoKey,v)}catch(e){}try{const st=JSON.parse(localStorage.getItem("srija_ribbon_state_v2")||'{"items":{},"deleted":[],"dynamic":[]}');st.logo=v;st.items=st.items||{};st.items["id:siteLogo"]={html:"",style:img.getAttribute("style")||"",src:v};st.deleted=Array.isArray(st.deleted)?st.deleted.filter(k=>k!=="id:siteLogo"):[];localStorage.setItem("srija_ribbon_state_v2",JSON.stringify(st))}catch(e){}done(true)};if(data.length<=30000){put(data);return}const im=new Image();im.onload=()=>{const s=Math.min(1,300/Math.max(im.naturalWidth,im.naturalHeight));const cv=document.createElement("canvas");cv.width=Math.max(1,Math.round(im.naturalWidth*s));cv.height=Math.max(1,Math.round(im.naturalHeight*s));cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);let out=cv.toDataURL("image/jpeg",0.5);if(out.length>30000)out=cv.toDataURL("image/jpeg",0.35);put(out)};im.onerror=()=>put(data);im.src=data};rd.onerror=()=>done(false);rd.readAsDataURL(file)}    function applyNotice(){try{const n=JSON.parse(localStorage.getItem(noticeKey)||"{}");if(n.text)document.getElementById("noticeText").textContent=n.text;document.getElementById("noticeText").style.animation=n.scroll==="off"?"none":""}catch(e){}}
+function applyPageBackground(){try{const v=localStorage.getItem("srija_page_background");if(v){document.body.style.setProperty("background-image","url(\""+v+"\")","important");document.body.style.setProperty("background-size","cover","important");document.body.style.setProperty("background-position","center","important");document.body.style.setProperty("background-attachment","fixed","important");document.body.style.setProperty("background-repeat","no-repeat","important")}}catch(e){}}
+function applyPageScroll(){const on=localStorage.getItem(scrollKey)==="on";document.querySelectorAll("header h1,header p,nav a,.hero h2,.hero p,.btn,.card h3,.card p,footer").forEach(e=>e.classList.toggle("srija-scroll-text",on));if(on&&!document.getElementById("srija-scroll-css")){const s=document.createElement("style");s.id="srija-scroll-css";s.textContent=".srija-scroll-text{white-space:nowrap;overflow:hidden;display:inline-block;max-width:100%;animation:srijaGlobalScroll 14s linear infinite}@keyframes srijaGlobalScroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}";document.head.appendChild(s)}}
+function applySaved(){
+ try{
+  const saved=JSON.parse(localStorage.getItem(key)||"{}");
+  Object.keys(saved).forEach((id)=>{const el=document.querySelector('[data-edit-id="'+id+'"]');if(el)Object.assign(el.style,saved[id]);});
+ }catch(e){}
+}
+function saveStyle(id,styles){
+ try{
+  const saved=JSON.parse(localStorage.getItem(key)||"{}");
+  saved[id]=styles;
+  localStorage.setItem(key,JSON.stringify(saved));
+  return true;
+ }catch(e){
+  alert("সেটিংস সংরক্ষণ করা যায়নি। আগের সাইট নিরাপদ রাখা হয়েছে।");
+  return false;
+ }
+}
+function setupSelectableElements(){
+ document.querySelectorAll("header,nav,.hero,.hero h2,.hero p,.btn,.card,.card h3,.card p,footer").forEach((el,i)=>{
+  el.dataset.editId="el"+i;
+ });
+}
+function admin(){
+ if(location.hash!=="#admin")return;
+ document.body.insertAdjacentHTML("beforeend",'<div class="admin-panel" id="adminPanel"><button id="settingsCloseTop" type="button" style="float:right;margin:0 0 8px 8px;background:#777">✕</button><h3>সবকিছু পরিচালনা</h3><div class="admin-help">যে অংশ পরিবর্তন করবেন সেটিতে ক্লিক করুন।</div><div id="selectedName">কিছু নির্বাচন করা হয়নি</div><details><summary>নির্বাচিত অংশের ডিজাইন</summary><label>Text / Content</label><textarea id="elText" rows="3"></textarea><label>Font Size</label><input id="fontSize" type="number" min="8" max="100" value="16"><label>Font Color</label><input id="fontColor" type="color" value="#172033"><label>Background Color</label><input id="bgColor" type="color" value="#ffffff"><label>Element Width (%)</label><input id="elWidth" type="number" min="10" max="100" value="100"><label>Element Height (px)</label><input id="elHeight" type="number" min="0" max="1000" value="0"><label>Font Style</label><select id="fontFamily"><option value="Arial, Noto Sans Bengali, sans-serif">Arial / Bengali</option><option value="Georgia, serif">Georgia</option><option value="Verdana, sans-serif">Verdana</option><option value="Tahoma, sans-serif">Tahoma</option></select><button id="applyBtn">প্রয়োগ করুন</button><button id="copyBtn">Copy</button><button id="pasteBtn">Paste</button><button id="resetBtn">নির্বাচিত অংশ Reset</button></details><details><summary>বিজ্ঞপ্তি ও Scrolling</summary><label>বিজ্ঞপ্তি / আপডেট</label><input id="noticeInput" type="text"><label><input id="noticeScroll" type="checkbox" checked style="width:auto"> বিজ্ঞপ্তি scrolling</label><label><input id="pageScroll" type="checkbox" style="width:auto"> সব লেখা scrolling</label><button id="noticeSave">বিজ্ঞপ্তি সংরক্ষণ</button></details><details><summary>Logo</summary><input id="logoFile" type="file" accept="image/*"><button id="logoSave">Logo সংরক্ষণ</button><button id="logoRemove">Logo সরান</button></details><details><summary>হেডার ও ফুটার</summary><label>সাইটের নাম <input id="siteTitleEdit" type="text"></label><label>সাবটাইটেল <input id="siteSubEdit" type="text"></label><button id="siteTextSave">সাইটের লেখা সংরক্ষণ</button><label>ফুটারের লেখা <input id="footerEdit" type="text"></label><button id="footerSave">ফুটারের লেখা সংরক্ষণ</button></details><details><summary>পরিষেবা</summary><label>পরিষেবা ১ <input id="service1Edit" type="text"></label><label>পরিষেবা ২ <input id="service2Edit" type="text"></label><label>পরিষেবা ৩ <input id="service3Edit" type="text"></label><button id="servicesSave">পরিষেবা লেখা সংরক্ষণ</button><label>পরিষেবা ১-এর বর্ণনা <textarea id="service1Desc" rows="2"></textarea></label><label>পরিষেবা ২-এর বর্ণনা <textarea id="service2Desc" rows="2"></textarea></label><label>পরিষেবা ৩-এর বর্ণনা <textarea id="service3Desc" rows="2"></textarea></label><button id="serviceDescSave">পরিষেবার বর্ণনা সংরক্ষণ</button></details><details><summary>Hero</summary><label>Hero শিরোনাম <input id="heroTitleEdit" type="text"></label><label>Hero বর্ণনা <textarea id="heroDescEdit" rows="2"></textarea></label><button id="heroSave">Hero লেখা সংরক্ষণ</button><label>Hero বাটনের লেখা <input id="heroBtnEdit" type="text"></label><label>Hero বাটনের লিংক <input id="heroBtnUrl" type="text"></label><button id="heroBtnSave">Hero বাটন সংরক্ষণ</button></details><details><summary>অন্যান্য</summary><button id="resetAllBtn">সব ডিজাইন Reset</button><button id="closeBtn">সাধারণ সাইট</button></details></div>');;
+ document.querySelectorAll("header,nav,.hero,.hero h2,.hero p,.btn,.card,.card h3,.card p,footer").forEach((el)=>{
+  el.addEventListener("click",function(e){
+   if(e.target.closest("#adminPanel"))return;
+   e.preventDefault();e.stopPropagation();
+   if(selected)selected.classList.remove("selected-edit");
+   selected=this;this.classList.add("selected-edit");
+   document.getElementById("selectedName").textContent="নির্বাচিত: "+(this.tagName==="DIV"?"বক্স":this.innerText.trim().slice(0,30));
+   const cs=getComputedStyle(this);
+   document.getElementById("fontSize").value=parseInt(cs.fontSize)||16;document.getElementById("elText").value=selected?selected.innerText:"";
+   document.getElementById("fontColor").value=rgbToHex(cs.color);
+   document.getElementById("fontFamily").value=[...document.getElementById("fontFamily").options].some(o=>o.value===cs.fontFamily)?cs.fontFamily:document.getElementById("fontFamily").options[0].value;document.getElementById("bgColor").value=rgbToHex(cs.backgroundColor);document.getElementById("elWidth").value=parseInt(cs.width)||100;document.getElementById("elHeight").value=cs.height==="auto"?0:parseInt(cs.height)||0;
+  },true);
+ });
+ document.getElementById("copyBtn").onclick=function(){if(!selected){alert("আগে একটি অংশ নির্বাচন করুন।");return}localStorage.setItem(copyKey,selected.outerHTML);alert("নির্বাচিত অংশ Copy হয়েছে")};
+ document.getElementById("resetAllBtn").onclick=()=>{if(!confirm("প্রথম পেজের সব সংরক্ষিত ডিজাইন Reset করবেন?"))return;localStorage.removeItem(key);location.reload()};document.getElementById("resetBtn").onclick=()=>{if(!selected){alert("আগে একটি অংশ নির্বাচন করুন।");return}selected.removeAttribute("style");try{const a=JSON.parse(localStorage.getItem(key)||"{}");delete a[selected.dataset.editId];localStorage.setItem(key,JSON.stringify(a))}catch(e){}alert("নির্বাচিত অংশের ডিজাইন Reset হয়েছে")};document.getElementById("pasteBtn").onclick=function(){if(!selected){alert("আগে যেখানে বসাবেন সেটি নির্বাচন করুন।");return}const html=localStorage.getItem(copyKey);if(!html){alert("আগে Copy করুন।");return}const box=document.createElement("div");box.innerHTML=html;const clone=box.firstElementChild;if(!clone){return}clone.dataset.editId="copy"+Date.now();clone.classList.remove("selected-edit");selected.parentNode.insertBefore(clone,selected.nextSibling);alert("Copy করা অংশ Paste হয়েছে")};
+ document.getElementById("logoSave").onclick=()=>{const f=document.getElementById("logoFile").files[0];if(!f)return alert("আগে একটি ছবি নির্বাচন করুন");saveLogoFile(f,ok=>{if(ok){applyLogo();applyPageBackground();alert("Logo সংরক্ষণ হয়েছে")}else alert("Logo সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।")})};document.getElementById("logoRemove").onclick=()=>{localStorage.removeItem(logoKey);const i=document.getElementById("siteLogo");if(i){i.src="";i.style.display="none"}alert("Logo সরানো হয়েছে")};document.getElementById("noticeSave").onclick=function(){const n={text:document.getElementById("noticeInput").value.trim()||"বিজ্ঞপ্তি / আপডেট",scroll:document.getElementById("noticeScroll").checked?"on":"off"};localStorage.setItem(noticeKey,JSON.stringify(n));applyNotice();alert("বিজ্ঞপ্তি সংরক্ষণ হয়েছে")};
+ const heroBtnKey="srija_hero_button";const hb=JSON.parse(localStorage.getItem(heroBtnKey)||"{}");const heroBtn=document.querySelector(".hero .btn");document.getElementById("heroBtnEdit").value=hb.text||heroBtn?.innerText||"";document.getElementById("heroBtnUrl").value=hb.url||heroBtn?.getAttribute("href")||"links.html";document.getElementById("heroBtnSave").onclick=()=>{const n={text:document.getElementById("heroBtnEdit").value.trim()||"প্রয়োজনীয় ওয়েবসাইট",url:document.getElementById("heroBtnUrl").value.trim()||"links.html"};localStorage.setItem(heroBtnKey,JSON.stringify(n));if(heroBtn){heroBtn.innerText=n.text;heroBtn.setAttribute("href",n.url)}alert("Hero বাটন সংরক্ষণ হয়েছে")};const heroKey="srija_hero_text";const hv=JSON.parse(localStorage.getItem(heroKey)||"{}");document.getElementById("heroTitleEdit").value=hv.title||document.querySelector(".hero h2")?.innerText||"";document.getElementById("heroDescEdit").value=hv.desc||document.querySelector(".hero p")?.innerText||"";document.getElementById("heroSave").onclick=()=>{const n={title:document.getElementById("heroTitleEdit").value.trim()||"আপনার প্রয়োজনীয় তথ্য ও পরিষেবা",desc:document.getElementById("heroDescEdit").value.trim()||"সহজে তথ্য খুঁজুন এবং প্রয়োজনীয় ওয়েবসাইটে প্রবেশ করুন।"};localStorage.setItem(heroKey,JSON.stringify(n));document.querySelector(".hero h2").innerText=n.title;document.querySelector(".hero p").innerText=n.desc;alert("Hero লেখা সংরক্ষণ হয়েছে")};const serviceDescKey="srija_services_desc";const sd=JSON.parse(localStorage.getItem(serviceDescKey)||"{}");const descs=[...document.querySelectorAll(".card p")];["service1Desc","service2Desc","service3Desc"].forEach((id,i)=>document.getElementById(id).value=sd["d"+(i+1)]||descs[i]?.innerText||"");document.getElementById("serviceDescSave").onclick=()=>{const n={d1:document.getElementById("service1Desc").value.trim()||"পরিষেবার বিবরণ",d2:document.getElementById("service2Desc").value.trim()||"পরিষেবার বিবরণ",d3:document.getElementById("service3Desc").value.trim()||"পরিষেবার বিবরণ"};localStorage.setItem(serviceDescKey,JSON.stringify(n));descs.forEach((e,i)=>e.innerText=n["d"+(i+1)]);alert("পরিষেবার বর্ণনা সংরক্ষণ হয়েছে")};const serviceKey="srija_services_text";const sv=JSON.parse(localStorage.getItem(serviceKey)||"{}");const cards=[...document.querySelectorAll(".card h3")];["service1Edit","service2Edit","service3Edit"].forEach((id,i)=>document.getElementById(id).value=sv["s"+(i+1)]||cards[i]?.innerText||"");document.getElementById("servicesSave").onclick=()=>{const n={s1:document.getElementById("service1Edit").value.trim()||"পরিষেবা ১",s2:document.getElementById("service2Edit").value.trim()||"পরিষেবা ২",s3:document.getElementById("service3Edit").value.trim()||"পরিষেবা ৩"};localStorage.setItem(serviceKey,JSON.stringify(n));cards.forEach((e,i)=>e.innerText=n["s"+(i+1)]);alert("পরিষেবা লেখা সংরক্ষণ হয়েছে")};const footerKey="srija_footer_text";const fv=localStorage.getItem(footerKey);document.getElementById("footerEdit").value=fv||document.querySelector("footer").innerText;document.getElementById("footerSave").onclick=()=>{const t=document.getElementById("footerEdit").value.trim()||"© 2026 SRIJA COMMUNICATION";localStorage.setItem(footerKey,t);document.querySelector("footer").innerText=t;alert("ফুটারের লেখা সংরক্ষণ হয়েছে")};const siteKey="srija_site_text";const ss=JSON.parse(localStorage.getItem(siteKey)||"{}");document.getElementById("siteTitleEdit").value=ss.title||document.querySelector("header h1").innerText;document.getElementById("siteSubEdit").value=ss.sub||document.querySelector("header p").innerText;document.getElementById("siteTextSave").onclick=()=>{const n={title:document.getElementById("siteTitleEdit").value.trim()||"SRIJA COMMUNICATION",sub:document.getElementById("siteSubEdit").value.trim()||"সেবা ও তথ্যের সহজ ঠিকানা"};localStorage.setItem(siteKey,JSON.stringify(n));document.querySelector("header h1").innerText=n.title;document.querySelector("header p").innerText=n.sub;alert("সাইটের লেখা সংরক্ষণ হয়েছে")};const ns=JSON.parse(localStorage.getItem(noticeKey)||"{}");document.getElementById("noticeInput").value=ns.text||"বিজ্ঞপ্তি / আপডেট";document.getElementById("noticeScroll").checked=ns.scroll!=="off";document.getElementById("pageScroll").checked=localStorage.getItem(scrollKey)==="on";document.getElementById("pageScroll").onchange=function(){localStorage.setItem(scrollKey,this.checked?"on":"off");applyPageScroll()};
+ document.getElementById("applyBtn").onclick=function(){
+  if(!selected){alert("আগে একটি অংশ নির্বাচন করুন।");return;}
+  const newText=document.getElementById("elText").value;if(selected && selected.children.length===0 && newText.trim()!=="") selected.innerText=newText;const styles={fontSize:document.getElementById("fontSize").value+"px",color:document.getElementById("fontColor").value,fontFamily:document.getElementById("fontFamily").value,backgroundColor:document.getElementById("bgColor").value,width:document.getElementById("elWidth").value+"%",...(document.getElementById("elHeight").value>0?{height:document.getElementById("elHeight").value+"px"}:{height:""})};
+  Object.assign(selected.style,styles);
+  saveStyle(selected.dataset.editId,styles);
+ };
+ document.getElementById("closeBtn").onclick=function(){location.hash="";location.reload()};document.getElementById("settingsCloseTop").onclick=function(){location.hash="";location.reload()};
+}
+function rgbToHex(rgb){const m=rgb.match(/\d+/g)||[23,32,51];return"#"+m.slice(0,3).map(x=>("0"+parseInt(x).toString(16)).slice(-2)).join("")}
+const savedHeroBtn=JSON.parse(localStorage.getItem("srija_hero_button")||"{}");const hbEl=document.querySelector(".hero .btn");if(hbEl){if(savedHeroBtn.text)hbEl.innerText=savedHeroBtn.text;if(savedHeroBtn.url)hbEl.setAttribute("href",savedHeroBtn.url)}const savedHero=JSON.parse(localStorage.getItem("srija_hero_text")||"{}");if(savedHero.title&&document.querySelector(".hero h2"))document.querySelector(".hero h2").innerText=savedHero.title;if(savedHero.desc&&document.querySelector(".hero p"))document.querySelector(".hero p").innerText=savedHero.desc;const savedServiceDesc=JSON.parse(localStorage.getItem("srija_services_desc")||"{}");document.querySelectorAll(".card p").forEach((e,i)=>{const v=savedServiceDesc["d"+(i+1)];if(v)e.innerText=v});const savedServices=JSON.parse(localStorage.getItem("srija_services_text")||"{}");document.querySelectorAll(".card h3").forEach((e,i)=>{const v=savedServices["s"+(i+1)];if(v)e.innerText=v});const ft=localStorage.getItem("srija_footer_text");if(ft)document.querySelector("footer").innerText=ft;const stx=JSON.parse(localStorage.getItem("srija_site_text")||"{}");if(stx.title)document.querySelector("header h1").innerText=stx.title;if(stx.sub)document.querySelector("header p").innerText=stx.sub;setupSelectableElements();
+applyNotice();
+applyPageScroll();
+applySaved();
+applyLogo();
+/* V3 Settings handles #admin; legacy admin panel disabled. */
+})();
+</script>
+<style id="srija-settings-v3-style">
+#srijaSettingsV3{position:fixed;inset:0;background:transparent;z-index:100000;display:flex;align-items:flex-start;justify-content:flex-end;padding:10px;pointer-events:none;overflow:auto} #srijaSettingsV3 .s3box{pointer-events:auto}
+#srijaSettingsV3 .s3box{width:min(360px,calc(100vw - 20px));max-height:80vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 18px 60px #0006;padding:16px}
+#srijaSettingsV3 h3{margin:0;color:#173b8f;font-size:21px}.s3top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.s3close{background:#666!important}.s3section{border:1px solid #d9deea;border-radius:10px;margin:9px 0;overflow:hidden}
+.s3section>summary{cursor:pointer;padding:11px;background:#f5f7fb;color:#173b8f;font-weight:700;list-style:none}.s3section>summary::-webkit-details-marker{display:none}.s3section>summary:before{content:"＋";margin-right:7px}.s3section[open]>summary:before{content:"−"}
+.s3body{padding:10px}.s3body label{display:block;font-size:13px;font-weight:700;margin:7px 0 4px}.s3body input[type=text],.s3body input[type=number],.s3body select,.s3body textarea{width:100%;padding:8px;border:1px solid #cbd2df;border-radius:7px}.s3row{display:flex;gap:6px;flex-wrap:wrap}.s3row>*{flex:1;min-width:70px}
+#srijaSettingsV3 button{border:0;border-radius:7px;padding:8px 10px;background:#173b8f;color:#fff;margin:4px 2px;cursor:pointer}#srijaSettingsV3 button.alt{background:#697386}
+.s3selected{outline:3px dashed #f59e0b!important;outline-offset:3px;max-width:100%;overflow-wrap:anywhere;word-break:break-word}.s3hint{font-size:12px;color:#667085;margin:6px 0}.s3login{max-width:390px;margin:12vh auto}.s3msg{font-size:13px;color:#b42318;min-height:18px}
+</style>
+<script>
+(function(){
+const PASSKEY="srija_settings_auth_v3", USER="srija";
+const HKEY="srija_editor_history_v3", CLIP="srija_editor_clip_v3", PREV="srija_previous_saved_v3";
+let selected=null, undo=[], redo=[], selectMode=false;
+function q(s){return document.querySelector(s)} function qa(s){return [...document.querySelectorAll(s)]}
+function rgb(x){const m=(x||"").match(/\\d+/g)||[255,255,255];return "#"+m.slice(0,3).map(v=>("0"+(+v).toString(16)).slice(-2)).join("")}
+function esc(s){return String(s||"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
+function editable(){
+  let saved={}, stylesSaved={};
+  try{saved=JSON.parse(localStorage.getItem("srija_editor_content_v3")||"{}")}catch(e){saved={};localStorage.removeItem("srija_editor_content_v3")}
+  try{stylesSaved=JSON.parse(localStorage.getItem("srija_editor_styles_v3")||"{}")}catch(e){stylesSaved={};localStorage.removeItem("srija_editor_styles_v3")}
+  qa("body,header,#headerLogoBox,header img,header h1,header p,nav,nav a,.notice,.notice-title,.hero,.hero h2,.hero p,.hero .btn,.cards,.card,.card h3,.card p,footer,footer strong").forEach((e,i)=>{
+    if(!e.dataset.s3id)e.dataset.s3id="s3-"+i;
+    if(!e.children.length && saved[e.dataset.s3id]!==undefined)e.innerText=saved[e.dataset.s3id];
+    const styles=stylesSaved[e.dataset.s3id];
+    if(styles)Object.assign(e.style,styles);
+  });
+}
+function snap(el){return {html:el.innerHTML,style:el.getAttribute("style")||"",id:el.dataset.s3id||""}}
+function restore(el,s){el.innerHTML=s.html;s.style?el.setAttribute("style",s.style):el.removeAttribute("style")}
+function savePrev(el,before,after){
+  const p=JSON.parse(localStorage.getItem(PREV)||"{}"); p[el.dataset.s3id]={before,after,at:Date.now()}; localStorage.setItem(PREV,JSON.stringify(p));
+}
+function mark(el){
+  if(selected)selected.classList.remove("s3selected");
+  selected=el; el.classList.add("s3selected");
+  const cs=getComputedStyle(el), txt=el.children.length?el.innerText:el.innerText;
+  q("#s3text").value=txt||""; q("#s3size").value=parseInt(cs.fontSize)||16; q("#s3color").value=rgb(cs.color);
+  q("#s3bg").value=rgb(cs.backgroundColor); q("#s3bg").dataset.original=q("#s3bg").value; q("#s3width").value=parseInt(cs.width)||100;
+  q("#s3height").value=cs.height==="auto"?0:(parseInt(cs.height)||0);
+  q("#s3align").value=cs.textAlign||"left"; q("#s3name").textContent="নির্বাচিত: "+(txt||el.tagName).trim().slice(0,35);
+}
+function applyStyles(){
+ if(!selected)return alert("আগে একটি অংশ নির্বাচন করুন।");
+ const before=snap(selected); const t=q("#s3text").value;
+ if(!selected.children.length && t.trim()){
+   selected.innerText=t;
+   const content=JSON.parse(localStorage.getItem("srija_editor_content_v3")||"{}");
+   content[selected.dataset.s3id]=t;
+   localStorage.setItem("srija_editor_content_v3",JSON.stringify(content));
+ }
+ selected.style.fontSize=q("#s3size").value+"px";selected.style.color=q("#s3color").value;
+ if(q("#s3bg").value!==q("#s3bg").dataset.original)selected.style.backgroundColor=q("#s3bg").value;selected.style.width=q("#s3width").value+"%";
+ selected.style.textAlign=q("#s3align").value;
+ selected.style.boxSizing="border-box";selected.style.maxWidth="100%";selected.style.overflowWrap="anywhere";selected.style.wordBreak="break-word";
+ const h=+q("#s3height").value;if(h>0)selected.style.height=h+"px";else selected.style.removeProperty("height");
+ const after=snap(selected);undo.push({el:selected,before,after});redo=[];
+ savePrev(selected,before,after);
+ const styles=JSON.parse(localStorage.getItem("srija_editor_styles_v3")||"{}");
+ styles[selected.dataset.s3id]={fontSize:selected.style.fontSize,color:selected.style.color,backgroundColor:selected.style.backgroundColor,width:selected.style.width,textAlign:selected.style.textAlign,height:selected.style.height,transform:selected.style.transform,boxSizing:selected.style.boxSizing,maxWidth:selected.style.maxWidth,overflowWrap:selected.style.overflowWrap,wordBreak:selected.style.wordBreak};
+ localStorage.setItem("srija_editor_styles_v3",JSON.stringify(styles));
+ localStorage.setItem(HKEY,JSON.stringify({undo:[],redo:[]})); alert("পরিবর্তন সংরক্ষণ হয়েছে");
+}
+function move(dx,dy){
+ if(!selected)return alert("আগে একটি অংশ নির্বাচন করুন।");
+ const before=snap(selected), cs=getComputedStyle(selected), tr=cs.transform;
+ let x=0,y=0,m=tr&&tr!=="none"?tr.match(/matrix\\(([^)]+)\\)/):null;
+ if(m){const a=m[1].split(",").map(Number);x=a[4]||0;y=a[5]||0}
+ x+=dx;y+=dy;selected.style.transform="translate("+x+"px,"+y+"px)";
+ const after=snap(selected);undo.push({el:selected,before,after});redo=[];
+}
+function doUndo(){
+ const a=undo.pop();if(!a)return;redo.push({el:a.el,before:snap(a.el),after:a.after});restore(a.el,a.before);mark(a.el)
+}
+function doRedo(){
+ const a=redo.pop();if(!a)return;undo.push({el:a.el,before:snap(a.el),after:a.after});restore(a.el,a.after);mark(a.el)
+}
+function addBox(){
+ let sec=q("#srijaUserBoxes");if(!sec){sec=document.createElement("section");sec.id="srijaUserBoxes";sec.className="cards";q("footer").before(sec)}
+ const d=document.createElement("div");d.className="card";d.dataset.s3id="new-"+Date.now();d.innerHTML="<h3>নতুন বক্স</h3><p>এই বক্সটি Settings থেকে পরিবর্তন করুন।</p>";sec.appendChild(d);editable();mark(d);
+}
+function panel(){
+ const old=q("#adminPanel");if(old)old.remove();
+ const wrap=document.createElement("div");wrap.id="srijaSettingsV3";
+ wrap.innerHTML='<div class="s3box"><div class="s3top"><h3>⚙️ সবকিছু পরিচালনা</h3><div><button id="s3selectMode" class="alt">🎯 Select</button><button class="s3close">✕</button></div></div><div class="s3hint">যে লেখা/বক্স/ছবি পরিবর্তন করবেন সেটিতে সরাসরি চাপুন। তারপর নিচের অপশন ব্যবহার করুন।</div><div id="s3name" class="s3hint">কিছু নির্বাচন করা হয়নি</div>'+
+ '<details class="s3section" open><summary>নির্বাচিত অংশ ডিজাইন</summary><div class="s3body"><label>লেখা</label><textarea id="s3text" rows="3"></textarea><div class="s3row"><button id="s3minus">A−</button><button id="s3plus">A+</button><input id="s3size" type="number" min="8" max="100" value="16"></div><div class="s3row"><label style="flex:1">লেখার রং<input id="s3color" type="color" value="#172033"></label><label style="flex:1">ব্যাকগ্রাউন্ড<input id="s3bg" type="color" value="#ffffff"></label></div><label>Alignment</label><select id="s3align"><option value="left">বাঁ দিকে</option><option value="center">মাঝখানে</option><option value="right">ডান দিকে</option><option value="justify">সমান</option></select><div class="s3row"><label>Width %<input id="s3width" type="number" min="10" max="100" value="100"></label><label>Height px<input id="s3height" type="number" min="0" max="1200" value="0"></label></div><button id="s3apply">প্রয়োগ + Save</button><button id="s3delete" style="background:#b42318">🗑️ Delete Selected</button><button id="s3reset" class="alt">Default</button></div></details>'+
+ '<details class="s3section"><summary>Move / Copy / Paste</summary><div class="s3body"><div class="s3hint">নির্বাচিত অংশকে তীর চিহ্ন দিয়ে সরানো যাবে।</div><button data-m="-1,0">←</button><button data-m="1,0">→</button><button data-m="0,-1">↑</button><button data-m="0,1">↓</button><button id="s3copy">Copy</button><button id="s3paste">Paste</button></div></details>'+
+ '<details class="s3section"><summary>Background Photo</summary><div class="s3body"><input id="s3bgfile" type="file" accept="image/*"><button id="s3bgsave">নির্বাচিত অংশে ছবি দিন</button><button id="s3bgpage">পুরো পেজে ছবি দিন</button></div></details>'+
+ '<details class="s3section"><summary>Undo / Redo</summary><div class="s3body"><button id="s3undo">↶ Undo</button><button id="s3redo">↷ Redo</button><button id="s3allopen">সব খুলুন</button><button id="s3allclose">সব বন্ধ</button></div></details>'+
+ '<details class="s3section"><summary>নতুন Box</summary><div class="s3body"><button id="s3add">＋ Add New Box</button><div class="s3hint">নতুন বক্স যোগ করে সেটিও একইভাবে পরিবর্তন করা যাবে।</div></div></details>'+
+ '<details class="s3section"><summary>Scrolling</summary><div class="s3body"><label><input id="s3scroll" type="checkbox" style="width:auto"> সব লেখা scrolling</label><label><input id="s3noticeScroll" type="checkbox" style="width:auto"> বিজ্ঞপ্তি scrolling</label><button id="s3scrollsave">Scrolling সংরক্ষণ</button></div></details>'+
+ '<details class="s3section"><summary>Logo</summary><div class="s3body"><input id="s3logo" type="file" accept="image/*"><button id="s3logosave">Logo Upload / Save</button></div></details>'+
+ '<details class="s3section"><summary>Header / Hero / Services / Footer</summary><div class="s3body"><div class="s3hint">এই অংশগুলিও সরাসরি নির্বাচন করে উপরের Design অপশন দিয়ে পরিবর্তন করুন।</div><button id="s3header">Header নির্বাচন</button><button id="s3hero">Hero নির্বাচন</button><button id="s3services">Services নির্বাচন</button><button id="s3footer">Footer নির্বাচন</button></div></details>'+
+ '<details class="s3section"><summary>Save / Default</summary><div class="s3body"><div class="s3hint">Default মানে মূল সাইটে ফিরে যাওয়া নয়; শেষবার Save করার আগের অবস্থায় ফিরিয়ে দেওয়া।</div><button id="s3last">শেষ Save-এর আগের অবস্থায় ফিরুন</button></div></details>'+
+ '</div>'; document.body.appendChild(wrap);
+ wrap.querySelector(".s3close").onclick=()=>{location.hash=""}; q("#s3selectMode").onclick=()=>{selectMode=true;wrap.querySelector(".s3box").style.display="none";alert("এখন যে অংশটি পরিবর্তন করতে চান সেটিতে চাপুন। Select হলে Settings আবার খুলবে।")};
+ qa("#srijaSettingsV3 button[data-m]").forEach(b=>b.onclick=()=>{const [x,y]=b.dataset.m.split(",").map(Number);move(x*5,y*5)});
+ q("#s3apply").onclick=applyStyles;q("#s3undo").onclick=doUndo;q("#s3redo").onclick=doRedo;q("#s3add").onclick=addBox;
+ q("#s3minus").onclick=()=>{q("#s3size").value=Math.max(8,(+q("#s3size").value||16)-1)};
+ q("#s3plus").onclick=()=>{q("#s3size").value=Math.min(100,(+q("#s3size").value||16)+1)};
+ q("#s3copy").onclick=()=>{if(selected){localStorage.setItem(CLIP,selected.outerHTML);alert("Copy হয়েছে")}};
+ q("#s3paste").onclick=()=>{if(!selected)return alert("আগে যেখানে বসাবেন সেটি নির্বাচন করুন।");const h=localStorage.getItem(CLIP);if(!h)return alert("আগে Copy করুন।");const t=document.createElement("div");t.innerHTML=h;const n=t.firstElementChild;if(n){n.dataset.s3id="paste-"+Date.now();selected.after(n);editable();mark(n)}};
+ q("#s3reset").onclick=()=>{if(!selected)return alert("আগে একটি অংশ নির্বাচন করুন।");const p=JSON.parse(localStorage.getItem(PREV)||"{}")[selected.dataset.s3id];if(!p){alert("এই অংশের আগের Save অবস্থা নেই।");return}const current=snap(selected);restore(selected,p.before);savePrev(selected,p.before,current);mark(selected);alert("Default: আগের Save-এর আগের অবস্থায় ফিরে গেছে।")};q("#s3delete").onclick=()=>{if(!selected)return alert("আগে একটি অংশ নির্বাচন করুন।");if(selected===document.body||selected===q("#srijaSettingsV3"))return alert("এই অংশটি Delete করা যাবে না।");const name=(selected.innerText||selected.tagName||"এই অংশ").trim().slice(0,35);if(!confirm("শুধু নির্বাচিত অংশটি Delete করবেন?\n\n"+name))return;const el=selected;const id=el.dataset.s3id;const content=JSON.parse(localStorage.getItem("srija_editor_content_v3")||"{}");delete content[id];localStorage.setItem("srija_editor_content_v3",JSON.stringify(content));const styles=JSON.parse(localStorage.getItem("srija_editor_styles_v3")||"{}");delete styles[id];localStorage.setItem("srija_editor_styles_v3",JSON.stringify(styles));el.remove();selected=null;q("#s3name").textContent="কিছু নির্বাচন করা হয়নি";alert("নির্বাচিত অংশটি Delete হয়েছে।")};
+ q("#s3last").onclick=()=>{if(!selected)return alert("আগে একটি অংশ নির্বাচন করুন।");const p=JSON.parse(localStorage.getItem(PREV)||"{}")[selected.dataset.s3id];if(!p)return alert("আগের Save অবস্থা পাওয়া যায়নি।");restore(selected,p.before);alert("আগের Save অবস্থায় ফিরে গেছে।")};
+ q("#s3allopen").onclick=()=>qa("#srijaSettingsV3 details").forEach(d=>d.open=true);q("#s3allclose").onclick=()=>qa("#srijaSettingsV3 details").forEach(d=>d.open=false);
+ q("#s3bgsave").onclick=()=>{if(!selected)return alert("আগে একটি অংশ নির্বাচন করুন।");const f=q("#s3bgfile").files[0];if(!f)return alert("আগে একটি ছবি নির্বাচন করুন।");const r=new FileReader();r.onload=()=>{const img=document.createElement("img");img.className="s3-background-layer";img.src=r.result;img.alt="";img.style.cssText="position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;z-index:0!important;pointer-events:none!important;border-radius:inherit!important;";selected.style.position="relative";selected.style.backgroundColor="transparent";selected.style.backgroundImage="none";selected.querySelectorAll(":scope > .s3-background-layer").forEach(x=>x.remove());selected.insertBefore(img,selected.firstChild);selected.style.overflow="hidden";selected.querySelectorAll(":scope > *:not(.s3-background-layer)").forEach(x=>{x.style.position=x.style.position||"relative";x.style.zIndex=x.style.zIndex||"1"});if(selected.classList.contains("cards"))selected.querySelectorAll(":scope > .card").forEach(x=>x.style.setProperty("background-color","transparent","important"));try{localStorage.setItem("srija_bg_"+(selected.dataset.s3id||"body"),r.result)}catch(e){};alert("Background photo বসানো হয়েছে")};r.readAsDataURL(f)}; q("#s3bgpage").onclick=()=>{const f=q("#s3bgfile").files[0];if(!f)return alert("আগে একটি ছবি নির্বাচন করুন।");const r=new FileReader();r.onload=()=>{document.body.style.setProperty("background-image","url(\""+r.result+"\")","important");document.body.style.setProperty("background-size","cover","important");document.body.style.setProperty("background-position","center","important");document.body.style.setProperty("background-attachment","fixed","important");document.body.style.setProperty("background-repeat","no-repeat","important");localStorage.setItem("srija_page_background",r.result);alert("পুরো পেজের Background photo বসানো হয়েছে")};r.readAsDataURL(f)};
+ q("#s3logosave").onclick=()=>{const f=q("#s3logo").files[0];if(!f)return;saveLogoFile(f,ok=>{if(ok){const i=q("#siteLogo");if(i){i.src=localStorage.getItem("srija_site_logo")||"";i.style.display="block"}alert("Logo Save হয়েছে")}else alert("Logo সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।")})};
+ q("#s3scroll").checked=localStorage.getItem("srija_first_page_scroll")==="on";q("#s3noticeScroll").checked=JSON.parse(localStorage.getItem("srija_notice_settings")||"{}").scroll!=="off";
+ q("#s3scrollsave").onclick=()=>{localStorage.setItem("srija_first_page_scroll",q("#s3scroll").checked?"on":"off");const n=JSON.parse(localStorage.getItem("srija_notice_settings")||"{}");n.scroll=q("#s3noticeScroll").checked?"on":"off";localStorage.setItem("srija_notice_settings",JSON.stringify(n));location.reload()};
+ q("#s3header").onclick=()=>mark(q("header"));q("#s3hero").onclick=()=>mark(q(".hero"));q("#s3services").onclick=()=>mark(q(".cards"));q("#s3footer").onclick=()=>mark(q("footer"));
+ document.addEventListener("keydown",e=>{if(!q("#srijaSettingsV3")||!selected)return;if(["INPUT","TEXTAREA","SELECT"].includes(e.target.tagName))return;const k=e.key;if(k==="ArrowLeft")move(-5,0);if(k==="ArrowRight")move(5,0);if(k==="ArrowUp")move(0,-5);if(k==="ArrowDown")move(0,5);if((e.ctrlKey||e.metaKey)&&k.toLowerCase()==="z"){e.preventDefault();doUndo()}if((e.ctrlKey||e.metaKey)&&k.toLowerCase()==="y"){e.preventDefault();doRedo()}});
+ document.addEventListener("click",ev=>{if(q("#srijaRibbonEditor"))return;if(!q("#srijaSettingsV3"))return;if(ev.target.closest("#srijaSettingsV3"))return;const e=ev.target.closest("header,#headerLogoBox,header img,header h1,header p,nav,nav a,.notice,.notice-title,.hero,.hero h2,.hero p,.hero .btn,.cards,.card,.card h3,.card p,footer,footer strong");if(!e)return;ev.preventDefault();ev.stopPropagation();mark(e);selectMode=false;const box=q("#srijaSettingsV3 .s3box");if(box)box.style.display="block";},true);
+ editable();
+ qa("header,#headerLogoBox,header img,header h1,header p,nav,nav a,.notice,.notice-title,.hero,.hero h2,.hero p,.hero .btn,.cards,.card,.card h3,.card p,footer,footer strong").forEach(e=>{const v=localStorage.getItem("srija_bg_"+e.dataset.s3id);if(!v)return;const parts=v.split("|img");if(parts.length===2&&e.tagName==="IMG"){e.src=parts[0];e.style.objectFit="cover"}else{e.style.backgroundImage="url('"+v.replace("|bg","")+"')";e.style.backgroundColor="transparent";e.style.backgroundSize="cover";e.style.backgroundPosition="center";e.style.backgroundRepeat="no-repeat"}});
+}
+function newPanel(){
+ const old=document.getElementById("srijaRibbonEditor"); if(old) old.remove();
+ let selected=null;
+ const STORE="srija_ribbon_state_v2", CLIP="srija_ribbon_clip_v2", PREV="srija_ribbon_previous_v1";
+ const root=document.createElement("div"); root.id="srijaRibbonEditor";
+ root.innerHTML='<div class="srija-ribbon"><div class="srija-brand">SRIJA Editor</div><button data-tab="home">Home</button><button data-tab="edit">Edit</button><button data-tab="insert">Insert</button><button data-tab="design">Design</button><button id="srijaSave">Save</button><button id="srijaLogout">Logout</button></div><div class="srija-context" id="srijaContext"><span id="srijaSelected">কিছু নির্বাচন করা হয়নি</span><span class="srija-tools" id="srijaTools"></span></div>';
+ document.body.appendChild(root); document.body.classList.add("srija-editing");
+ const name=root.querySelector("#srijaSelected"),tools=root.querySelector("#srijaTools");
+ const selectable="img,header,header img,header h1,header p,nav,.notice,.notice-title,.hero,.hero h2,.hero p,.hero .btn,.cards,.card,.card h3,.card p,footer,footer strong";
+ function pathOf(el){const a=[];while(el&&el!==document.body){let n=1,s=el;while((s=s.previousElementSibling))n++;a.unshift(n);el=el.parentElement}return a.join(".")}
+ function stableKey(el){if(el.id)return "id:"+el.id;const cls=[...el.classList].filter(x=>x!=="srija-selected").sort().join(".");if(cls){const all=[...document.querySelectorAll("." + [...el.classList].filter(x=>x!=="srija-selected").join("."))];return "cls:"+cls+":"+all.indexOf(el)}return "path:"+pathOf(el)}
+ function id(el){if(!el.dataset.editId)el.dataset.editId=stableKey(el);return el.dataset.editId}
+ function saveState(show=true){const oldState=localStorage.getItem(STORE);if(oldState){try{localStorage.setItem(PREV,oldState)}catch(e){}}const state=JSON.parse(oldState||'{"items":{},"deleted":[],"dynamic":[]}');if(!state.items)state.items={};if(!Array.isArray(state.deleted))state.deleted=[];if(!Array.isArray(state.dynamic))state.dynamic=[];document.querySelectorAll("[data-edit-id]").forEach(el=>{const k=stableKey(el);let savedHtml=el.innerHTML;if(!/^new-|^newtext-|^newimg-|^paste-/.test(el.dataset.editId||"")){const c=el.cloneNode(true);c.querySelectorAll("[data-edit-id]").forEach(ch=>{if(/^new-|^newtext-|^newimg-|^paste-/.test(ch.dataset.editId||""))ch.remove()});if(c.tagName==="HEADER"){const lg=c.querySelector("#siteLogo");if(lg){const lv=localStorage.getItem("srija_site_logo");if(lv){lg.src=lv;lg.style.setProperty("display","block","important")}}}savedHtml=c.innerHTML}state.items[k]={html:savedHtml,style:el.getAttribute("style")||""}; if(el.id==="siteLogo" && el.src) state.items[k].src=el.src;if(/^new-|^newtext-|^newimg-|^paste-/.test(el.dataset.editId||"")){const parent=el.parentElement;const dyn=state.dynamic.find(x=>x.id===el.dataset.editId)||{};dyn.id=el.dataset.editId;const clone=el.cloneNode(true);clone.querySelectorAll(".srija-selected,.s3selected,.selected-edit").forEach(x=>x.classList.remove("srija-selected","s3selected","selected-edit"));clone.classList.remove("srija-selected","s3selected","selected-edit");dyn.html=clone.outerHTML;dyn.parentKey=parent?stableKey(parent):"body";dyn.index=parent?[...parent.children].indexOf(el):0;state.dynamic=state.dynamic.filter(x=>x.id!==dyn.id);state.dynamic.push(dyn)}});try{localStorage.setItem(STORE,JSON.stringify(state));if(show)alert("Save হয়েছে")}catch(e){if(show)alert("Save করা যায়নি")}}
+ function loadState(){try{const raw=JSON.parse(localStorage.getItem(STORE)||"{}");const state=raw.items?raw:{items:raw,deleted:[],dynamic:[]};const all=[...document.querySelectorAll("header,#headerLogoBox,header img,header h1,header p,nav,nav a,.notice,.notice-title,.hero,.hero h2,.hero p,.hero .btn,.cards,.card,.card h3,.card p,footer,footer strong")];const savedKeys=new Set(Object.keys(state.items||{}));all.forEach(el=>{const k=stableKey(el),v=state.items[k];if(!v)return;el.setAttribute("style",v.style||"");if(el.id==="siteLogo"&&v.src)el.src=v.src;const hasSavedDescendant=[...el.querySelectorAll("[data-edit-id]")].some(ch=>savedKeys.has(stableKey(ch)));if(!hasSavedDescendant)el.innerHTML=v.html||""});const savedLogo=state.logo||localStorage.getItem("srija_site_logo")||logoMemory;(state.deleted||[]).forEach(k=>{if(k==="id:siteLogo"&&savedLogo)return;all.forEach(el=>{if(stableKey(el)===k)el.remove()})});(state.dynamic||[]).forEach(d=>{if(!d||!d.html||document.querySelector('[data-edit-id="'+d.id+'"]'))return;let parent=[...document.querySelectorAll("header,#headerLogoBox,header img,header h1,header p,nav,nav a,.notice,.notice-title,.hero,.hero h2,.hero p,.hero .btn,.cards,.card,.card h3,.card p,footer,footer strong")].find(el=>stableKey(el)===d.parentKey)||document.body;if(!parent)return;const box=document.createElement("div");box.innerHTML=d.html;const n=box.firstElementChild;if(!n)return;const at=Math.max(0,Math.min(d.index||0,parent.children.length));parent.insertBefore(n,parent.children[at]||null)});document.querySelectorAll(".srija-selected,.s3selected,.selected-edit").forEach(x=>x.classList.remove("srija-selected","s3selected","selected-edit"));selected=null;let logoEl=document.getElementById("siteLogo");if(!logoEl){const h=document.querySelector("header");if(h){logoEl=document.createElement("img");logoEl.id="siteLogo";logoEl.alt="SRIJA COMMUNICATION logo";logoEl.style.cssText="display:none;width:auto;max-width:180px;max-height:100px;height:auto;margin:0 auto 10px;border-radius:10px;object-fit:contain";h.insertBefore(logoEl,h.firstChild)}}const logo=state.logo||localStorage.getItem("srija_site_logo")||logoMemory;if(logo)showLogo(logo); }catch(e){console.error("SRIJA Save/Load:",e)}}
+ function select(el){if(!el||el.closest("#srijaRibbonEditor"))return;if(el.id==="siteLogo")el.dataset.editId="id:siteLogo";if(selected)selected.classList.remove("srija-selected");selected=el;id(el);el.classList.add("srija-selected");name.textContent="Selected: "+((el.innerText||el.alt||el.tagName).trim().slice(0,35));try{if(typeof makeHandle==="function")makeHandle(el)}catch(_){}}
+ function clear(){if(selected)selected.classList.remove("srija-selected");selected=null;name.textContent="কিছু নির্বাচন করা হয়নি";tools.innerHTML=""}
+ function syncSelection(){if(selected)return selected;const el=document.querySelector(".s3selected,.selected-edit,.srija-selected");if(el){selected=el;el.classList.add("srija-selected");name.textContent="Selected: "+((el.innerText||el.alt||el.tagName).trim().slice(0,35));return selected}return null} function editTools(){if(!syncSelection()){alert("আগে একটি অংশ Select করুন।");return}tools.innerHTML='<button id="sText">Text</button><button id="sMinus">A−</button><button id="sPlus">A+</button><button id="sBold">Bold</button><select id="sFont" title="Font"><option value="Arial, Noto Sans Bengali, sans-serif">Arial</option><option value="Georgia, serif">Georgia</option><option value="Verdana, sans-serif">Verdana</option><option value="Tahoma, sans-serif">Tahoma</option></select><button id="sItalic">Italic</button><button id="sUnderline">Underline</button><input id="sColor" type="color"><button id="sLeft">Left</button><button id="sCenter">Center</button><button id="sRight">Right</button><button id="sCopy">Copy</button><button id="sPaste">Paste</button><button id="sDelete" class="danger">🗑 Delete</button><button id="sRestore">↶ Previous Save</button>';
+ root.querySelector("#sText").onclick=()=>{if(!selected)return;const v=prompt("নতুন লেখা লিখুন:",selected.innerText||"");if(v!==null){if(selected.children.length===0){selected.innerText=v}else{const t=selected.querySelector("h1,h2,h3,h4,h5,h6,p,span,strong,a");if(!t)return alert("এই অংশের নির্দিষ্ট লেখাটি Select করুন।");const tv=prompt("নতুন লেখা লিখুন:",t.innerText||"");if(tv!==null)t.innerText=tv}saveState(false)}};
+ root.querySelector("#sMinus").onclick=()=>{selected.style.fontSize=Math.max(8,(parseInt(getComputedStyle(selected).fontSize)||16)-1)+"px";saveState()};
+ root.querySelector("#sPlus").onclick=()=>{selected.style.fontSize=Math.min(100,(parseInt(getComputedStyle(selected).fontSize)||16)+1)+"px";saveState()};
+ root.querySelector("#sBold").onclick=()=>{selected.style.fontWeight=getComputedStyle(selected).fontWeight==="700"?"400":"700";saveState()};
+ root.querySelector("#sFont").onchange=e=>{selected.style.fontFamily=e.target.value;saveState()};
+ root.querySelector("#sItalic").onclick=()=>{selected.style.fontStyle=getComputedStyle(selected).fontStyle==="italic"?"normal":"italic";saveState()};
+ root.querySelector("#sUnderline").onclick=()=>{selected.style.textDecoration=getComputedStyle(selected).textDecorationLine.includes("underline")?"none":"underline";saveState()};
+ root.querySelector("#sColor").oninput=e=>{selected.style.color=e.target.value;saveState()};
+ root.querySelector("#sLeft").onclick=()=>{selected.style.textAlign="left";saveState()};root.querySelector("#sCenter").onclick=()=>{selected.style.textAlign="center";saveState()};root.querySelector("#sRight").onclick=()=>{selected.style.textAlign="right";saveState()};
+ root.querySelector("#sCopy").onclick=()=>{localStorage.setItem(CLIP,selected.outerHTML);alert("Copy হয়েছে")};
+ root.querySelector("#sPaste").onclick=()=>{const h=localStorage.getItem(CLIP);if(!h)return alert("আগে Copy করুন।");const t=document.createElement("div");t.innerHTML=h;const n=t.firstElementChild;if(n){n.dataset.editId="paste-"+Date.now();selected.after(n);select(n);saveState()}};
+ root.querySelector("#sDelete").onclick=()=>{if(!selected)return;if(confirm("শুধু নির্বাচিত অংশটি Delete করবেন?")){const k=stableKey(selected);const state=JSON.parse(localStorage.getItem(STORE)||'{"items":{},"deleted":[]}');if(!Array.isArray(state.deleted))state.deleted=[];if(!state.deleted.includes(k))state.deleted.push(k);if(Array.isArray(state.dynamic))state.dynamic=state.dynamic.filter(d=>d&&d.id!==selected.dataset.editId);localStorage.setItem(STORE,JSON.stringify(state));selected.remove();clear()}};root.querySelector("#sRestore").onclick=()=>{const raw=localStorage.getItem(PREV);if(!raw)return alert("আগের Save অবস্থা পাওয়া যায়নি।");if(!confirm("আগের Save অবস্থায় ফিরে যাবেন? বর্তমান অবস্থাটি একটি backup হিসেবে রাখা হবে।"))return;try{const current=localStorage.getItem(STORE);if(current)localStorage.setItem("srija_ribbon_restore_backup_v1",current);localStorage.setItem(STORE,raw);localStorage.setItem(PREV,raw);location.reload()}catch(e){alert("Restore করা যায়নি")}};
+ }
+ function insertTools(){tools.innerHTML='<button id="sAddBox">＋ New Box</button><button id="sAddText">＋ Text</button><button id="sAddImage">＋ Image</button><button id="sAddLogo">＋ Logo</button>';root.querySelector("#sAddBox").onclick=()=>{let sec=document.querySelector("#srijaUserBoxes")||document.querySelector(".cards");const d=document.createElement("div");d.className="card";d.dataset.editId="new-"+Date.now();d.innerHTML="<h3>নতুন বক্স</h3><p>এখানে আপনার লেখা দিন</p>";sec.appendChild(d);select(d);saveState()};root.querySelector("#sAddText").onclick=()=>{const d=document.createElement("p");d.dataset.editId="newtext-"+Date.now();d.textContent="নতুন লেখা";(document.querySelector(".hero")||document.body).appendChild(d);select(d);saveState()};root.querySelector("#sAddImage").onclick=()=>{const f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=()=>{const file=f.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{const img=document.createElement("img");img.src=r.result;img.alt="নতুন ছবি";img.dataset.editId="newimg-"+Date.now();img.style.maxWidth="100%";img.style.height="auto";img.style.display="block";img.style.margin="12px auto";const parent=selected&&selected.parentElement?selected.parentElement:(document.querySelector(".hero")||document.body);if(selected&&selected.parentElement===parent)selected.after(img);else parent.appendChild(img);select(img);saveState()};r.readAsDataURL(file)};f.click()};root.querySelector("#sAddLogo").onclick=()=>{const f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=()=>{const file=f.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{const img=document.getElementById("siteLogo")||document.createElement("img");img.id="siteLogo";img.dataset.editId="id:siteLogo";img.src=r.result;img.alt="SRIJA COMMUNICATION logo";img.style.display="block";img.style.maxWidth="180px";img.style.maxHeight="100px";img.style.width="auto";img.style.height="auto";img.style.margin="0 auto 10px";img.style.objectFit="contain";const h=document.querySelector("header");if(h&&!img.parentElement)h.insertBefore(img,h.firstChild);select(img);saveState();alert("Logo Save হয়েছে")};r.readAsDataURL(file)};f.click()}};
+ function enableBoxResize(el){
+ if(!el || el.closest("#srijaRibbonEditor") || el.dataset.resizeReady==="1") return;
+ el.dataset.resizeReady="1";
+ el.style.resize="none";
+ el.style.overflow="auto";
+ el.style.minWidth=el.classList.contains("card")?"80px":"20px";
+ el.style.minHeight=el.classList.contains("card")?"50px":"20px";
+ el.style.maxWidth="100%";
+}
+function enableAllBoxResize(){
+ document.querySelectorAll(".card,.cards").forEach(enableBoxResize);
+}
+function designTools(){if(!syncSelection()){alert("আগে একটি অংশ Select করুন।");return}tools.innerHTML='<button id="sBg">Background Color</button><button id="sBgPhoto">Background Photo</button><button id="sRemoveBg">Remove Photo</button><button id="sWidth">Width −</button><button id="sWidthP">Width +</button><button id="sUp">↑</button><button id="sDown">↓</button>';root.querySelector("#sBg").onclick=()=>{const v=prompt("Background color (#ffffff):",getComputedStyle(selected).backgroundColor);if(v){selected.style.background=v;saveState()}};root.querySelector("#sBgPhoto").onclick=()=>{const f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=()=>{const file=f.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{selected.style.backgroundImage="url('"+r.result+"')";selected.style.backgroundSize="cover";selected.style.backgroundPosition="center";selected.style.backgroundRepeat="no-repeat";saveState()};r.readAsDataURL(file)};f.click()};root.querySelector("#sRemoveBg").onclick=()=>{selected.style.backgroundImage="none";selected.style.backgroundSize="";selected.style.backgroundPosition="";selected.style.backgroundRepeat="";saveState()};root.querySelector("#sWidth").onclick=()=>{const p=selected.parentElement;const pw=p?p.clientWidth:window.innerWidth;const w=selected.getBoundingClientRect().width||pw;selected.style.width=Math.max(10,Math.round((w/pw)*100)-5)+"%";saveState()};root.querySelector("#sWidthP").onclick=()=>{const p=selected.parentElement;const pw=p?p.clientWidth:window.innerWidth;const w=selected.getBoundingClientRect().width||pw;selected.style.width=Math.min(100,Math.round((w/pw)*100)+5)+"%";saveState()};root.querySelector("#sUp").onclick=()=>moveSelected(0,-5);root.querySelector("#sDown").onclick=()=>moveSelected(0,5)};
+ root.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{if(b.dataset.tab==="home"){clear();tools.innerHTML="<span>Home: সাধারণভাবে সাইট ব্যবহার করুন।</span>"}if(b.dataset.tab==="edit")editTools();if(b.dataset.tab==="insert")insertTools();if(b.dataset.tab==="design")designTools()});
+ root.querySelector("#srijaSave").onclick=saveState;
+ root.querySelector("#srijaLogout").onclick=()=>{clear();root.remove();document.body.classList.remove("srija-editing");location.hash=""};
+ document.addEventListener("click",function(ev){if(ev.target.closest&&ev.target.closest("#settingsBtn"))return;if(!document.getElementById("srijaRibbonEditor")||ev.target.closest("#srijaRibbonEditor"))return;const img=ev.target.closest("img");if(img){ev.preventDefault();ev.stopImmediatePropagation();select(img);return}const el=ev.target.closest(selectable);if(el){ev.preventDefault();ev.stopPropagation();select(el)}},true);
+ document.addEventListener("click",function(ev){if(document.getElementById("srijaRibbonEditor")&& !ev.target.closest("#srijaRibbonEditor") && !ev.target.closest(selectable)){clear()}},true);
+ function moveSelected(dx,dy){if(!selected)return;const m=getComputedStyle(selected).transform;if(m&&m!=="none"){const a=m.match(/^matrix\\(([^)]+)\\)$/);if(a){const v=a[1].split(",").map(Number);v[4]=(v[4]||0)+dx;v[5]=(v[5]||0)+dy;selected.style.transform="matrix("+v.join(",")+")";saveState();return}}selected.style.transform="translate("+dx+"px,"+dy+"px)";saveState()}
+document.addEventListener("keydown",e=>{if(!selected||e.target.closest("#srijaRibbonEditor"))return;if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key)){e.preventDefault();moveSelected(e.key==="ArrowLeft"?-5:e.key==="ArrowRight"?5:0,e.key==="ArrowUp"?-5:e.key==="ArrowDown"?5:0)}});
+ document.addEventListener("DOMContentLoaded",()=>{loadState();enableAllBoxResize();setTimeout(applyLogo,50);setTimeout(applyLogo,500)},{once:true}); loadState(); enableAllBoxResize(); setTimeout(applyLogo,100); window.addEventListener("load",applyLogo);setInterval(applyLogo,300);
+}
+window.srijaOpenEditor=newPanel; window.srijaOpenAdmin=admin; window.srijaOpenSettings=function(){try{location.hash="#admin"; if(typeof newPanel==="function") newPanel();}catch(e){console.error(e);} setTimeout(function(){if(!document.getElementById("srijaRibbonEditor") && typeof window.srijaOpenAdmin==="function"){location.hash="#admin"; window.srijaOpenAdmin();}},300);};
+function open(){ if(sessionStorage.getItem("srija_owner_logged_in")==="1"){ try{newPanel();}catch(e){} } }\nq("#settingsBtn").onclick=function(e){e.preventDefault();e.stopImmediatePropagation();};
+if(location.hash==="#admin"){history.replaceState(null,"",location.pathname+location.search)}
+})();
+</script>
+<script>
+(function(){
+ function boxCursor(ev){
+  const el=ev.target.closest&&ev.target.closest(".box,.card,.linkbox,[class*='box'],[class*='card']");
+  if(!el){document.documentElement.style.cursor="";return}
+  const r=el.getBoundingClientRect(),z=12,x=ev.clientX-r.left,y=ev.clientY-r.top;
+  if(x<0||y<0||x>r.width||y>r.height){document.documentElement.style.cursor="";return}
+  const l=x<=z,R=x>=r.width-z,t=y<=z,b=y>=r.height-z;
+  document.documentElement.style.cursor=(l&&t||R&&b)?"nwse-resize":(R&&t||l&&b)?"nesw-resize":(l||R)?"ew-resize":(t||b)?"ns-resize":"";
+ }
+ document.addEventListener("mousemove",boxCursor,true);
+})();
+</script><script id="srija-free-move-resize">
+(function(){
+if(sessionStorage.getItem("srija_owner_logged_in")==="1" && document.getElementById("srijaUniversalBar")) return;
+  let active=null,mode=null,sx=0,sy=0,startX=0,startY=0,startW=0,startH=0,handle=null,pointerId=null;
+  const EDITOR="#srijaRibbonEditor";
+  const SELECTOR="header,nav,.notice,.hero,.hero h2,.hero p,.btn,.card,.card h3,.card p,footer,img,[data-edit-id]";
+  function editing(){return !!document.querySelector(EDITOR)}
+  function xy(el){const t=getComputedStyle(el).transform;if(!t||t==="none")return[0,0];const m=t.match(/^matrix\\(([^)]+)\\)$/);if(!m)return[0,0];const v=m[1].split(",").map(Number);return[Number(v[4])||0,Number(v[5])||0]}
+  function removeHandle(){if(handle){handle.remove();handle=null}}
+  function positionHandle(){}
+  function makeHandle(el){removeHandle();active=el}
+  function selectForMove(el){if(!el||el.closest(EDITOR))return;if(!el.dataset.editId)el.dataset.editId="move-"+Date.now()+"-"+Math.random().toString(36).slice(2,7);const old=document.querySelector(".srija-selected");if(old&&old!==el)old.classList.remove("srija-selected");el.classList.add("srija-selected");active=el}
+  function startDrag(e,el){active=el;mode="drag";pointerId=e.pointerId;sx=e.clientX;sy=e.clientY;[startX,startY]=xy(el);try{el.setPointerCapture(e.pointerId)}catch(_){}el.style.touchAction="none";e.preventDefault();e.stopPropagation()}
+  function startResize(e,el){if(!el)return;active=el;mode="resize";pointerId=e.pointerId;sx=e.clientX;sy=e.clientY;const r=active.getBoundingClientRect();startW=r.width;startH=r.height;try{active.setPointerCapture(e.pointerId)}catch(_){}e.preventDefault();e.stopPropagation()}
+  document.addEventListener("pointerdown",function(e){if(!editing()||e.target.closest(EDITOR))return;const el=e.target.closest(SELECTOR);if(!el)return;selectForMove(el);const r=el.getBoundingClientRect(),edge=28;const nearRight=e.clientX>=r.right-edge&&e.clientX<=r.right+4,nearBottom=e.clientY>=r.bottom-edge&&e.clientY<=r.bottom+4;if(nearRight&&nearBottom)startResize(e,el);else startDrag(e,el)},true);
+  document.addEventListener("pointermove",function(e){if(!active||!mode||e.pointerId!==pointerId)return;if(mode==="drag"){active.style.transform="translate("+(startX+e.clientX-sx)+"px,"+(startY+e.clientY-sy)+"px)"}else{var nx=Math.max(.2,(startW+e.clientX-sx)/startW),ny=Math.max(.2,(startH+e.clientY-sy)/startH);active.style.transform="translate("+(startX+e.clientX-sx)+"px,"+(startY+e.clientY-sy)+"px) scale("+nx+","+ny+")";}positionHandle();e.preventDefault()},true);
+  function finish(e){if(!active||!mode||e.pointerId!==pointerId)return;try{if(active.releasePointerCapture)active.releasePointerCapture(pointerId)}catch(_){}try{const k=active.dataset.editId;if(k){const styles={transform:active.style.transform,width:active.style.width,height:active.style.height,maxWidth:active.style.maxWidth,maxHeight:active.style.maxHeight};const old=JSON.parse(localStorage.getItem("srija_first_page_styles")||"{}");old[k]=Object.assign(old[k]||{},styles);localStorage.setItem("srija_first_page_styles",JSON.stringify(old));const st=JSON.parse(localStorage.getItem("srija_ribbon_state_v2")||'{"items":{},"deleted":[],"dynamic":[]}');st.items=st.items||{};st.items[k]=Object.assign(st.items[k]||{},{style:active.getAttribute("style")||""});localStorage.setItem("srija_ribbon_state_v2",JSON.stringify(st))}}catch(_){}mode=null;pointerId=null;positionHandle()}
+  document.addEventListener("pointerup",finish,true);document.addEventListener("pointercancel",finish,true);document.addEventListener("scroll",positionHandle,true);window.addEventListener("resize",positionHandle);
+  document.addEventListener("click",function(e){if(!editing()){removeHandle();active=null;return}if(e.target.closest(EDITOR))return;const el=e.target.closest(SELECTOR);if(el){e.preventDefault();e.stopPropagation();selectForMove(el)}else{removeHandle();const old=document.querySelector(".srija-selected");if(old)old.classList.remove("srija-selected");active=null}},true);
+  setInterval(function(){if(!editing()){removeHandle();active=null;mode=null;return}const el=document.querySelector(".srija-selected");if(el&&(!active||active!==el))makeHandle(el);if(active&&!mode)positionHandle()},500);
+})();
+</script><script id="srija-universal-editor-home">
+(function(){
+if(sessionStorage.getItem("srija_owner_logged_in")!=="1" || document.getElementById("srijaRibbonEditor")) return;
+const STORE="srija_universal_home_v1", BAR="srijaUniversalBar";
+let selected=null,drag=null,resize=null;
+const EXCLUDE="#srijaRibbonEditor,#srijaSettingsV3,#srijaStandaloneLogin,#adminPanel,#pageSettings,#loginBox,#addBox,#srijaEditMode2,#srijaUniversalBar";
+function editable(e){return e&&e.nodeType===1&&!e.closest(EXCLUDE)&&e!==document.body&&e!==document.documentElement&&!["SCRIPT","STYLE","META","LINK"].includes(e.tagName)}
+function uid(e){if(!e.dataset.uvid)e.dataset.uvid="u-"+Math.random().toString(36).slice(2,10);return e.dataset.uvid}
+function save(){try{const out={};document.querySelectorAll("[data-uvid]").forEach(e=>{if(!editable(e))return;out[e.dataset.uvid]={style:e.getAttribute("style")||"",text:e.children.length===0?e.textContent:null}});localStorage.setItem(STORE,JSON.stringify(out))}catch(e){}}
+function load(){try{const out=JSON.parse(localStorage.getItem(STORE)||"{}");document.querySelectorAll("[data-uvid]").forEach(e=>{const v=out[e.dataset.uvid];if(!v)return;if(v.style)e.setAttribute("style",v.style);if(v.text!==null)e.textContent=v.text})}catch(e){}}
+function select(e){if(!editable(e))return;if(selected)selected.classList.remove("ue-selected");selected=e;uid(e);e.classList.add("ue-selected");document.getElementById("ueName").textContent="নির্বাচিত: "+((e.innerText||e.tagName).trim().slice(0,32));document.getElementById("ueText").value=e.children.length?"":e.textContent;document.getElementById("ueSize").value=parseInt(getComputedStyle(e).fontSize)||16}
+function move(e,dx,dy){if(!e)return;let x=parseFloat(e.dataset.srijaX||"0")||0,y=parseFloat(e.dataset.srijaY||"0")||0;x+=dx;y+=dy;e.dataset.srijaX=x;e.dataset.srijaY=y;e.style.transform="translate("+x+"px,"+y+"px) scale("+(parseFloat(e.dataset.srijaSX||"1")||1)+","+(parseFloat(e.dataset.srijaSY||"1")||1)+")";save()}
+function bar(){if(document.getElementById(BAR))return;const b=document.createElement("div");b.id=BAR;b.innerHTML='<span id="ueName">কিছু নির্বাচন করা হয়নি</span><input id="ueText" placeholder="লেখা পরিবর্তন" /><button id="ueApply">লেখা</button><button id="ueMinus">A−</button><button id="uePlus">A+</button><input id="ueColor" type="color" value="#172033"><input id="ueBg" type="color" value="#ffffff"><button id="ueUp">↑</button><button id="ueDown">↓</button><button id="ueLeft">←</button><button id="ueRight">→</button><button id="ueDelete">Delete</button><button id="ueClose">Close Edit</button>';document.body.appendChild(b);
+document.getElementById("ueApply").onclick=()=>{if(!selected)return;if(selected.children.length===0){selected.textContent=document.getElementById("ueText").value;save()}};
+document.getElementById("ueMinus").onclick=()=>{if(selected){selected.style.fontSize=Math.max(8,(parseInt(getComputedStyle(selected).fontSize)||16)-1)+"px";save()}};
+document.getElementById("uePlus").onclick=()=>{if(selected){selected.style.fontSize=Math.min(100,(parseInt(getComputedStyle(selected).fontSize)||16)+1)+"px";save()}};
+document.getElementById("ueColor").oninput=e=>{if(selected){selected.style.color=e.target.value;save()}};
+document.getElementById("ueBg").oninput=e=>{if(selected){selected.style.backgroundColor=e.target.value;save()}};
+document.getElementById("ueUp").onclick=()=>move(selected,0,-5);document.getElementById("ueDown").onclick=()=>move(selected,0,5);document.getElementById("ueLeft").onclick=()=>move(selected,-5,0);document.getElementById("ueRight").onclick=()=>move(selected,5,0);
+document.getElementById("ueDelete").onclick=()=>{if(selected&&confirm("নির্বাচিত অংশটি Delete করবেন?")){selected.remove();selected=null;save()}};
+document.getElementById("ueClose").onclick=()=>{b.remove();if(selected)selected.classList.remove("ue-selected");selected=null};
+}
+const st=document.createElement("style");st.textContent="#srijaUniversalBar{position:fixed;left:6px;right:6px;bottom:6px;z-index:2147483647;background:#172033;color:#fff;padding:7px;border-radius:12px;display:flex;gap:5px;align-items:center;flex-wrap:wrap;box-shadow:0 8px 25px #0005;font:13px Arial,sans-serif}#srijaUniversalBar input[type=text]{min-width:120px;flex:1;padding:7px;border-radius:6px;border:0}#srijaUniversalBar button,#srijaUniversalBar input{min-height:34px;border:0;border-radius:6px;padding:6px 8px}.ue-selected{outline:3px dashed #2563eb!important;outline-offset:3px;cursor:move!important}@media(max-width:600px){#srijaUniversalBar{font-size:12px}}";document.head.appendChild(st);
+bar();document.querySelectorAll("body *").forEach(e=>{if(editable(e))uid(e)});load();
+document.addEventListener("pointerdown",function(ev){if(ev.target.closest(EXCLUDE))return;const e=ev.target.closest("body *");if(!editable(e))return;select(e);if(ev.pointerType==="mouse"&&ev.button!==0)return;const r=e.getBoundingClientRect(),z=14,x=ev.clientX-r.left,y=ev.clientY-r.top;const edge=x<z||x>r.width-z||y<z||y>r.height-z;if(edge){resize={e,sx:ev.clientX,sy:ev.clientY,w:r.width,h:r.height};}else{drag={e,sx:ev.clientX,sy:ev.clientY};}e.setPointerCapture?.(ev.pointerId);ev.preventDefault();ev.stopPropagation()},true);
+document.addEventListener("pointermove",function(ev){if(drag&&drag.e){const dx=ev.clientX-drag.sx,dy=ev.clientY-drag.sy;move(drag.e,dx,dy);drag.sx=ev.clientX;drag.sy=ev.clientY;ev.preventDefault()}if(resize&&resize.e){const nsx=Math.max(0.2,(resize.w+ev.clientX-resize.sx)/resize.w);const nsy=Math.max(0.2,(resize.h+ev.clientY-resize.sy)/resize.h);resize.e.dataset.srijaSX=nsx;resize.e.dataset.srijaSY=nsy;const tx=parseFloat(resize.e.dataset.srijaX||"0")||0,ty=parseFloat(resize.e.dataset.srijaY||"0")||0;resize.e.style.transform="translate("+tx+"px,"+ty+"px) scale("+nsx+","+nsy+")";ev.preventDefault()}},true);
+document.addEventListener("pointerup",function(){if(drag||resize)save();drag=null;resize=null},true);
+document.addEventListener("keydown",function(e){if(!selected||e.target.closest("input,textarea,select"))return;if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key)){e.preventDefault();move(selected,e.key==="ArrowLeft"?-5:e.key==="ArrowRight"?5:0,e.key==="ArrowUp"?-5:e.key==="ArrowDown"?5:0)}},true);
+})();
+</script>
+<script id="SRIJA_HOME_ALL_ELEMENT_DRAG_FIX_V1">
+(function(){
+if(sessionStorage.getItem("srija_owner_logged_in")==="1" && document.getElementById("srijaUniversalBar")) return;
+  var active=null, mode=null, sx=0, sy=0, sw=0, sh=0, stx=0, sty=0, pid=null;
+  var EX='#srijaRibbonEditor,#srijaSettingsV3,#srijaStandaloneLogin,#adminPanel,#srijaUniversalBar';
+  function isEdit(){return sessionStorage.getItem('srija_owner_logged_in')==='1';}
+  function ok(e){return e&&e.nodeType===1&&!e.closest(EX)&&e!==document.body&&e!==document.documentElement&&!["SCRIPT","STYLE","META","LINK"].includes(e.tagName);}
+  function key(e){if(!e.dataset.editId)e.dataset.editId='homefix-'+Math.random().toString(36).slice(2,10);return e.dataset.editId;}
+  function xy(e){var t=getComputedStyle(e).transform;if(!t||t==='none')return[0,0];var m=t.match(/^matrix\\(([^)]+)\\)$/);if(!m)return[0,0];var a=m[1].split(',').map(Number);return[+a[4]||0,+a[5]||0];}
+  function save(e){
+    try{
+      var k=key(e), s=JSON.parse(localStorage.getItem('srija_first_page_styles')||'{}');
+      s[k]=Object.assign(s[k]||{}, {transform:e.style.transform,width:e.style.width,height:e.style.height,maxWidth:e.style.maxWidth,maxHeight:e.style.maxHeight});
+      localStorage.setItem('srija_first_page_styles',JSON.stringify(s));
+      var st=JSON.parse(localStorage.getItem('srija_ribbon_state_v2')||'{"items":{},"deleted":[],"dynamic":[]}');
+      st.items=st.items||{}; st.items[k]=Object.assign(st.items[k]||{}, {style:e.getAttribute('style')||'',html:e.children.length===0?e.innerHTML:''});
+      localStorage.setItem('srija_ribbon_state_v2',JSON.stringify(st));
+    }catch(_){}
+  }
+  function select(e){
+    if(!ok(e))return;
+    document.querySelectorAll('.srija-home-fix-selected').forEach(function(x){x.classList.remove('srija-home-fix-selected')});
+    active=e; e.classList.add('srija-home-fix-selected'); key(e);
+  }
+  function start(e){
+    if(!isEdit()||!ok(e.target))return;
+    var el=e.target.closest('body *'); if(!ok(el))return;
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    select(el);
+    var r=el.getBoundingClientRect(), z=e.pointerType==='touch'?18:12;
+    var x=e.clientX-r.left,y=e.clientY-r.top;
+    var edgeL=x<=z,edgeR=x>=r.width-z,edgeT=y<=z,edgeB=y>=r.height-z;
+    mode=(edgeL||edgeR||edgeT||edgeB)?'resize':'drag';
+    sx=e.clientX;sy=e.clientY;sw=r.width;sh=r.height;var p=xy(el);stx=p[0];sty=p[1];pid=e.pointerId;
+    try{el.setPointerCapture(e.pointerId)}catch(_){}
+    e.preventDefault();e.stopImmediatePropagation();
+  }
+  function move(e){
+    if(!active||!mode||e.pointerId!==pid)return;
+    if(mode==='drag'){
+      active.style.transform='translate('+(stx+e.clientX-sx)+'px,'+(sty+e.clientY-sy)+'px)';
+    }else{
+      active.style.width=Math.max(30,sw+e.clientX-sx)+'px';
+      active.style.height=Math.max(30,sh+e.clientY-sy)+'px';
+      active.style.maxWidth='none'; active.style.maxHeight='none';
+    }
+    e.preventDefault();e.stopImmediatePropagation();
+  }
+  function end(e){
+    if(!active||e.pointerId!==pid)return;
+    save(active);mode=null;pid=null;
+  }
+  var css=document.createElement('style');
+  css.textContent='.srija-home-fix-selected{outline:3px dashed #2563eb!important;outline-offset:3px;cursor:move!important}';
+  document.head.appendChild(css);
+  document.addEventListener('pointerdown',start,true);
+  document.addEventListener('pointermove',move,true);
+  document.addEventListener('pointerup',end,true);
+  document.addEventListener('pointercancel',end,true);
+  document.addEventListener('click',function(e){
+    if(!isEdit()||e.target.closest(EX))return;
+    var el=e.target.closest('body *'); if(!ok(el))return;
+    e.preventDefault();e.stopImmediatePropagation();select(el);
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(!isEdit()||!active||e.target.closest('input,textarea,select'))return;
+    if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){
+      e.preventDefault();var p=xy(active),dx=e.key==='ArrowLeft'?-5:e.key==='ArrowRight'?5:0,dy=e.key==='ArrowUp'?-5:e.key==='ArrowDown'?5:0;
+      active.style.transform='translate('+(p[0]+dx)+'px,'+(p[1]+dy)+'px)';save(active);
+    }
+  },true);
+})();
+</script><script id="SRIJA_HOME_START_GUARD">
+(function(){
+  function homeFirst(){
+    try{
+      var hash=location.hash;
+      if(hash==="#admin" || hash==="#login") history.replaceState(null,"",location.pathname+location.search);
+      var ids=["adminPanel","srijaSettingsV3","srijaStandaloneLogin","loginBox"];
+      ids.forEach(function(id){var el=document.getElementById(id);if(el)el.remove();});
+      if(sessionStorage.getItem("srija_owner_logged_in")!=="1"){
+        var ed=document.getElementById("srijaRibbonEditor"); if(ed)ed.remove();
+        document.body.classList.remove("srija-editing");
+      }
+      document.body.classList.remove("srija-editing");
+    }catch(e){}
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",homeFirst,{once:true});
+  else homeFirst();
+})();
+</script>
+<script id="SRIJA_SINGLE_LOGIN_V1">
+(function(){
+  function cleanupOverlays(){
+    ["adminPanel","srijaLoginOverlay","srijaStandaloneLogin","loginBox"].forEach(function(id){
+      var el=document.getElementById(id); if(el) el.remove();
+    });
+  }
+  function ensureEditorFallback(){
+    var existing=document.getElementById("srijaRibbonEditor");
+    if(existing){
+      var complete=existing.querySelector('[data-tab="home"]')&&existing.querySelector('[data-tab="edit"]')&&existing.querySelector('[data-tab="insert"]')&&existing.querySelector('[data-tab="design"]');
+      if(complete)return true;
+      existing.remove();
+    }
+    var r=document.createElement("div"); r.id="srijaRibbonEditor";
+    r.innerHTML='<div class="srija-ribbon"><div class="srija-brand">SRIJA Editor</div><button type="button" data-tab="home">Home</button><button type="button" data-tab="edit">Edit</button><button type="button" data-tab="insert">Insert</button><button type="button" data-tab="design">Design</button><button type="button" id="srijaFallbackSave">Save</button><button type="button" id="srijaFallbackLogout">Logout</button></div><div class="srija-context"><span id="srijaFallbackContext">Editor চালু হয়েছে — এখন যে অংশ পরিবর্তন করবেন সেটিতে চাপুন</span></div>';
+    document.body.appendChild(r); document.body.classList.add("srija-editing");
+    r.querySelectorAll("[data-tab]").forEach(function(b){b.onclick=function(){
+      var tab=b.getAttribute("data-tab"), ctx=document.getElementById("srijaFallbackContext");
+      if(ctx)ctx.textContent=tab==="home"?"Home: সাইটের মূল পেজ":tab==="edit"?"Edit: যে অংশ পরিবর্তন করবেন সেটি নির্বাচন করুন":tab==="insert"?"Insert: নতুন Box / Text / Image যোগ করুন":"Design: Background / Size / Position পরিবর্তন করুন";
+      try{if(typeof newPanel==="function")newPanel();}catch(e){}
+    }});
+    var s=document.getElementById("srijaFallbackSave"); if(s)s.onclick=function(){try{if(typeof newPanel==="function")newPanel();}catch(e){} alert("Save অপশন প্রস্তুত আছে।")};
+    var l=document.getElementById("srijaFallbackLogout"); if(l)l.onclick=function(){sessionStorage.removeItem("srija_owner_logged_in");sessionStorage.removeItem("srijaSecondEdit");location.reload()};
+    return true;
+  }
+  function openEditorDirect(){
+    function fullEditorReady(){
+      var r=document.getElementById("srijaRibbonEditor");
+      if(!r)return false;
+      return !!(r.querySelector('[data-tab="home"]')&&r.querySelector('[data-tab="edit"]')&&r.querySelector('[data-tab="insert"]')&&r.querySelector('[data-tab="design"]')&&r.querySelector("#srijaSave")&&r.querySelector("#srijaLogout"));
+    }
+    function openFull(){
+      try{
+        if(typeof window.srijaOpenEditor==="function") window.srijaOpenEditor();
+        else if(typeof newPanel==="function") newPanel();
+      }catch(e){console.error(e);}
+      document.body.classList.add("srija-editing");
+    }
+    try{
+      cleanupOverlays();
+      openFull();
+      if(!fullEditorReady()){
+        setTimeout(function(){
+          if(sessionStorage.getItem("srija_owner_logged_in")==="1" && !fullEditorReady()) openFull();
+        },150);
+      }
+      [400,900,1600].forEach(function(ms){
+        setTimeout(function(){
+          if(sessionStorage.getItem("srija_owner_logged_in")==="1"){
+            if(!fullEditorReady()) openFull();
+            if(!fullEditorReady()) ensureEditorFallback();
+            document.body.classList.add("srija-editing");
+          }
+        },ms);
+      });
+    }catch(e){
+      console.error(e);
+      try{openFull();}catch(_){}
+      if(!fullEditorReady()) ensureEditorFallback();
+    }
+  }
+  function showLogin(ev){
+    if(ev && ev.target && ev.target.closest && !ev.target.closest("#settingsBtn")) return;
+    if(ev){ev.preventDefault();ev.stopImmediatePropagation();}
+    var old=document.getElementById("srijaLoginOverlay"); if(old) old.remove();
+    cleanupOverlays();
+    var p=document.createElement("div");
+    p.id="srijaLoginOverlay";
+    p.style.cssText="position:fixed!important;inset:0!important;background:rgba(0,0,0,.55)!important;z-index:2147483647!important;display:flex!important;align-items:center!important;justify-content:center!important;pointer-events:auto!important;touch-action:auto!important;";
+    p.innerHTML='<div style="width:340px;max-width:92vw;background:#fff;border-radius:12px;padding:22px;box-sizing:border-box;box-shadow:0 12px 40px rgba(0,0,0,.35)"><h3 style="margin:0 0 14px;color:#173b8f">🔐 Settings Login</h3><label>User ID</label><input id="srijaFinalUid" type="text" autocomplete="username" style="width:100%;padding:10px;margin:5px 0 10px;box-sizing:border-box"><label>Password</label><input id="srijaFinalPw" type="password" autocomplete="current-password" style="width:100%;padding:10px;margin:5px 0 10px;box-sizing:border-box"><button id="srijaFinalLogin" type="button" style="padding:10px 18px;background:#173b8f;color:#fff;border:0;border-radius:7px">Login</button><button id="srijaFinalClose" type="button" style="padding:10px 18px;margin-left:6px;background:#777;color:#fff;border:0;border-radius:7px">Close</button><div id="srijaFinalMsg" style="color:#b42318;margin-top:8px;min-height:18px"></div></div>';
+    document.body.appendChild(p);
+    p.addEventListener("pointerdown",function(e){e.stopPropagation();},true);
+    p.addEventListener("click",function(e){e.stopPropagation();},true);
+    var uid=document.getElementById("srijaFinalUid"), pw=document.getElementById("srijaFinalPw");
+    [uid,pw].forEach(function(x){
+      x.disabled=false; x.readOnly=false; x.style.pointerEvents="auto"; x.style.touchAction="auto";
+      x.addEventListener("pointerdown",function(e){e.stopPropagation();},true);
+      x.addEventListener("click",function(e){e.stopPropagation();},true);
+    });
+    function login(){
+      var u=(uid.value||"").trim(), pass=pw.value||"";
+      if(u==="srija" && pass==="srija1234"){
+        sessionStorage.setItem("srija_owner_logged_in","1");
+        sessionStorage.setItem("srijaSecondEdit","1");
+        cleanupOverlays();
+        document.body.classList.remove("srija-editing");
+        openEditorDirect();
+      }else{
+        document.getElementById("srijaFinalMsg").textContent="User ID বা Password ভুল।";
+        pw.value=""; pw.focus();
+      }
+    }
+    document.getElementById("srijaFinalLogin").onclick=login;
+    pw.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();login();}};
+    document.getElementById("srijaFinalClose").onclick=function(){p.remove();};
+    uid.focus();
+  }
+  function bind(){
+    var b=document.getElementById("settingsBtn");
+    if(!b)return;
+    b.href="javascript:void(0)";
+    b.onclick=showLogin;
+  }
+  function autoOpenAfterLoad(){
+    try{
+      if(sessionStorage.getItem("srija_owner_logged_in")!=="1") return;
+      if(document.getElementById("srijaRibbonEditor")) return;
+      setTimeout(function(){
+        if(!document.getElementById("srijaRibbonEditor")) openEditorDirect();
+      },250);
+    }catch(e){console.error(e);}
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",function(){bind();autoOpenAfterLoad();},{once:true});
+  else {bind();autoOpenAfterLoad();}
+})();
+</script></body>
+</html>
