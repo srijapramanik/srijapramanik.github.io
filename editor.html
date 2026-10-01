@@ -22,6 +22,28 @@ function act(a){if(["color","bg","left","center","right"].includes(a)){applyStyl
   },false);
  });
 })();
+</script><script id="SRIJA_PAGE_LOAD_ACTUAL_V1">
+(function(){
+ var tabs=document.querySelectorAll("#pageTabs button[data-page]");
+ tabs.forEach(function(b){
+  b.addEventListener("click",function(e){
+   var p=b.getAttribute("data-page");
+   if(p==="home")return;
+   var file=p==="links"?"links.html":"tools.html";
+   var s=document.getElementById("status");
+   fetch(file,{cache:"no-store"}).then(function(r){
+    if(!r.ok)throw new Error("page unavailable");
+    return r.text();
+   }).then(function(html){
+    var doc=new DOMParser().parseFromString(html,"text/html");
+    var main=doc.querySelector("main")||doc.body;
+    if(s)s.textContent="পৃষ্ঠা পাওয়া গেছে ✓ — পরের ধাপে Editor canvas-এ যুক্ত হবে";
+   }).catch(function(){
+    if(s)s.textContent="পৃষ্ঠা এখনো যুক্ত হয়নি — মূল Editor নিরাপদ আছে";
+   });
+  },false);
+ });
+})();
 </script></body></html>
 <script id="SRIJA_DRAFT_STATUS_V1">window.SRIJA_DRAFT_STATUS_V1=1;</script><script id="SRIJA_LINKS_EDITOR_CONNECT_V1">window.SRIJA_LINKS_EDITOR_CONNECT_V1=1;</script><script id="SRIJA_PAGE_SELECTOR_V1">window.SRIJA_PAGE_SELECTOR_V1=1;</script><script id="SRIJA_PAGE_TAB_FUNCTION_V1">
 (function(){
