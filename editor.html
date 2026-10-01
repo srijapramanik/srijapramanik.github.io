@@ -2,7 +2,7 @@
 <html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SRIJA Visual Editor</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#172033;padding-top:120px}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#172033;padding-top:125px;min-height:100vh}
 #toolbar{position:fixed;top:0;left:0;right:0;z-index:1000000;background:#fff;border-bottom:2px solid #173b8f;padding:8px;display:flex;gap:6px;flex-wrap:wrap;box-shadow:0 2px 12px #0003}
 button{font-size:14px;padding:9px 12px;border:1px solid #999;border-radius:6px;background:#fff;cursor:pointer!important;pointer-events:auto!important}
 button:active{transform:scale(.97)}#status{padding:9px;font-size:13px}#canvas{max-width:1100px;margin:18px auto;background:#fff;min-height:80vh;padding:25px}.picked{outline:3px solid #1677ff!important;outline-offset:2px}
@@ -19,7 +19,7 @@ button:active{transform:scale(.97)}#status{padding:9px;font-size:13px}#canvas{ma
 <button type="button" data-a="home">Home</button><button type="button" data-a="logout">Logout</button>
 <span id="status">কোনও অংশ নির্বাচিত নয়</span>
 </div>
-<main id="canvas"><h1>SRIJA COMMUNICATION</h1><p>শ্রীজা কমিউনিকেশন</p><div>চলমান লেখা</div></main>
+<main id="canvas"><h1>SRIJA COMMUNICATION</h1><p>শ্রীজা কমিউনিকেশন</p><div>চলমান লেখা</div><p>Editor প্রস্তুত — উপরের বাটন থেকে লেখা, Box বা ছবি যোগ করুন।</p></main>
 <script>
 (function(){
 "use strict";
@@ -54,6 +54,6 @@ if(a==="home")return location.href="./";if(a==="logout"){sessionStorage.clear();
 document.querySelectorAll("#toolbar button").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();try{act(b.getAttribute("data-a"));}catch(err){status.textContent="ত্রুটি: "+err.message;}});});
 canvas.addEventListener("pointerdown",function(e){if(e.target===canvas)clear();});
 document.addEventListener("keydown",function(e){if(!selected||e.target.closest("#toolbar"))return;var d=e.shiftKey?10:3;if(e.key==="ArrowLeft")move(-d,0);else if(e.key==="ArrowRight")move(d,0);else if(e.key==="ArrowUp")move(0,-d);else if(e.key==="ArrowDown")move(0,d);});
-try{var old=localStorage.getItem("srija_editor_page_v6");if(old)canvas.innerHTML=old;}catch(e){}
+try{var old=localStorage.getItem("srija_editor_page_v6");if(old&&old.trim()&&old.replace(/\s/g,"").length>20)canvas.innerHTML=old;}catch(e){localStorage.removeItem("srija_editor_page_v6");}
 bind();clear();
 })();</script></body></html>
