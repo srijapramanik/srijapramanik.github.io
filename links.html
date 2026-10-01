@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>প্রয়োজনীয় ওয়েবসাইট - SRIJA COMMUNICATION</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f5f7fb;color:#172033}header{background:linear-gradient(135deg,#173b8f,#2457c5);color:#fff;padding:22px 16px;text-align:center}header h1{margin:0;font-size:28px}header p{margin:7px 0 0}nav{background:#fff;padding:12px;text-align:center;box-shadow:0 2px 8px #0001;position:sticky;top:0;z-index:5}nav a{color:#173b8f;text-decoration:none;font-weight:bold;margin:0 8px}.wrap{max-width:1000px;margin:25px auto;padding:0 14px}.title{text-align:center;background:#fff;border-radius:14px;padding:20px;margin-bottom:18px;box-shadow:0 5px 20px #0001}.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.linkbox{background:#fff;border-radius:14px;padding:18px;text-align:center;box-shadow:0 5px 20px #0001;resize:none;overflow:auto;min-width:180px;min-height:100px}
+body:not(.srija-editing) .linkbox{resize:none!important;cursor:default!important;}.linkbox img{width:90px;height:70px;object-fit:contain;margin:auto auto 10px;display:block}.linkbox h3{margin:7px 0;color:#173b8f}.linkbox a{display:inline-block;margin-top:8px;color:#2457c5;word-break:break-all}footer{text-align:center;background:#172033;color:#fff;padding:20px;margin-top:35px}@media(max-width:600px){header h1{font-size:23px}.links{grid-template-columns:1fr}}
+.linkbox-tools{display:flex;justify-content:center;gap:7px;margin-top:12px}
+.linkbox-tools button{border:0;border-radius:7px;padding:7px 11px;cursor:pointer;font-weight:bold}
+.link-edit{background:#2457c5;color:#fff}
+.link-delete{background:#c62828;color:#fff}
+#editLinkMode{color:#173b8f;font-weight:bold;margin:0 0 8px}
+
+.srija-editing{padding-top:86px!important}.srija-ribbon{position:fixed;top:0;left:0;right:0;z-index:100000;background:#fff;border-bottom:1px solid #ccd3df;box-shadow:0 3px 14px #0002;display:flex;align-items:center;gap:4px;padding:7px 10px;overflow-x:auto;white-space:nowrap}.srija-ribbon button{border:0;background:#f3f5f9;color:#173b8f;padding:9px 13px;border-radius:7px;font-weight:bold}.srija-brand{font-weight:800;color:#173b8f;margin-right:5px}.srija-context{position:fixed;top:48px;left:0;right:0;z-index:99999;min-height:38px;background:#eef4ff;border-bottom:1px solid #ccd3df;padding:6px 10px;display:flex;gap:8px;align-items:center;overflow-x:auto;white-space:nowrap}.srija-tools{display:flex;gap:5px}.srija-tools button,.srija-context button{border:0;border-radius:6px;padding:6px 9px;background:#fff;color:#173b8f;font-weight:bold}.srija-tools .danger{background:#b42318;color:#fff}.srija-selected{outline:3px dashed #f59e0b!important;outline-offset:3px;scroll-margin-top:100px}#pageSettings{display:none!important}#loginBox{position:relative!important;z-index:2147483646!important;pointer-events:auto!important}#loginBtn{position:relative!important;z-index:2147483647!important;display:inline-block!important;cursor:pointer!important;pointer-events:auto!important}
+<style>#addBtn{display:none!important}</style>
+</style>
+</head>
+<body>
+<header><h1>SRIJA COMMUNICATION</h1><p>প্রয়োজনীয় ওয়েবসাইট</p></header>
+<nav><a href="./">হোম</a><a href="links.html">প্রয়োজনীয় ওয়েবসাইট</a><a href="#srija-editor" id="settingsBtn">🔐 Login / SRIJA Editor</a></nav>
+<main class="wrap">
+<div id="s2TopWebsiteBox" style="display:flex;justify-content:center;align-items:center;gap:6px;margin:0 0 18px"><span id="s2WebsiteTitle" style="display:inline-block;background:#fff;border:1px solid #d9deea;border-radius:7px;padding:5px 9px;font-size:14px;font-weight:bold;color:#173b8f;box-shadow:0 2px 7px #0001">প্রয়োজনীয় ওয়েবসাইট</span><button id="inPageEditBtn" type="button" style="border:0;border-radius:7px;padding:6px 10px;background:#2457c5;color:#fff;font-weight:bold;cursor:pointer">✎ Edit</button></div>
+<div id="loginBox" style="display:none;background:#fff;border-radius:14px;padding:18px;margin-bottom:18px;box-shadow:0 5px 20px #0001;max-width:520px;margin-left:auto;margin-right:auto">
+<h3 style="margin-top:0">Settings Login</h3>
+<input id="uid" placeholder="User ID" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ccd3df;border-radius:8px">
+<input id="pw" type="password" placeholder="Password" style="width:100%;padding:10px;margin:6px 0;border:1px solid #ccd3df;border-radius:8px">
+<button id="loginBtn" type="button" style="display:block!important;position:relative!important;z-index:2147483647!important;border:0!important;border-radius:8px!important;padding:12px 20px!important;background:#2457c5!important;color:#fff!important;cursor:pointer!important;pointer-events:auto!important;user-select:none!important" onclick="var u=document.getElementById('uid').value.trim();var p=document.getElementById('pw').value;if(u==='srija'&&p==='srija1234'){document.getElementById('loginBox').style.display='none';document.getElementById('addBox').style.display='block';sessionStorage.setItem('srijaSecondEdit','1');if(window.startRibbonLinks)window.startRibbonLinks();}else{alert('User ID বা Password ভুল')}">Login</button>
+</div>
+<div id="addBox" style="display:none;background:#fff;border-radius:14px;padding:18px;margin-bottom:18px;box-shadow:0 5px 20px #0001">
+<h3 style="margin-top:0">নতুন ওয়েবসাইট যোগ করুন</h3><div id="editLinkMode"></div>
+<input id="lname" placeholder="লিঙ্কের নাম" style="width:100%;padding:10px;margin:5px 0;border:1px solid #ccd3df;border-radius:8px">
+<input id="lurl" placeholder="লিঙ্ক / URL" style="width:100%;padding:10px;margin:5px 0;border:1px solid #ccd3df;border-radius:8px">
+<input id="ldesc" placeholder="ছোট বিবরণ" style="width:100%;padding:10px;margin:5px 0;border:1px solid #ccd3df;border-radius:8px">
+<label style="display:block;margin:10px 0 5px">ছবি</label><input id="limg" type="file" accept="image/*">
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px">
+<label>Box Background <input id="lbg" type="color" value="#ffffff"></label>
+<label>Text Color <input id="lcolor" type="color" value="#173b8f"></label>
+</div>
+<button id="saveLink" style="margin-top:14px;border:0;border-radius:8px;padding:10px 16px;background:#173b8f;color:#fff">Save Link</button>
+<button id="closeAdd" style="margin-top:14px;border:0;border-radius:8px;padding:10px 16px">বন্ধ</button>
+</div>
+<section class="links">
+<div class="linkbox"><h3>ভারত সরকারের পোর্টাল</h3><p>সরকারি পরিষেবার মূল পোর্টাল</p><a href="https://www.india.gov.in/" target="_blank" rel="noopener">https://www.india.gov.in/</a></div>
+<div class="linkbox"><h3>আধার</h3><p>UIDAI-এর অফিসিয়াল ওয়েবসাইট</p><a href="https://uidai.gov.in/" target="_blank" rel="noopener">https://uidai.gov.in/</a></div>
+<div class="linkbox"><h3>আয়কর</h3><p>Income Tax Department</p><a href="https://www.incometax.gov.in/" target="_blank" rel="noopener">https://www.incometax.gov.in/</a></div>
+</section>
+</main>
+<script>
+(function(){
+const staleAdd=document.getElementById("addBtn");if(staleAdd)staleAdd.remove();
+const KEY="srija_required_links_v1";
+let saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||"[]");if(!Array.isArray(saved))saved=[];}catch(e){saved=[];}
+const grid=document.querySelector(".links");
+saved.forEach((x,i)=>addCard(x,i));
+
+function addCard(x,index){
+ const d=document.createElement("div"); d.className="linkbox custom-link-card"; d.style.background=x.bg||"#fff"; d.style.color=x.color||"#172033";
+ d.innerHTML=(x.img?'<img src="'+x.img+'" alt="">':"")+"<h3 style=\"color:"+(x.color||"#173b8f")+"\">"+esc(x.name)+"</h3><p>"+esc(x.desc||"")+"</p><a href=\""+esc(x.url)+"\" target=\"_blank\" rel=\"noopener\" style=\"color:"+(x.color||"#2457c5")+"\">"+esc(x.url)+"</a>";
+ grid.appendChild(d);
+ d.querySelectorAll(".linkbox-tools,.link-edit,.link-delete").forEach(el=>el.remove());
+}
+function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+let editingIndex=-1;
+window.__srijaEditingLinkIndex=-1;
+function resetLinkForm(){
+ document.getElementById("lname").value="";
+ document.getElementById("lurl").value="";
+ document.getElementById("ldesc").value="";
+ document.getElementById("limg").value="";
+ document.getElementById("lbg").value="#ffffff";
+ document.getElementById("lcolor").value="#173b8f";
+ document.getElementById("editLinkMode").textContent="";
+ document.getElementById("saveLink").textContent="Save Link";
+ editingIndex=-1;
+}
+function openEdit(index){
+ const x=saved[index]; if(!x)return;
+ editingIndex=index;window.__srijaEditingLinkIndex=index;
+ document.getElementById("lname").value=x.name||"";
+ document.getElementById("lurl").value=x.url||"";
+ document.getElementById("ldesc").value=x.desc||"";
+ document.getElementById("limg").value="";
+ document.getElementById("lbg").value=x.bg||"#ffffff";
+ document.getElementById("lcolor").value=x.color||"#173b8f";
+ document.getElementById("editLinkMode").textContent="✎ Link Edit";
+ document.getElementById("saveLink").textContent="Update Link";
+ document.getElementById("loginBox").style.display="none";
+ document.getElementById("addBox").style.display="block";
+}
+
+document.getElementById("inPageEditBtn").onclick=()=>{document.getElementById("loginBox").style.display="block";document.getElementById("addBox").style.display="none"};
+
+document.getElementById("loginBtn").addEventListener("click",function(e){
+ e.preventDefault();e.stopPropagation();
+ const u=document.getElementById("uid").value.trim(),p=document.getElementById("pw").value;
+ if(u==="srija" && p==="srija1234"){
+  document.getElementById("loginBox").style.display="none";document.getElementById("addBox").style.display="block";sessionStorage.setItem("srijaSecondEdit","1");window.startRibbonLinks();
+ }else alert("User ID বা Password ভুল");
+});
+document.getElementById("closeAdd").onclick=()=>{
+ resetLinkForm();
+ document.getElementById("addBox").style.display="none";
+};
+window.startRibbonLinks=function startRibbonLinks(){
+ if(document.getElementById("srijaRibbonEditor"))return;
+ let selected=null;
+ const RKEY="srija_links_ribbon_state_v1";
+ function rid(el){if(!el.dataset.srijaRid)el.dataset.srijaRid="r_"+Math.random().toString(36).slice(2,10);return el.dataset.srijaRid}
+ function stableKey(el){if(el.id)return "id:"+el.id;const cls=[...el.classList].filter(x=>x!=="srija-selected").sort().join(".");if(cls){const all=[...document.querySelectorAll("."+[...el.classList].filter(x=>x!=="srija-selected").join(".") )];const i=all.indexOf(el);return "cls:"+cls+":"+i}return "path:"+pathOf(el)}
+ function saveRibbon(){const state=JSON.parse(localStorage.getItem(RKEY)||'{"items":{},"deleted":[]}');if(!state.items)state.items={};if(!Array.isArray(state.deleted))state.deleted=[];document.querySelectorAll("[data-srija-rid]").forEach(el=>{const k=stableKey(el);state.items[k]={style:el.getAttribute("style")||"",text:el.children.length===0?el.innerText:null};if(!state.deleted.includes(k))state.deleted=state.deleted.filter(x=>x!==k)});localStorage.setItem(RKEY,JSON.stringify(state))}
+ function loadRibbon(){try{const raw=JSON.parse(localStorage.getItem(RKEY)||"{}");const state=raw.items?raw:{items:raw,deleted:[]};document.querySelectorAll("header,header h1,header p,nav,nav a,#s2WebsiteTitle,.links,.linkbox,.linkbox h3,.linkbox p,.linkbox a,footer").forEach(el=>{const k=stableKey(el);const v=state.items[k];if(v){if(v.style){let st=v.style.replace(/(^|;)\s*outline\s*:[^;]*/gi,'').replace(/(^|;)\s*outline-offset\s*:[^;]*/gi,'').replace(/(^|;)\s*resize\s*:[^;]*/gi,'');el.setAttribute("style",st)}if(v.text!==null)el.innerText=v.text}});(state.deleted||[]).forEach(k=>{document.querySelectorAll("header,header h1,header p,nav,nav a,#s2WebsiteTitle,.links,.linkbox,.linkbox h3,.linkbox p,.linkbox a,footer").forEach(el=>{if(stableKey(el)===k)el.remove()})})}catch(e){}}
+ const root=document.createElement("div");root.id="srijaRibbonEditor";
+ root.innerHTML='<div class="srija-ribbon"><div class="srija-brand">SRIJA Editor</div><button data-tab="home">Home</button><button data-tab="edit">Edit</button><button data-tab="insert">Insert</button><button data-tab="design">Design</button><button id="srijaSave">Save</button><button id="srijaLogout">Logout</button></div><div class="srija-context"><span id="srlName">কিছু নির্বাচন করা হয়নি</span><span id="srlTools"></span></div>';document.body.appendChild(root);document.body.classList.add("srija-editing");
+ const name=root.querySelector("#srlName"),tools=root.querySelector("#srlTools");
+ function sel(e){if(!e||e.closest("#srijaRibbonEditor"))return;rid(e);if(selected)selected.classList.remove("srija-selected");selected=e;e.classList.add("srija-selected");name.textContent="Selected: "+((e.innerText||e.tagName).trim().slice(0,35))}
+ function edit(){if(!selected)return alert("আগে একটি অংশ Select করুন।");tools.innerHTML='<button id="rlText">Text</button><button id="rlMinus">A−</button><button id="rlPlus">A+</button><button id="rlBold">Bold</button><input id="rlColor" type="color"><button id="rlLeft">Left</button><button id="rlCenter">Center</button><button id="rlRight">Right</button><button id="rlCopy">Copy</button><button id="rlPaste">Paste</button><button id="rlDelete" class="danger">🗑 Delete</button>';rlText.onclick=()=>{if(selected.children.length)return alert("নির্দিষ্ট Text Select করুন।");const v=prompt("নতুন লেখা:",selected.innerText);if(v!==null){selected.innerText=v;saveRibbon()}};rlMinus.onclick=()=>{selected.style.fontSize=Math.max(8,parseInt(getComputedStyle(selected).fontSize)-1)+"px";saveRibbon()};rlPlus.onclick=()=>{selected.style.fontSize=Math.min(100,parseInt(getComputedStyle(selected).fontSize)+1)+"px";saveRibbon()};rlBold.onclick=()=>{selected.style.fontWeight=getComputedStyle(selected).fontWeight==="700"?"400":"700";saveRibbon()};rlColor.oninput=e=>{selected.style.color=e.target.value;saveRibbon()};rlLeft.onclick=()=>{selected.style.textAlign="left";saveRibbon()};rlCenter.onclick=()=>{selected.style.textAlign="center";saveRibbon()};rlRight.onclick=()=>{selected.style.textAlign="right";saveRibbon()};rlCopy.onclick=()=>localStorage.setItem("srija_ribbon_clip",selected.outerHTML);rlPaste.onclick=()=>{const h=localStorage.getItem("srija_ribbon_clip");if(h){selected.insertAdjacentHTML("afterend",h);const n=selected.nextElementSibling;if(n)rid(n);saveRibbon()}};rlDelete.onclick=()=>{if(!selected)return;if(!confirm("শুধু নির্বাচিত অংশটি Delete করবেন?"))return;const card=selected.closest(".custom-link-card");if(card){const i=[...grid.querySelectorAll(".custom-link-card")].indexOf(card);if(i>=0){saved.splice(i,1);localStorage.setItem(KEY,JSON.stringify(saved));rerenderSaved();selected=null;name.textContent="কিছু নির্বাচন করা হয়নি";tools.innerHTML="";return}}const k=stableKey(selected);const state=JSON.parse(localStorage.getItem(RKEY)||'{"items":{},"deleted":[]}');if(!Array.isArray(state.deleted))state.deleted=[];if(!state.deleted.includes(k))state.deleted.push(k);selected.remove();selected=null;name.textContent="কিছু নির্বাচন করা হয়নি";tools.innerHTML="";localStorage.setItem(RKEY,JSON.stringify(state))}}
+ function ins(){const r=root;tools.innerHTML='<button id="rlAddBox">＋ New Box</button><button id="rlAddText">＋ Text</button><button id="rlAddImage">＋ Image</button><button id="rlAddLogo">＋ Logo</button>';
+const q=id=>r.querySelector("#"+id);
+q("rlAddBox").onclick=()=>{const d=document.createElement("div");d.className="linkbox";d.dataset.srijaRid="new-"+Date.now();d.innerHTML="<h3>নতুন বক্স</h3><p>এখানে আপনার লেখা দিন</p>";grid.appendChild(d);enableMouseResize(d);sel(d);edit();saveRibbon()};
+q("rlAddText").onclick=()=>{const d=document.createElement("p");d.dataset.srijaRid="newtext-"+Date.now();d.textContent="নতুন লেখা";(document.querySelector(".links")||document.body).appendChild(d);sel(d);saveRibbon()};
+q("rlAddImage").onclick=()=>{const f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=()=>{const file=f.files[0];if(!file)return;const rr=new FileReader();rr.onload=()=>{const img=document.createElement("img");img.src=rr.result;img.alt="নতুন ছবি";img.dataset.srijaRid="newimg-"+Date.now();img.style.maxWidth="100%";img.style.height="auto";img.style.display="block";img.style.margin="12px auto";const parent=selected&&selected.parentElement?selected.parentElement:(document.querySelector(".links")||document.body);if(selected&&selected.parentElement===parent)selected.after(img);else parent.appendChild(img);sel(img);saveRibbon()};rr.readAsDataURL(file)};f.click()};
+q("rlAddLogo").onclick=()=>{const f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=()=>{const file=f.files[0];if(!file)return;const rr=new FileReader();rr.onload=()=>{let img=document.querySelector("header img");if(!img){img=document.createElement("img");img.alt="SRIJA COMMUNICATION logo";img.style.maxWidth="110px";img.style.maxHeight="70px";img.style.margin="0 auto 10px";img.style.display="block";document.querySelector("header").prepend(img)}img.src=rr.result;try{localStorage.setItem("srija_site_logo",rr.result)}catch(e){}saveRibbon()};rr.readAsDataURL(file)};f.click()}}
+ function enableMouseResize(el){
+  if(sessionStorage.getItem('srijaSecondEdit')!=='1')return;
+  if(!document.getElementById('srijaRibbonEditor'))return;
+ if(!el||el.dataset.resizeReady)return;
+ el.dataset.resizeReady="1";
+ el.style.resize="none";
+ el.style.overflow="auto";
+ el.style.minWidth="180px";
+ el.style.minHeight="100px";
+ el.style.touchAction="none";
+ el.addEventListener("mousemove",function(ev){
+  const r=el.getBoundingClientRect(),x=ev.clientX-r.left,y=ev.clientY-r.top,z=(ev.pointerType==='touch'?32:10);
+  const l=x<z,t=x>r.width-z,u=y<z,b=y>r.height-z;
+  el.style.cursor=(l&&t||l&&b)?"nwse-resize":(t&&u||r&&b)?"nesw-resize":(l||t)?"ew-resize":(u||b)?"ns-resize":"default";
+ });
+ el.addEventListener('pointerdown',function(ev){
+    if(ev.pointerType==='mouse' && ev.button!==0)return;
+  const r=el.getBoundingClientRect(),x=ev.clientX-r.left,y=ev.clientY-r.top,z=(ev.pointerType==='touch'?12:10);
+  const l=x<z,t=x>r.width-z,u=y<z,b=y>r.height-z;
+  if(!(l||t||u||b))return;
+  ev.preventDefault();ev.stopPropagation();
+  if(el.setPointerCapture)try{el.setPointerCapture(ev.pointerId)}catch(e){}
+  const sx=ev.clientX,sy=ev.clientY,sw=r.width,sh=r.height;
+  function mv(q){
+      if(ev.pointerType==='touch')q.preventDefault();
+   if(l)el.style.width=Math.max(180,sw+sx-q.clientX)+"px";
+   if(t)el.style.height=Math.max(100,sh+sy-q.clientY)+"px";
+   if(t&&l){} 
+   if(b)el.style.height=Math.max(100,sh+q.clientY-sy)+"px";
+   if(r)el.style.width=Math.max(180,sw+q.clientX-sx)+"px";
+  }
+  function up(){document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);saveRibbon();el.style.cursor='default'}
+  document.addEventListener('pointermove',mv);
+    document.addEventListener('pointerup',up);
+ });
+}
+function prepareResizeBoxes(){
+ document.querySelectorAll(".linkbox").forEach(el=>{el.style.resize="none";el.style.overflow="auto";});
+ if(window.__srijaCursorReady)return;
+ window.__srijaCursorReady=1;
+ document.addEventListener("mousemove",function(ev){
+  const el=ev.target.closest&&ev.target.closest(".linkbox");
+  if(!el){document.documentElement.style.cursor="";return}
+  const r=el.getBoundingClientRect(),z=14,x=ev.clientX-r.left,y=ev.clientY-r.top;
+  const l=x<=z,t=y<=z,R=x>=r.width-z,b=y>=r.height-z;
+  document.documentElement.style.cursor=(l&&t||R&&b)?"nwse-resize":(R&&t||l&&b)?"nesw-resize":(l||R)?"ew-resize":(t||b)?"ns-resize":"";
+ },true);
+}
+function des(){if(!selected)return alert("আগে একটি অংশ Select করুন।");tools.innerHTML='<button id="rlBg">Background</button><button id="rlWm">Width −</button><button id="rlWp">Width +</button>';rlBg.onclick=()=>{const v=prompt("Background color:",getComputedStyle(selected).backgroundColor);if(v){selected.style.background=v;saveRibbon()}};rlWm.onclick=()=>{const w=parseFloat(getComputedStyle(selected).width),pw=selected.parentElement?.getBoundingClientRect().width||w;selected.style.width=Math.max(10,Math.round(w/pw*100)-5)+"%";saveRibbon()};rlWp.onclick=()=>{const w=parseFloat(getComputedStyle(selected).width),pw=selected.parentElement?.getBoundingClientRect().width||w;selected.style.width=Math.min(100,Math.round(w/pw*100)+5)+"%";saveRibbon()}}
+ root.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>b.dataset.tab==="edit"?edit():b.dataset.tab==="insert"?ins():b.dataset.tab==="design"?des():(tools.innerHTML="Home"));
+ root.querySelector("#srijaSave").onclick=()=>{saveRibbon();alert("পরিবর্তন Save হয়েছে")};root.querySelector("#srijaLogout").onclick=()=>{root.remove();document.body.classList.remove("srija-editing");if(selected)selected.classList.remove("srija-selected");sessionStorage.removeItem("srijaSecondEdit")};
+ document.addEventListener("click",function(ev){if(!document.getElementById("srijaRibbonEditor")||ev.target.closest("#srijaRibbonEditor"))return;const e=ev.target.closest("header,header h1,header p,nav,nav a,.title,#s2WebsiteTitle,.links,.linkbox,.linkbox h3,.linkbox p,.linkbox a,footer");if(e){
+    if(e.classList.contains('linkbox') && sessionStorage.getItem('srijaSecondEdit')==='1'){
+      const rr=e.getBoundingClientRect(),zz=(ev.pointerType==='touch'?12:10),x=ev.clientX-rr.left,y=ev.clientY-rr.top;
+      if(x<zz||x>rr.width-zz||y<zz||y>rr.height-zz)return;
+    }
+    ev.preventDefault();ev.stopPropagation();sel(e)
+  }},true);
+ loadRibbon();prepareResizeBoxes();
+}
+
+function rerenderSaved(){
+ const old=grid.querySelectorAll('.custom-link-card'); old.forEach(el=>el.remove());
+ saved.forEach((x,i)=>addCard(x,i));
+}
+
+document.getElementById("saveLink").onclick=()=>{
+ const name=document.getElementById("lname").value.trim(),url=document.getElementById("lurl").value.trim();
+ if(!name||!url)return alert("লিঙ্কের নাম ও URL দিন");
+ const f=document.getElementById("limg").files[0];
+ const save=(img)=>{
+  const x={name,url,desc:document.getElementById("ldesc").value,bg:document.getElementById("lbg").value,color:document.getElementById("lcolor").value,img:img||""};
+  if((window.__srijaEditingLinkIndex??editingIndex)>=0){const editIndex=window.__srijaEditingLinkIndex??editingIndex;
+   if(!x.img)x.img=saved[editIndex].img||"";
+   saved[editIndex]=x;
+   localStorage.setItem(KEY,JSON.stringify(saved));
+   rerenderSaved();
+   alert("Link পরিবর্তন সংরক্ষণ হয়েছে");
+  }else{
+   saved.push(x);
+   localStorage.setItem(KEY,JSON.stringify(saved));
+   rerenderSaved();
+   alert("নতুন লিঙ্ক যোগ হয়েছে");
+  }
+  resetLinkForm();
+  document.getElementById("addBox").style.display="none";
+ };
+ if(f){const rd=new FileReader();rd.onload=()=>save(rd.result);rd.readAsDataURL(f)}else save("");
+};
+})();
+</script>
+
+<div id="pageSettings" data-duplicate-old-settings="1" style="display:none;position:fixed;inset:0;background:#0006;z-index:99999;padding:18px;overflow:auto">
+<div id="s2box" style="max-width:700px;margin:20px auto;background:#fff;border-radius:16px;padding:18px;box-shadow:0 10px 35px #0004;color:#172033">
+<button id="closeSettings" style="float:right;border:0;border-radius:8px;padding:8px 12px">✕</button>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><h2 style="margin-top:0;color:#173b8f">⚙️ সবকিছু পরিচালনা</h2><button id="s2selectMode" type="button" style="border:0;border-radius:8px;padding:8px 12px;background:#697386;color:#fff;cursor:pointer">🎯 Select</button></div>
+<div id="s2login"><p>দ্বিতীয় পেজের Settings</p><label>User ID</label><input id="sUid" style="width:100%;padding:10px;margin:5px 0;border:1px solid #ccc;border-radius:8px"><label>Password</label><input id="sPw" type="password" style="width:100%;padding:10px;margin:5px 0;border:1px solid #ccc;border-radius:8px"><button id="sLoginBtn" style="padding:10px 16px;background:#173b8f;color:#fff;border:0;border-radius:8px">Login</button></div>
+<div id="s2tools" style="display:none"><button id="s2selectAgain" type="button" style="width:100%;margin-bottom:10px;padding:12px;border:0;border-radius:9px;background:#173b8f;color:#fff;font-weight:bold">🎯 আবার অন্য অংশ Select করুন</button>
+<div style="padding:10px;background:#eef4ff;border-radius:10px;margin-bottom:10px">🎯 <b>যে লেখা/বক্স/ছবি বদলাবেন সেটিতে সরাসরি চাপুন।</b><div id="s2name">কিছু নির্বাচন করা হয়নি</div></div>
+<details open><summary style="font-weight:700;padding:10px">নির্বাচিত অংশ ডিজাইন</summary><div style="display:grid;gap:8px;padding:10px">
+<label>লেখা<textarea id="s2text" rows="3" style="width:100%;padding:8px"></textarea></label>
+<div style="display:flex;gap:6px;align-items:center"><button id="s2minus">A−</button><input id="s2size" type="number" min="8" max="100" value="16" style="flex:1;padding:8px"><button id="s2plus">A+</button></div>
+<div style="display:flex;gap:10px"><label>লেখার রং <input id="s2color" type="color" value="#172033"></label><label>BG <input id="s2bg" type="color" value="#ffffff"></label></div>
+<label>Font <select id="s2font" style="width:100%;padding:8px"><option value="inherit">Default</option><option>Arial</option><option>Poppins</option><option>Hind Siliguri</option><option>Georgia</option><option>Verdana</option></select></label>
+<label>Style <select id="s2weight" style="width:100%;padding:8px"><option value="400">Normal</option><option value="600">Semi Bold</option><option value="700">Bold</option></select></label>
+<label>Alignment <select id="s2align" style="width:100%;padding:8px"><option>left</option><option>center</option><option>right</option><option>justify</option></select></label>
+<div style="display:flex;gap:8px"><label style="flex:1">Width %<input id="s2width" type="number" min="10" max="100" value="100" style="width:100%;padding:8px"></label><label style="flex:1">Height px<input id="s2height" type="number" min="0" max="1500" value="0" style="width:100%;padding:8px"></label></div>
+<button id="s2apply" style="padding:11px;background:#2457c5;color:#fff;border:0;border-radius:8px">✓ প্রয়োগ + Save</button>
+</div></details>
+<details><summary style="font-weight:700;padding:10px">🌐 Link Box পরিচালনা</summary><div style="padding:10px"><label style="display:block;font-weight:700;margin-bottom:6px">Link Box নির্বাচন করুন</label><select id="s2linkSelect" style="width:100%;padding:10px;border:1px solid #ccd3df;border-radius:8px;margin-bottom:8px"><option value="">-- Link Box নির্বাচন করুন --</option></select><div id="s2linkInfo" style="font-size:13px;color:#555;margin:6px 0 10px"></div><button id="s2linkEdit" type="button" style="padding:10px 14px;background:#2457c5;color:#fff;border:0;border-radius:8px">✎ Edit Link</button><button id="s2linkDelete" type="button" style="padding:10px 14px;background:#c62828;color:#fff;border:0;border-radius:8px;margin-left:6px">🗑 Delete Link</button></div></details><details><summary style="font-weight:700;padding:10px">Move / Copy / Paste</summary><div style="padding:10px;display:flex;gap:6px;flex-wrap:wrap"><button data-m="-1,0">←</button><button data-m="1,0">→</button><button data-m="0,-1">↑</button><button data-m="0,1">↓</button><button id="s2copy">Copy</button><button id="s2paste">Paste</button><button id="s2delete">Delete</button></div></details>
+<details><summary style="font-weight:700;padding:10px">Background Photo</summary><div style="padding:10px"><input id="s2bgfile" type="file" accept="image/*"><button id="s2bgsave">নির্বাচিত অংশে ছবি দিন</button><button id="s2bgpage">পুরো পেজে ছবি দিন</button></div></details>
+<details><summary style="font-weight:700;padding:10px">Undo / Redo</summary><div style="padding:10px"><button id="s2undo">↶ Undo</button><button id="s2redo">↷ Redo</button></div></details>
+<details><summary style="font-weight:700;padding:10px">Scrolling</summary><div style="padding:10px"><label><input id="s2scroll" type="checkbox"> সব লেখা scrolling</label><button id="s2scrollsave">Scrolling সংরক্ষণ</button></div></details>
+<details><summary style="font-weight:700;padding:10px">Logo</summary><div style="padding:10px"><input id="s2logo" type="file" accept="image/*"><button id="s2logosave">Logo Upload / Save</button></div></details>
+<button id="s2logout" style="margin-top:12px;padding:10px">Close Edit Mode</button>
+</div></div></div>
+<script>
+(function(){
+const panel=document.getElementById('pageSettings'), login=document.getElementById('s2login'), tools=document.getElementById('s2tools');
+let selected=null,history=[],future=[],selectMode=false;const S2SAVE='srija_second_page_editor_v2';
+const LINK_KEY='srija_required_links_v1';
+function getSavedLinks(){try{return JSON.parse(localStorage.getItem(LINK_KEY)||'[]')}catch(e){return[]}}
+function refreshLinkManager(){
+ const saved=getSavedLinks(),sel=document.getElementById('s2linkSelect');
+ if(!sel)return;
+ const old=sel.value;
+ sel.innerHTML='<option value="">-- Link Box নির্বাচন করুন --</option>';
+ saved.forEach((x,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=(i+1)+'. '+(x.name||'নাম নেই');sel.appendChild(o)});
+ if(saved[Number(old)])sel.value=old;
+ const info=document.getElementById('s2linkInfo');
+ const i=Number(sel.value);
+ if(info)info.textContent=(sel.value!==''&&saved[i])?('নির্বাচিত: '+(saved[i].name||'নাম নেই')):'কোনো Link Box নির্বাচন করা হয়নি';
+}
+function openEditFromSettings(index){
+ const saved=getSavedLinks(),x=saved[index];if(!x)return;
+ document.getElementById('lname').value=x.name||'';
+ document.getElementById('lurl').value=x.url||'';
+ document.getElementById('ldesc').value=x.desc||'';
+ document.getElementById('limg').value='';
+ document.getElementById('lbg').value=x.bg||'#ffffff';
+ document.getElementById('lcolor').value=x.color||'#173b8f';
+ document.getElementById('editLinkMode').textContent='✎ Link Edit';
+ document.getElementById('saveLink').textContent='Update Link';
+ window.__srijaEditingLinkIndex=index;
+ document.getElementById('loginBox').style.display='none';
+ document.getElementById('addBox').style.display='block';
+}
+function deleteLinkFromSettings(index){
+ const saved=getSavedLinks();if(!saved[index])return;
+ if(!confirm('এই Link Box-টি মুছে ফেলবেন?'))return;
+ saved.splice(index,1);localStorage.setItem(LINK_KEY,JSON.stringify(saved));
+ refreshLinkManager();
+ location.reload();
+}
+function sid(e){if(!e.dataset.s2id)e.dataset.s2id='s2_'+Math.random().toString(36).slice(2,10);return e.dataset.s2id}
+function pathOf(e){const a=[];while(e&&e!==document.body){let n=1,s=e;while((s=s.previousElementSibling))n++;a.unshift(n);e=e.parentElement}return a.join('.')}
+function byPath(p){let e=document.body;for(const n of String(p).split('.')){e=e&&e.children[Number(n)-1]}return e}
+function saveAll(){const out={};document.querySelectorAll('[data-s2id]').forEach(e=>{const p=pathOf(e);const wasOutline=e.style.outline,wasOffset=e.style.outlineOffset;e.style.outline='';e.style.outlineOffset='';out[p]={style:e.getAttribute('style')||'',text:e.children.length===0?e.innerText:null,move:e.dataset.move||''};e.style.outline=wasOutline;e.style.outlineOffset=wasOffset});localStorage.setItem(S2SAVE,JSON.stringify(out))}
+function loadAll(){const out=JSON.parse(localStorage.getItem(S2SAVE)||'{}');Object.keys(out).forEach(p=>{const v=out[p],e=byPath(p);if(e){sid(e);if(v.style)e.setAttribute('style',v.style);if(v.text!==null)e.innerText=v.text;if(v.move)e.dataset.move=v.move}})}
+function saveSelected(){if(selected){sid(selected);saveAll()}}
+setTimeout(()=>{loadAll();document.querySelectorAll('[data-s2-selected],.s2sel').forEach(e=>{e.removeAttribute('data-s2-selected');e.classList.remove('s2sel');e.style.outline='';e.style.outlineOffset='';});},50);
+const allowed='*';
+function hit(t){while(t&&t.nodeType===1){if(!t.closest('#pageSettings,#loginBox,#addBox'))return t;t=t.parentElement}return null;}
+function rgb(v){let m=String(v).match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);return m?'#'+[m[1],m[2],m[3]].map(x=>Number(x).toString(16).padStart(2,'0')).join(''):'#ffffff'}
+function snap(e){return {html:e.innerHTML,style:e.getAttribute('style')||''}}
+function restore(e,s){e.innerHTML=s.html;e.setAttribute('style',s.style)}
+function select(e){if(!e)return;document.querySelectorAll('.s2sel,[data-s2-selected]').forEach(x=>{x.classList.remove('s2sel');x.removeAttribute('data-s2-selected');x.style.outline='';x.style.outlineOffset='';});selected=e;e.classList.add('s2sel');e.setAttribute('data-s2-selected','1');e.style.outline='3px dashed #ff2d55';e.style.outlineOffset='3px';document.getElementById('s2name').textContent='নির্বাচিত: '+e.tagName.toLowerCase();document.getElementById('s2text').value=e.innerText||'';document.getElementById('s2size').value=parseInt(getComputedStyle(e).fontSize)||16;document.getElementById('s2color').value=rgb(getComputedStyle(e).color);document.getElementById('s2bg').value=rgb(getComputedStyle(e).backgroundColor);document.getElementById('s2font').value=(getComputedStyle(e).fontFamily.split(',')[0]||'inherit').replaceAll('"','').trim();document.getElementById('s2weight').value=getComputedStyle(e).fontWeight;document.getElementById('s2align').value=getComputedStyle(e).textAlign;document.getElementById('s2width').value=Math.round(e.getBoundingClientRect().width/(e.parentElement?.getBoundingClientRect().width||e.getBoundingClientRect().width)*100)||100;document.getElementById('s2height').value=e.offsetHeight||0}
+const oldSettingsBtn=document.getElementById('settingsBtn'); if(oldSettingsBtn) oldSettingsBtn.onclick=e=>{e.preventDefault();selectMode=false;if(sessionStorage.getItem('srijaSecondEdit')==='1'){window.startRibbonLinks();return;}panel.style.display='block';login.style.display='block';tools.style.display='none';};
+document.getElementById('closeSettings').onclick=()=>panel.style.display='none';
+document.getElementById('sLoginBtn').onclick=()=>{if(document.getElementById('sUid').value.trim()==='srija'&&document.getElementById('sPw').value==='srija1234'){sessionStorage.setItem('srijaSecondEdit','1');login.style.display='none';tools.style.display='block';panel.style.display='none';window.startRibbonLinks()}else alert('User ID বা Password ভুল')};
+document.getElementById('s2linkSelect').onchange=()=>{const a=getSavedLinks(),i=Number(document.getElementById('s2linkSelect').value);document.getElementById('s2linkInfo').textContent=(document.getElementById('s2linkSelect').value!==''&&a[i])?('নির্বাচিত: '+(a[i].name||'নাম নেই')):'কোনো Link Box নির্বাচন করা হয়নি';};
+document.getElementById('s2linkEdit').onclick=()=>{const v=document.getElementById('s2linkSelect').value;if(v==='')return alert('আগে একটি Link Box নির্বাচন করুন');openEditFromSettings(Number(v));panel.style.display='none';};
+document.getElementById('s2linkDelete').onclick=()=>{const v=document.getElementById('s2linkSelect').value;if(v==='')return alert('আগে একটি Link Box নির্বাচন করুন');deleteLinkFromSettings(Number(v));};
+document.getElementById('s2selectMode').onclick=()=>{selectMode=true;panel.style.display='none';let b=document.getElementById('s2selectBanner');if(!b){b=document.createElement('div');b.id='s2selectBanner';b.textContent='🎯 SELECT MODE: এখন যে কোনো ছোট/বড় বক্স বা অংশে চাপুন';b.style.cssText='position:fixed;top:10px;left:10px;right:10px;z-index:2147483646;background:#173b8f;color:#fff;padding:12px;text-align:center;border-radius:10px;font-weight:bold;box-shadow:0 5px 20px #0005';document.body.appendChild(b)}b.style.display='block';};
+function secondPagePick(e){
+ if(!selectMode)return;
+ const t=e.target;
+ if(t&&t.closest?.('#pageSettings,#srijaEditMode2,#loginBox,#addBox'))return;
+ const h=(t&&t.closest?.('.linkbox'))||hit(t);
+ if(!h)return;
+ e.preventDefault();e.stopPropagation();
+ select(h);
+ const b=document.getElementById('s2selectBanner');if(b)b.style.display='block';
+ panel.style.display='none';
+ login.style.display='none';tools.style.display='block';
+}
+document.addEventListener('pointerdown',e=>{if(!selectMode)return;secondPagePick(e)},{capture:true});
+document.getElementById('s2minus').onclick=()=>s2size.value=Math.max(8,(+s2size.value||16)-1);document.getElementById('s2plus').onclick=()=>s2size.value=Math.min(100,(+s2size.value||16)+1);
+document.getElementById('s2apply').onclick=()=>{if(!selected)return alert('আগে একটি অংশ নির্বাচন করুন');history.push(snap(selected));future=[];if(selected.children.length===0&&s2text.value.trim()!=='')selected.innerText=s2text.value;selected.style.fontSize=(+s2size.value||16)+'px';selected.style.color=s2color.value;selected.style.backgroundColor=s2bg.value;selected.style.fontFamily=s2font.value;selected.style.fontWeight=s2weight.value;selected.style.textAlign=s2align.value;if(+s2width.value)selected.style.width=s2width.value+'%';if(+s2height.value)selected.style.height=s2height.value+'px';selected.style.position='relative';saveSelected();alert('পরিবর্তন স্থায়ীভাবে Save হয়েছে')};
+document.querySelectorAll('#s2tools button[data-m]').forEach(b=>b.onclick=()=>{if(!selected)return alert('আগে নির্বাচন করুন');history.push(snap(selected));const [x,y]=b.dataset.m.split(',').map(Number);const m=selected.dataset.move||'0,0';const [ox,oy]=m.split(',').map(Number);const nx=ox+x*10,ny=oy+y*10;selected.dataset.move=nx+','+ny;selected.style.transform='translate('+nx+'px,'+ny+'px)';saveSelected();});
+document.getElementById('s2copy').onclick=()=>{if(selected)localStorage.setItem('s2clip',selected.outerHTML)};document.getElementById('s2paste').onclick=()=>{if(!selected)return;const h=localStorage.getItem('s2clip');if(!h)return;selected.insertAdjacentHTML('afterend',h)};
+document.getElementById('s2delete').onclick=()=>{if(selected){history.push(snap(selected));selected.remove();selected=null}};
+document.getElementById('s2undo').onclick=()=>{if(selected&&history.length){future.push(snap(selected));restore(selected,history.pop())}};document.getElementById('s2redo').onclick=()=>{if(selected&&future.length){history.push(snap(selected));restore(selected,future.pop())}};
+document.getElementById('s2bgsave').onclick=()=>{if(!selected)return;const f=s2bgfile.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{history.push(snap(selected));selected.style.backgroundImage='url("'+r.result+'")';selected.style.backgroundSize='cover';selected.style.backgroundPosition='center';selected.style.backgroundRepeat='no-repeat';saveSelected()};r.readAsDataURL(f)};
+document.getElementById('s2bgpage').onclick=()=>{const f=document.getElementById('s2bgfile').files[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.body.style.backgroundImage='url("'+r.result+'")';document.body.style.backgroundSize='cover';document.body.style.backgroundPosition='center';localStorage.setItem('srija_second_page_body_bg',r.result)};r.readAsDataURL(f)};
+document.getElementById('s2logosave').onclick=()=>{const f=s2logo.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const i=document.querySelector('header img');if(i)i.src=r.result;localStorage.setItem('srija_site_logo',r.result)};r.readAsDataURL(f)};
+document.getElementById('s2scrollsave').onclick=()=>localStorage.setItem('srija_second_page_scroll',s2scroll.checked?'on':'off');
+document.getElementById('s2selectAgain').onpointerdown=e=>{e.preventDefault();e.stopPropagation();selectMode=true;panel.style.display='none';};document.getElementById('s2logout').onclick=()=>{sessionStorage.removeItem('srijaSecondEdit');panel.style.display='none'};
+})();
+</script>
+<script>(function(){function clearOldSelection(){document.querySelectorAll('.srija-selected,.s2sel,[data-s2-selected]').forEach(function(e){e.classList.remove('srija-selected','s2sel');e.removeAttribute('data-s2-selected');e.style.outline='none';e.style.outlineOffset='';});document.querySelectorAll('[style*="outline"]').forEach(function(e){e.style.outline='none';e.style.outlineOffset='';});sessionStorage.removeItem('srijaSecondEdit');}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',clearOldSelection);}else{clearOldSelection();}setTimeout(clearOldSelection,300);setTimeout(clearOldSelection,1000);})();</script>
+<!-- SRIJA_MOUSE_KEYBOARD_EDITOR_V5_FULL_SETTINGS -->
+<style>
+#srijaEditMode2{position:fixed;left:8px;right:8px;bottom:max(8px,env(safe-area-inset-bottom));z-index:2147483647;background:#172033;color:#fff;padding:10px;border-radius:12px;display:none;box-shadow:0 8px 25px #0005;font-size:14px;touch-action:manipulation}
+#srijaEditMode2 .srow{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+#srijaEditMode2 button,#srijaEditMode2 select,#srijaEditMode2 input{border:0;border-radius:7px;padding:8px 10px;background:#fff;color:#172033;font-size:13px;min-height:38px}
+#srijaEditMode2 input[type=color]{padding:3px;width:42px}
+.srija-mk-selected{outline:3px dashed #2563eb!important;outline-offset:3px}
+@media(max-width:600px){#srijaEditMode2{font-size:12px;bottom:max(6px,env(safe-area-inset-bottom));padding:7px}.wrap{padding-bottom:210px}}
+</style>
+<script id="srija-universal-editor-links">
+(function(){
+if(!sessionStorage.getItem("srija_owner_logged_in") && !sessionStorage.getItem("srijaSecondEdit")) return;
+const STORE="srija_universal_links_v1", BAR="srijaUniversalBar";
+let selected=null,drag=null,resize=null;
+const EXCLUDE="#srijaRibbonEditor,#srijaSettingsV3,#srijaStandaloneLogin,#adminPanel,#pageSettings,#loginBox,#addBox,#srijaEditMode2,#srijaUniversalBar";
+function editable(e){return e&&e.nodeType===1&&!e.closest(EXCLUDE)&&e!==document.body&&e!==document.documentElement&&!["SCRIPT","STYLE","META","LINK"].includes(e.tagName)}
+function uid(e){if(!e.dataset.uvid)e.dataset.uvid="u-"+Math.random().toString(36).slice(2,10);return e.dataset.uvid}
+function save(){try{const out={};document.querySelectorAll("[data-uvid]").forEach(e=>{if(!editable(e))return;out[e.dataset.uvid]={style:e.getAttribute("style")||"",text:e.children.length===0?e.textContent:null}});localStorage.setItem(STORE,JSON.stringify(out))}catch(e){}}
+function load(){try{const out=JSON.parse(localStorage.getItem(STORE)||"{}");document.querySelectorAll("[data-uvid]").forEach(e=>{const v=out[e.dataset.uvid];if(!v)return;if(v.style)e.setAttribute("style",v.style);if(v.text!==null)e.textContent=v.text})}catch(e){}}
+function select(e){if(!editable(e))return;if(selected)selected.classList.remove("ue-selected");selected=e;uid(e);e.classList.add("ue-selected");document.getElementById("ueName").textContent="নির্বাচিত: "+((e.innerText||e.tagName).trim().slice(0,32));document.getElementById("ueText").value=e.children.length?"":e.textContent;document.getElementById("ueSize").value=parseInt(getComputedStyle(e).fontSize)||16}
+function move(e,dx,dy){if(!e)return;const t=getComputedStyle(e).transform;let x=0,y=0;if(t&&t!=="none"){const m=t.match(/^matrix\(([^)]+)\)$/);if(m){const a=m[1].split(",").map(Number);x=a[4]||0;y=a[5]||0}}e.style.transform="translate("+(x+dx)+"px,"+(y+dy)+"px)";save()}
+function bar(){if(document.getElementById(BAR))return;const b=document.createElement("div");b.id=BAR;b.innerHTML='<span id="ueName">কিছু নির্বাচন করা হয়নি</span><input id="ueText" placeholder="লেখা পরিবর্তন" /><button id="ueApply">লেখা</button><button id="ueMinus">A−</button><button id="uePlus">A+</button><input id="ueColor" type="color" value="#172033"><input id="ueBg" type="color" value="#ffffff"><button id="ueUp">↑</button><button id="ueDown">↓</button><button id="ueLeft">←</button><button id="ueRight">→</button><button id="ueDelete">Delete</button><button id="ueClose">Close Edit</button>';document.body.appendChild(b);
+document.getElementById("ueApply").onclick=()=>{if(!selected)return;if(selected.children.length===0){selected.textContent=document.getElementById("ueText").value;save()}};
+document.getElementById("ueMinus").onclick=()=>{if(selected){selected.style.fontSize=Math.max(8,(parseInt(getComputedStyle(selected).fontSize)||16)-1)+"px";save()}};
+document.getElementById("uePlus").onclick=()=>{if(selected){selected.style.fontSize=Math.min(100,(parseInt(getComputedStyle(selected).fontSize)||16)+1)+"px";save()}};
+document.getElementById("ueColor").oninput=e=>{if(selected){selected.style.color=e.target.value;save()}};
+document.getElementById("ueBg").oninput=e=>{if(selected){selected.style.backgroundColor=e.target.value;save()}};
+document.getElementById("ueUp").onclick=()=>move(selected,0,-5);document.getElementById("ueDown").onclick=()=>move(selected,0,5);document.getElementById("ueLeft").onclick=()=>move(selected,-5,0);document.getElementById("ueRight").onclick=()=>move(selected,5,0);
+document.getElementById("ueDelete").onclick=()=>{if(selected&&confirm("নির্বাচিত অংশটি Delete করবেন?")){selected.remove();selected=null;save()}};
+document.getElementById("ueClose").onclick=()=>{b.remove();if(selected)selected.classList.remove("ue-selected");selected=null};
+}
+const st=document.createElement("style");st.textContent="#srijaUniversalBar{position:fixed;left:6px;right:6px;bottom:6px;z-index:2147483647;background:#172033;color:#fff;padding:7px;border-radius:12px;display:flex;gap:5px;align-items:center;flex-wrap:wrap;box-shadow:0 8px 25px #0005;font:13px Arial,sans-serif}#srijaUniversalBar input[type=text]{min-width:120px;flex:1;padding:7px;border-radius:6px;border:0}#srijaUniversalBar button,#srijaUniversalBar input{min-height:34px;border:0;border-radius:6px;padding:6px 8px}.ue-selected{outline:3px dashed #2563eb!important;outline-offset:3px;cursor:move!important}@media(max-width:600px){#srijaUniversalBar{font-size:12px}}";document.head.appendChild(st);
+bar();document.querySelectorAll("body *").forEach(e=>{if(editable(e))uid(e)});load();
+document.addEventListener("pointerdown",function(ev){if(ev.target.closest(EXCLUDE))return;const e=ev.target.closest("body *");if(!editable(e))return;select(e);if(ev.pointerType==="mouse"&&ev.button!==0)return;const r=e.getBoundingClientRect(),z=14,x=ev.clientX-r.left,y=ev.clientY-r.top;const edge=x<z||x>r.width-z||y<z||y>r.height-z;if(edge){resize={e,sx:ev.clientX,sy:ev.clientY,w:r.width,h:r.height};}else{drag={e,sx:ev.clientX,sy:ev.clientY};}e.setPointerCapture?.(ev.pointerId);ev.preventDefault();ev.stopPropagation()},true);
+document.addEventListener("pointermove",function(ev){if(drag&&drag.e){const dx=ev.clientX-drag.sx,dy=ev.clientY-drag.sy;move(drag.e,dx,dy);drag.sx=ev.clientX;drag.sy=ev.clientY;ev.preventDefault()}if(resize&&resize.e){resize.e.style.width=Math.max(30,resize.w+ev.clientX-resize.sx)+"px";resize.e.style.height=Math.max(30,resize.h+ev.clientY-resize.sy)+"px";resize.e.style.maxWidth="none";resize.e.style.maxHeight="none";ev.preventDefault()}},true);
+document.addEventListener("pointerup",function(){if(drag||resize)save();drag=null;resize=null},true);
+document.addEventListener("keydown",function(e){if(!selected||e.target.closest("input,textarea,select"))return;if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key)){e.preventDefault();move(selected,e.key==="ArrowLeft"?-5:e.key==="ArrowRight"?5:0,e.key==="ArrowUp"?-5:e.key==="ArrowDown"?5:0)}},true);
+})();
+</script></body></html>
