@@ -667,5 +667,39 @@ window.srijaStartUnifiedEditor=start;
 if(logged())setTimeout(start,100);
 })();
 </script>
-<script id="SRIJA_DIRECT_TOUCH_RESIZE_V1">(function(){if(!sessionStorage.getItem("srija_owner_logged_in"))return;var active=null,sx=0,sy=0,sl=0,st=0,sw=0,sh=0;function prep(){document.querySelectorAll("body *").forEach(function(el){if(el.id==="srijaUnifiedEditor"||el.closest("#srijaUnifiedEditor")||el.dataset.srijaDragBound)return;el.dataset.srijaDragBound="1";el.style.touchAction="none";el.addEventListener("pointerdown",function(e){if(e.button!==undefined&&e.button!==0)return;if(el.closest("button,input,select,textarea,a")&&!el.dataset.srijaEditable)return;active=el;sx=e.clientX;sy=e.clientY;var r=el.getBoundingClientRect();sl=r.left;st=r.top;sw=r.width;sh=r.height;try{el.setPointerCapture(e.pointerId)}catch(x){}},true);el.addEventListener("pointermove",function(e){if(active!==el)return;var dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)<3)return;if(el.tagName!=="IMG"&&el.dataset.srijaEditable!=="1"&&el.children.length===0&&el.textContent.trim()!=="")el.style.position="relative";if(el.style.position==="static"||!el.style.position)el.style.position="relative";el.style.left=(parseFloat(el.dataset.dragX)||0)+dx+"px";el.style.top=(parseFloat(el.dataset.dragY)||0)+dy+"px";el.dataset.dragX=(parseFloat(el.dataset.dragX)||0)+dx;el.dataset.dragY=(parseFloat(el.dataset.dragY)||0)+dy;sx=e.clientX;sy=e.clientY},true);el.addEventListener("pointerup",function(){if(active===el)active=null},true)});}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",prep);else setTimeout(prep,100);})();</script>\n</body>
+<script id="SRIJA_DIRECT_TOUCH_RESIZE_V1">(function(){if(!sessionStorage.getItem("srija_owner_logged_in"))return;var active=null,sx=0,sy=0,sl=0,st=0,sw=0,sh=0;function prep(){document.querySelectorAll("body *").forEach(function(el){if(el.id==="srijaUnifiedEditor"||el.closest("#srijaUnifiedEditor")||el.dataset.srijaDragBound)return;el.dataset.srijaDragBound="1";el.style.touchAction="none";el.addEventListener("pointerdown",function(e){if(e.button!==undefined&&e.button!==0)return;if(el.closest("button,input,select,textarea,a")&&!el.dataset.srijaEditable)return;active=el;sx=e.clientX;sy=e.clientY;var r=el.getBoundingClientRect();sl=r.left;st=r.top;sw=r.width;sh=r.height;try{el.setPointerCapture(e.pointerId)}catch(x){}},true);el.addEventListener("pointermove",function(e){if(active!==el)return;var dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)<3)return;if(el.tagName!=="IMG"&&el.dataset.srijaEditable!=="1"&&el.children.length===0&&el.textContent.trim()!=="")el.style.position="relative";if(el.style.position==="static"||!el.style.position)el.style.position="relative";el.style.left=(parseFloat(el.dataset.dragX)||0)+dx+"px";el.style.top=(parseFloat(el.dataset.dragY)||0)+dy+"px";el.dataset.dragX=(parseFloat(el.dataset.dragX)||0)+dx;el.dataset.dragY=(parseFloat(el.dataset.dragY)||0)+dy;sx=e.clientX;sy=e.clientY},true);el.addEventListener("pointerup",function(){if(active===el)active=null},true)});}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",prep);else setTimeout(prep,100);})();</script>\n<script id="SRIJA_PERSISTENT_PAGE_SAVE_V2">
+(function(){
+  "use strict";
+  var key="srija_page_saved_"+location.pathname;
+  function cleanHTML(){
+    var b=document.body.cloneNode(true);
+    ["srijaUnifiedEditor","srijaRibbonEditor","srijaLoginOverlay","srijaEmergencyLogin","srijaEditorPanel","srijaStandaloneLogin","adminPanel","srijaSettingsV3","loginBox"].forEach(function(id){var x=b.querySelector("#"+id);if(x)x.remove();});
+    b.querySelectorAll("script").forEach(function(x){x.remove();});
+    return b.innerHTML;
+  }
+  function restore(){
+    try{
+      var saved=localStorage.getItem(key);
+      if(!saved)return;
+      var tmp=document.createElement("div");tmp.innerHTML=saved;
+      var old=document.body.innerHTML;
+      document.body.innerHTML=saved;
+      if(window.srijaStartUnifiedEditor&&sessionStorage.getItem("srija_owner_logged_in")==="1")setTimeout(window.srijaStartUnifiedEditor,20);
+    }catch(e){}
+  }
+  function saveNow(){
+    try{localStorage.setItem(key,cleanHTML());return true}catch(e){return false}
+  }
+  window.srijaPersistentSave=saveNow;
+  window.srijaPersistentLoad=restore;
+  try{restore()}catch(e){}
+  document.addEventListener("click",function(e){
+    var b=e.target&&e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if((b.textContent||"").trim()==="Save" && sessionStorage.getItem("srija_owner_logged_in")==="1"){
+      setTimeout(function(){saveNow()},30);
+    }
+  },false);
+})();
+</script>\n</body>
 </html>
