@@ -51,7 +51,6 @@ function act(a){if(["color","bg","left","center","right"].includes(a)){applyStyl
  tabs.forEach(function(b){
   b.addEventListener("click",function(e){
    e.preventDefault();
-   e.stopPropagation();
    tabs.forEach(function(x){x.removeAttribute("aria-current")});
    b.setAttribute("aria-current","page");
    var p=b.getAttribute("data-page");
