@@ -576,5 +576,22 @@ if(sessionStorage.getItem("srija_owner_logged_in")==="1" && document.getElementB
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",function(){bind();autoOpenAfterLoad();},{once:true});
   else {bind();autoOpenAfterLoad();}
 })();
+</script><script id="SRIJA_LOGIN_EMERGENCY_V2">
+(function(){
+  function openLogin(e){
+    var t=e.target&&e.target.closest?e.target.closest("#settingsBtn"):null;
+    if(!t)return;
+    e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+    var old=document.getElementById("srijaEmergencyLogin"); if(old)old.remove();
+    var p=document.createElement("div"); p.id="srijaEmergencyLogin";
+    p.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:2147483647;display:flex;align-items:center;justify-content:center;";
+    p.innerHTML='<div style="width:340px;max-width:92vw;background:#fff;border-radius:12px;padding:22px;box-shadow:0 12px 40px #0006;font-family:Arial,sans-serif"><h3 style="margin:0 0 14px;color:#173b8f">🔐 Settings Login</h3><label>User ID</label><input id="emUid" type="text" autocomplete="username" style="width:100%;padding:10px;margin:5px 0 10px;box-sizing:border-box"><label>Password</label><input id="emPw" type="password" autocomplete="current-password" style="width:100%;padding:10px;margin:5px 0 10px;box-sizing:border-box"><button id="emLogin" type="button" style="padding:10px 18px;background:#173b8f;color:#fff;border:0;border-radius:7px">Login</button><button id="emClose" type="button" style="padding:10px 18px;margin-left:6px;background:#777;color:#fff;border:0;border-radius:7px">Close</button><div id="emMsg" style="color:#b42318;margin-top:8px;min-height:18px"></div></div>';
+    document.body.appendChild(p);
+    var uid=document.getElementById("emUid"),pw=document.getElementById("emPw");
+    function login(){var u=uid.value.trim(),v=pw.value;if(u==="srija"&&v==="srija1234"){sessionStorage.setItem("srija_owner_logged_in","1");sessionStorage.setItem("srijaSecondEdit","1");p.remove();if(typeof openEditorDirect==="function")openEditorDirect();else location.hash="srija-settings";}else{document.getElementById("emMsg").textContent="User ID বা Password ভুল।";pw.value="";pw.focus();}}
+    document.getElementById("emLogin").onclick=login; document.getElementById("emClose").onclick=function(){p.remove();}; pw.onkeydown=function(x){if(x.key==="Enter"){x.preventDefault();login();}}; uid.focus();
+  }
+  document.addEventListener("click",openLogin,true);
+})();
 </script></body>
 </html>
