@@ -547,7 +547,7 @@ if(sessionStorage.getItem("srija_owner_logged_in")==="1" && document.getElementB
         sessionStorage.setItem("srijaSecondEdit","1");
         cleanupOverlays();
         document.body.classList.remove("srija-editing");
-        location.href="./editor.html";
+        location.replace(new URL("./editor.html", document.baseURI).href + "?v=" + Date.now());
       }else{
         document.getElementById("srijaFinalMsg").textContent="User ID বা Password ভুল।";
         pw.value=""; pw.focus();
