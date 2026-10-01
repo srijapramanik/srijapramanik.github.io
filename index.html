@@ -621,5 +621,33 @@ if(sessionStorage.getItem("srija_owner_logged_in")==="1" && document.getElementB
     }else if(++tries>=8){clearInterval(timer);}
   },500);
 })();
-</script></body>
+</script><script id="SRIJA_EDITOR_HARD_FIX_V1">
+(function(){
+  function hardEditor(){
+    if(sessionStorage.getItem("srija_owner_logged_in")!=="1") return;
+    document.body.classList.add("srija-editing");
+    var r=document.getElementById("srijaRibbonEditor");
+    if(!r){
+      r=document.createElement("div");
+      r.id="srijaRibbonEditor";
+      r.innerHTML='<div class="srija-ribbon"><div class="srija-brand">SRIJA Editor</div><button type="button">Home</button><button type="button">Edit</button><button type="button">Insert</button><button type="button">Design</button><button type="button">Save</button><button type="button">Logout</button></div><div class="srija-context"><span>Editor চালু হয়েছে — এখন যে অংশ পরিবর্তন করবেন সেটিতে চাপুন।</span></div>';
+      document.body.appendChild(r);
+      var bs=r.querySelectorAll("button");
+      bs[1].onclick=function(){try{if(window.srijaOpenEditor)window.srijaOpenEditor()}catch(e){}};
+      bs[2].onclick=function(){try{if(window.srijaOpenEditor)window.srijaOpenEditor()}catch(e){}};
+      bs[3].onclick=function(){try{if(window.srijaOpenEditor)window.srijaOpenEditor()}catch(e){}};
+      bs[4].onclick=function(){try{if(window.srijaOpenEditor)window.srijaOpenEditor()}catch(e){}};
+      bs[5].onclick=function(){sessionStorage.removeItem("srija_owner_logged_in");sessionStorage.removeItem("srijaSecondEdit");location.reload()};
+    }
+  }
+  var observer=new MutationObserver(function(){hardEditor()});
+  function start(){
+    hardEditor();
+    observer.observe(document.body,{childList:true,subtree:true});
+    setInterval(hardEditor,700);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>
+</body>
 </html>
