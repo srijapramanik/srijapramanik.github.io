@@ -551,5 +551,32 @@ if(sessionStorage.getItem("srija_owner_logged_in")==="1" && document.getElementB
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",function(){bind();autoOpenAfterLoad();},{once:true});
   else {bind();autoOpenAfterLoad();}
 })();
+</script><script id="SRIJA_LOGIN_FINAL_FIX_20261001">
+(function(){
+  function openLogin(){
+    var old=document.getElementById("srijaLoginOverlay"); if(old) old.remove();
+    var p=document.createElement("div"); p.id="srijaLoginOverlay";
+    p.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2147483647;display:flex;align-items:center;justify-content:center";
+    p.innerHTML='<div style="width:340px;max-width:92vw;background:#fff;border-radius:12px;padding:22px;box-sizing:border-box"><h3 style="color:#173b8f">🔐 Settings Login</h3><label>User ID</label><input id="srijaFixUid" type="text" style="width:100%;padding:10px;box-sizing:border-box"><label>Password</label><input id="srijaFixPw" type="password" style="width:100%;padding:10px;box-sizing:border-box"><button id="srijaFixLogin" type="button" style="margin-top:10px;padding:10px 18px;background:#173b8f;color:#fff;border:0;border-radius:7px">Login</button><button id="srijaFixClose" type="button" style="margin-left:6px;padding:10px 18px">Close</button><div id="srijaFixMsg" style="color:#b42318;margin-top:8px"></div></div>';
+    document.body.appendChild(p);
+    var uid=document.getElementById("srijaFixUid"), pw=document.getElementById("srijaFixPw");
+    document.getElementById("srijaFixLogin").onclick=function(){
+      if((uid.value||"").trim()==="srija" && (pw.value||"")==="srija1234"){
+        sessionStorage.setItem("srija_owner_logged_in","1");
+        sessionStorage.setItem("srijaSecondEdit","1");
+        p.remove();
+        if(typeof window.srijaOpenEditor==="function") window.srijaOpenEditor();
+        else location.hash="#admin";
+      }else{document.getElementById("srijaFixMsg").textContent="User ID বা Password ভুল।";}
+    };
+    document.getElementById("srijaFixClose").onclick=function(){p.remove()};
+    pw.onkeydown=function(e){if(e.key==="Enter")document.getElementById("srijaFixLogin").click()};
+    uid.focus();
+  }
+  document.addEventListener("click",function(e){
+    var b=e.target.closest&&e.target.closest("#settingsBtn");
+    if(b){e.preventDefault();e.stopImmediatePropagation();openLogin();}
+  },true);
+})();
 </script></body>
 </html>
