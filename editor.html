@@ -1,33 +1,59 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SRIJA Visual Editor</title>
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SRIJA Visual Editor</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#172033}body{padding-top:92px}#toolbar{position:fixed;top:0;left:0;right:0;z-index:999999;background:#fff;border-bottom:2px solid #173b8f;padding:8px;display:flex;gap:6px;flex-wrap:wrap;box-shadow:0 2px 12px #0003}button,select,input{font-size:14px;padding:8px;border:1px solid #aaa;border-radius:6px;background:#fff;cursor:pointer}.info{width:100%;font-size:12px}#canvas{max-width:1100px;margin:18px auto;background:#fff;min-height:80vh;padding:25px}.picked{outline:3px solid #1677ff!important;outline-offset:2px}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#172033;padding-top:120px}
+#toolbar{position:fixed;top:0;left:0;right:0;z-index:1000000;background:#fff;border-bottom:2px solid #173b8f;padding:8px;display:flex;gap:6px;flex-wrap:wrap;box-shadow:0 2px 12px #0003}
+button{font-size:14px;padding:9px 12px;border:1px solid #999;border-radius:6px;background:#fff;cursor:pointer!important;pointer-events:auto!important}
+button:active{transform:scale(.97)}#status{padding:9px;font-size:13px}#canvas{max-width:1100px;margin:18px auto;background:#fff;min-height:80vh;padding:25px}.picked{outline:3px solid #1677ff!important;outline-offset:2px}
 </style></head><body>
-<div id="toolbar"><b>SRIJA EDITOR</b><button onclick="addText()">＋ Text</button><button onclick="addBox()">＋ Box</button><button onclick="addImage()">＋ Image</button><button onclick="bold()">B</button><button onclick="italic()">I</button><button onclick="under()">U</button><button onclick="align('left')">Left</button><button onclick="align('center')">Center</button><button onclick="align('right')">Right</button><button onclick="fontSize(-2)">A−</button><button onclick="fontSize(2)">A+</button><button onclick="move(0,-5)">↑</button><button onclick="move(-5,0)">←</button><button onclick="move(5,0)">→</button><button onclick="move(0,5)">↓</button><button onclick="copyEl()">Copy</button><button onclick="pasteEl()">Paste</button><button onclick="deleteEl()">Delete</button><button onclick="undo()">Undo</button><button onclick="redo()">Redo</button><button onclick="savePage()">SAVE</button><button onclick="location.href='./'">Home</button><button onclick="logout()">Logout</button><span id="status">কোনও অংশ নির্বাচিত নয়</span><div class="info">একটি অংশে একবার চাপুন = Select • দুইবার চাপুন = লেখা Edit • Logo/Image যোগ করা যাবে Image থেকে</div></div>
+<div id="toolbar">
+<b>SRIJA EDITOR</b>
+<button type="button" data-a="text">＋ Text</button><button type="button" data-a="box">＋ Box</button><button type="button" data-a="image">＋ Image</button>
+<button type="button" data-a="bold">B</button><button type="button" data-a="italic">I</button><button type="button" data-a="under">U</button>
+<button type="button" data-a="left">Left</button><button type="button" data-a="center">Center</button><button type="button" data-a="right">Right</button>
+<button type="button" data-a="smaller">A−</button><button type="button" data-a="larger">A+</button>
+<button type="button" data-a="up">↑</button><button type="button" data-a="leftmove">←</button><button type="button" data-a="rightmove">→</button><button type="button" data-a="down">↓</button>
+<button type="button" data-a="copy">Copy</button><button type="button" data-a="paste">Paste</button><button type="button" data-a="delete">Delete</button>
+<button type="button" data-a="undo">Undo</button><button type="button" data-a="redo">Redo</button><button type="button" data-a="save">SAVE</button>
+<button type="button" data-a="home">Home</button><button type="button" data-a="logout">Logout</button>
+<span id="status">কোনও অংশ নির্বাচিত নয়</span>
+</div>
 <main id="canvas"><h1>SRIJA COMMUNICATION</h1><p>শ্রীজা কমিউনিকেশন</p><div>চলমান লেখা</div></main>
 <script>
-(function(){if(sessionStorage.getItem("srija_owner_logged_in")!=="1"){location.replace("./");return}
-var selected=null,clipboard=null,history=[],future=[];
-function clearPick(){document.querySelectorAll(".picked").forEach(function(x){x.classList.remove("picked")});selected=null;document.getElementById("status").textContent="কোনও অংশ নির্বাচিত নয়"}
-function selectEl(e){if(e.target.closest("#toolbar"))return;clearPick();selected=e.currentTarget;selected.classList.add("picked");document.getElementById("status").textContent="নির্বাচিত: "+(selected.innerText||selected.tagName).trim().slice(0,30)}
-function bind(){document.querySelectorAll("#canvas *").forEach(function(el){el.onpointerdown=selectEl;el.ondblclick=function(e){e.stopPropagation();selectEl.call(el,e);if(el.tagName!=="IMG"){el.contentEditable="true";el.focus()}}})}
-function snap(){history.push(document.getElementById("canvas").innerHTML);if(history.length>30)history.shift();future=[]}
-window.addText=function(){snap();var e=document.createElement("p");e.textContent="নতুন লেখা";document.getElementById("canvas").appendChild(e);bind();clearPick();selectEl.call(e,{target:e,currentTarget:e});e.contentEditable="true";e.focus()}
-window.addBox=function(){snap();var e=document.createElement("div");e.textContent="নতুন Box";e.style.cssText="padding:20px;margin:12px 0;border:2px solid #2457c5;border-radius:10px;min-height:70px;resize:both;overflow:auto";document.getElementById("canvas").appendChild(e);bind();clearPick();selectEl.call(e,{target:e,currentTarget:e})}
-window.addImage=function(){var f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=function(){var file=f.files[0];if(!file)return;var r=new FileReader();r.onload=function(){snap();var i=document.createElement("img");i.src=r.result;i.alt="নতুন ছবি / Logo";i.style.cssText="max-width:220px;max-height:160px;display:block;margin:12px auto;object-fit:contain";document.getElementById("canvas").appendChild(i);bind();clearPick();selectEl.call(i,{target:i,currentTarget:i})};r.readAsDataURL(file)};f.click()}
-function style(k,v){if(!selected)return; snap();selected.style[k]=v}
-window.bold=function(){if(selected)style("fontWeight",getComputedStyle(selected).fontWeight==="700"?"normal":"bold")}
-window.italic=function(){if(selected)style("fontStyle",getComputedStyle(selected).fontStyle==="italic"?"normal":"italic")}
-window.under=function(){if(selected)style("textDecoration",getComputedStyle(selected).textDecoration.includes("underline")?"none":"underline")}
-window.align=function(v){style("textAlign",v)};window.fontSize=function(d){if(selected)style("fontSize",Math.max(8,(parseFloat(getComputedStyle(selected).fontSize)||16)+d)+"px")}
-window.move=function(x,y){if(!selected)return;snap();selected.style.position="relative";selected.style.left=(parseInt(selected.style.left)||0)+x+"px";selected.style.top=(parseInt(selected.style.top)||0)+y+"px"}
-window.copyEl=function(){if(selected)clipboard=selected.cloneNode(true)}
-window.pasteEl=function(){if(!selected||!clipboard)return;snap();var n=clipboard.cloneNode(true);n.classList.remove("picked");selected.after(n);bind()}
-window.deleteEl=function(){if(!selected)return;snap();selected.remove();clearPick()}
-window.undo=function(){if(!history.length)return;future.push(document.getElementById("canvas").innerHTML);document.getElementById("canvas").innerHTML=history.pop();clearPick();bind()}
-window.redo=function(){if(!future.length)return;history.push(document.getElementById("canvas").innerHTML);document.getElementById("canvas").innerHTML=future.pop();clearPick();bind()}
-window.savePage=function(){try{localStorage.setItem("srija_editor_page_v5",document.getElementById("canvas").innerHTML);document.getElementById("status").textContent="Save হয়েছে ✓"}catch(e){document.getElementById("status").textContent="Save করা যায়নি"}}
-window.logout=function(){sessionStorage.clear();location.href="./"}
-window.addEventListener("keydown",function(e){if(!selected||e.target.closest("#toolbar"))return;var d=e.shiftKey?10:3;if(e.key==="ArrowLeft")move(-d,0);if(e.key==="ArrowRight")move(d,0);if(e.key==="ArrowUp")move(0,-d);if(e.key==="ArrowDown")move(0,d)})
-try{var old=localStorage.getItem("srija_editor_page_v5");if(old)document.getElementById("canvas").innerHTML=old}catch(e){}
-bind();clearPick();
+(function(){
+"use strict";
+if(sessionStorage.getItem("srija_owner_logged_in")!=="1"){location.replace("./");return;}
+var selected=null,clip=null,hist=[],future=[];
+var canvas=document.getElementById("canvas"),status=document.getElementById("status");
+function clear(){canvas.querySelectorAll(".picked").forEach(function(e){e.classList.remove("picked")});selected=null;status.textContent="কোনও অংশ নির্বাচিত নয়";}
+function pick(e){if(!e||!e.target||e.target.closest("#toolbar"))return;clear();selected=e.currentTarget;selected.classList.add("picked");status.textContent="নির্বাচিত: "+((selected.innerText||selected.tagName).trim().slice(0,30));}
+function bind(){canvas.querySelectorAll("*").forEach(function(el){el.onpointerdown=function(e){e.stopPropagation();pick(e)};el.ondblclick=function(e){e.stopPropagation();pick(e);if(el.tagName!=="IMG"){el.contentEditable="true";el.focus();}}});}
+function snap(){hist.push(canvas.innerHTML);if(hist.length>40)hist.shift();future=[];}
+function style(k,v){if(!selected)return;snap();selected.style[k]=v;}
+function addText(){snap();var e=document.createElement("p");e.textContent="নতুন লেখা";canvas.appendChild(e);bind();pick({target:e,currentTarget:e});e.contentEditable="true";e.focus();}
+function addBox(){snap();var e=document.createElement("div");e.textContent="নতুন Box";e.style.cssText="padding:20px;margin:12px 0;border:2px solid #2457c5;border-radius:10px;min-height:70px;resize:both;overflow:auto";canvas.appendChild(e);bind();pick({target:e,currentTarget:e});}
+function addImage(){var f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=function(){var file=f.files&&f.files[0];if(!file)return;var r=new FileReader();r.onload=function(){snap();var i=document.createElement("img");i.src=r.result;i.alt="নতুন ছবি / Logo";i.style.cssText="max-width:220px;max-height:160px;display:block;margin:12px auto;object-fit:contain";canvas.appendChild(i);bind();pick({target:i,currentTarget:i});};r.readAsDataURL(file)};f.click();}
+function move(x,y){if(!selected)return;snap();selected.style.position="relative";selected.style.left=(parseInt(selected.style.left)||0)+x+"px";selected.style.top=(parseInt(selected.style.top)||0)+y+"px";}
+function act(a){
+if(a==="text")return addText();if(a==="box")return addBox();if(a==="image")return addImage();
+if(a==="bold")return style("fontWeight",getComputedStyle(selected||document.body).fontWeight==="700"?"normal":"bold");
+if(a==="italic")return style("fontStyle",getComputedStyle(selected||document.body).fontStyle==="italic"?"normal":"italic");
+if(a==="under")return style("textDecoration",getComputedStyle(selected||document.body).textDecoration.includes("underline")?"none":"underline");
+if(a==="left"||a==="center"||a==="right")return style("textAlign",a);
+if(a==="smaller"||a==="larger"){if(!selected)return;var n=parseFloat(getComputedStyle(selected).fontSize)||16;return style("fontSize",Math.max(8,n+(a==="larger"?2:-2))+"px");}
+if(a==="up")return move(0,-5);if(a==="down")return move(0,5);if(a==="leftmove")return move(-5,0);if(a==="rightmove")return move(5,0);
+if(a==="copy"){if(selected)clip=selected.cloneNode(true);return;}
+if(a==="paste"){if(!selected||!clip)return;snap();var n=clip.cloneNode(true);n.classList.remove("picked");selected.after(n);bind();return;}
+if(a==="delete"){if(!selected)return;snap();selected.remove();return clear();}
+if(a==="undo"){if(!hist.length)return;future.push(canvas.innerHTML);canvas.innerHTML=hist.pop();bind();return clear();}
+if(a==="redo"){if(!future.length)return;hist.push(canvas.innerHTML);canvas.innerHTML=future.pop();bind();return clear();}
+if(a==="save"){try{localStorage.setItem("srija_editor_page_v6",canvas.innerHTML);status.textContent="Save হয়েছে ✓";}catch(e){status.textContent="Save করা যায়নি";}return;}
+if(a==="home")return location.href="./";if(a==="logout"){sessionStorage.clear();return location.href="./";}
+}
+document.querySelectorAll("#toolbar button").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();try{act(b.getAttribute("data-a"));}catch(err){status.textContent="ত্রুটি: "+err.message;}});});
+canvas.addEventListener("pointerdown",function(e){if(e.target===canvas)clear();});
+document.addEventListener("keydown",function(e){if(!selected||e.target.closest("#toolbar"))return;var d=e.shiftKey?10:3;if(e.key==="ArrowLeft")move(-d,0);else if(e.key==="ArrowRight")move(d,0);else if(e.key==="ArrowUp")move(0,-d);else if(e.key==="ArrowDown")move(0,d);});
+try{var old=localStorage.getItem("srija_editor_page_v6");if(old)canvas.innerHTML=old;}catch(e){}
+bind();clear();
 })();</script></body></html>
