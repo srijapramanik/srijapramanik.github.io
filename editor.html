@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SRIJA Visual Editor</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#172033}
+#bar{position:sticky;top:0;z-index:1000;background:#173b8f;color:white;padding:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;box-shadow:0 2px 8px #0003}
+#bar button,#bar label{border:0;background:white;color:#173b8f;border-radius:7px;padding:9px 11px;font-weight:700;cursor:pointer}
+#bar input{width:70px;padding:8px;border-radius:7px;border:0}#file{display:none}
+#status{margin-left:auto;font-size:12px}
+#work{max-width:1100px;margin:16px auto;padding:18px;background:white;min-height:calc(100vh - 100px);border-radius:12px;box-shadow:0 2px 12px #0002}
+.item{position:relative;margin:10px;padding:12px;border:2px solid transparent;min-height:35px;cursor:pointer;touch-action:none}
+.item.selected{border-color:#2457c5;outline:2px dashed #7aa0ef;outline-offset:2px}
+.item[contenteditable=true]{cursor:text}
+img.item{display:block;max-width:100%;height:auto}
+#panel{position:fixed;right:10px;bottom:10px;z-index:1100;background:white;border:1px solid #ccd5e3;border-radius:12px;padding:10px;box-shadow:0 4px 20px #0003;display:none;max-width:95vw}
+#panel.show{display:block}.row{display:flex;gap:5px;flex-wrap:wrap;margin:5px 0}.row button,.row select,.row input{padding:7px}
+@media(max-width:600px){#bar{position:sticky}.item{margin:6px;padding:10px}#work{margin:6px;padding:8px}.row button{min-height:42px}}
+</style></head>
+<body>
+<div id="bar">
+<strong>SRIJA EDITOR</strong>
+<button onclick="addText()">+ Text</button><button onclick="addBox()">+ Box</button><button onclick="addImage()">+ Image</button>
+<button onclick="undo()">↶</button><button onclick="redo()">↷</button><button onclick="copyEl()">Copy</button><button onclick="pasteEl()">Paste</button>
+<button onclick="save()">Save</button><button onclick="resetSaved()">Default</button><button onclick="goHome()">Home</button>
+<label>Font <input id="fs" type="number" min="8" max="120" value="18" onchange="styleSel('fontSize',this.value+'px')"></label>
+<button onclick="styleSel('fontWeight','bold')">B</button><button onclick="styleSel('fontStyle','italic')">I</button>
+<button onclick="styleSel('textAlign','left')">L</button><button onclick="styleSel('textAlign','center')">C</button><button onclick="styleSel('textAlign','right')">R</button>
+<label>Text <input type="color" onchange="styleSel('color',this.value)"></label><label>BG <input type="color" onchange="styleSel('backgroundColor',this.value)"></label>
+<label>Upload <input id="file" type="file" accept="image/*" onchange="uploadImage(event)"></label>
+<span id="status">Ready</span>
+</div>
+<main id="work"></main>
+<div id="panel"><div class="row"><button onclick="move(-5,0)">←</button><button onclick="move(0,-5)">↑</button><button onclick="move(0,5)">↓</button><button onclick="move(5,0)">→</button><button onclick="resize(-5)">− Size</button><button onclick="resize(5)">+ Size</button><button onclick="deleteSel()">Delete</button></div><div class="row"><label>Width <input id="wd" type="number" onchange="setWidth(this.value)"></label></div></div>
+<script>
+const W=document.getElementById('work'),P=document.getElementById('panel'),S=document.getElementById('status');let sel=null,clip=null,undoStack=[],redoStack=[];
+const KEY='srija_visual_editor_v1';
+function snapshot(){undoStack.push(W.innerHTML);if(undoStack.length>40)undoStack.shift();redoStack=[]}
+function bind(el){el.classList.add('item');el.addEventListener('pointerdown',e=>{if(e.target===el||el.tagName==='IMG'){select(el);if(el.tagName==='IMG')e.preventDefault()}});el.addEventListener('dblclick',()=>{if(el.tagName!=='IMG'){el.contentEditable='true';el.focus()}});el.addEventListener('input',()=>snapshot());}
+function select(el){document.querySelectorAll('.selected').forEach(x=>x.classList.remove('selected'));sel=el;el.classList.add('selected');P.classList.add('show');document.getElementById('wd').value=Math.round(el.getBoundingClientRect().width)}
+function addText(){snapshot();let e=document.createElement('div');e.textContent='এখানে লেখা লিখুন';e.contentEditable='true';bind(e);W.appendChild(e);select(e);e.focus()}
+function addBox(){snapshot();let e=document.createElement('div');e.innerHTML='<strong>নতুন বক্স</strong><div>এখানে আপনার লেখা বা তথ্য দিন</div>';bind(e);e.style.background='#f4f7ff';e.style.minHeight='90px';W.appendChild(e);select(e)}
+function addImage(){document.getElementById('file').click()}
+function uploadImage(ev){let f=ev.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{snapshot();let e=document.createElement('img');e.src=rd.result;bind(e);W.appendChild(e);select(e);save()};rd.readAsDataURL(f);ev.target.value=''}
+function styleSel(k,v){if(!sel)return; snapshot();sel.style[k]=v}
+function move(x,y){if(!sel)return;snapshot();sel.style.transform='translate('+((parseInt(sel.dataset.x)||0)+x)+'px,'+((parseInt(sel.dataset.y)||0)+y)+'px)';sel.dataset.x=(parseInt(sel.dataset.x)||0)+x;sel.dataset.y=(parseInt(sel.dataset.y)||0)+y}
+function resize(d){if(!sel)return;snapshot();let n=Math.max(30,(sel.offsetWidth||100)+d*5);sel.style.width=n+'px';document.getElementById('wd').value=n}
+function setWidth(v){if(sel){snapshot();sel.style.width=v+'px'}}
+function deleteSel(){if(sel){snapshot();sel.remove();sel=null;P.classList.remove('show');}}
+function copyEl(){if(sel)clip=sel.cloneNode(true)}
+function pasteEl(){if(!clip)return;snapshot();let e=clip.cloneNode(true);bind(e);W.appendChild(e);select(e)}
+function undo(){if(!undoStack.length)return;redoStack.push(W.innerHTML);W.innerHTML=undoStack.pop();rebind()}
+function redo(){if(!redoStack.length)return;undoStack.push(W.innerHTML);W.innerHTML=redoStack.pop();rebind()}
+function rebind(){W.querySelectorAll('.item').forEach(bind)}
+function save(){localStorage.setItem(KEY,W.innerHTML);S.textContent='Saved ✓'}
+function resetSaved(){snapshot();localStorage.removeItem(KEY);location.reload()}
+function goHome(){location.href='./'}
+document.addEventListener('keydown',e=>{if(!sel)return;if(e.key==='Delete')deleteSel();else if(e.key==='ArrowLeft'){e.preventDefault();move(-5,0)}else if(e.key==='ArrowRight'){e.preventDefault();move(5,0)}else if(e.key==='ArrowUp'){e.preventDefault();move(0,-5)}else if(e.key==='ArrowDown'){e.preventDefault();move(0,5)}else if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}else if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='y'){e.preventDefault();redo()}})
+let saved=localStorage.getItem(KEY);
+if(saved){W.innerHTML=saved;rebind()}else{
+let h=document.createElement('h1');h.textContent='SRIJA COMMUNICATION';h.contentEditable='true';bind(h);W.appendChild(h);
+let p=document.createElement('p');p.textContent='শ্রীজা কমিউনিকেশন';p.contentEditable='true';bind(p);W.appendChild(p);
+let n=document.createElement('div');n.textContent='চলমান লেখা';bind(n);W.appendChild(n);
+}
+</script></body></html>
