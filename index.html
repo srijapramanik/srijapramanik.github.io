@@ -589,7 +589,7 @@ if(sessionStorage.getItem("srija_owner_logged_in")==="1" && document.getElementB
     document.body.appendChild(p);
     var uid=document.getElementById("emUid"),pw=document.getElementById("emPw");
     function login(){var u=uid.value.trim(),v=pw.value;if(u==="srija"&&v==="srija1234"){sessionStorage.setItem("srija_owner_logged_in","1");sessionStorage.setItem("srijaSecondEdit","1");p.remove();if(typeof openEditorDirect==="function")openEditorDirect();else location.hash="srija-settings";}else{document.getElementById("emMsg").textContent="User ID বা Password ভুল।";pw.value="";pw.focus();}}
-    document.getElementById("emLogin").onclick=login; document.getElementById("emClose").onclick=function(){p.remove();}; pw.onkeydown=function(x){if(x.key==="Enter"){x.preventDefault();login();}}; uid.focus();
+    var lb=document.getElementById("emLogin"), cb=document.getElementById("emClose"); lb.addEventListener("click",function(x){x.preventDefault();x.stopPropagation();if(x.stopImmediatePropagation)x.stopImmediatePropagation();login();},true); cb.addEventListener("click",function(x){x.preventDefault();x.stopPropagation();if(x.stopImmediatePropagation)x.stopImmediatePropagation();p.remove();},true); pw.addEventListener("keydown",function(x){if(x.key==="Enter"){x.preventDefault();login();}},true); uid.focus();
   }
   document.addEventListener("click",openLogin,true);
 })();
