@@ -157,122 +157,31 @@ applyLogo();
 })();
 </script><!-- Legacy embedded editor script 3 disabled. --><!-- Legacy embedded editor script 4 disabled. -->
 <!-- Legacy embedded editor script 5 disabled. --><!-- Legacy embedded editor script 6 disabled. -->
-<script id="SRIJA_SINGLE_LOGIN_V1">
+<script id="SRIJA_SINGLE_LOGIN_V2">
 (function(){
-  function cleanupOverlays(){
-    ["adminPanel","srijaLoginOverlay","srijaStandaloneLogin","loginBox"].forEach(function(id){
-      var el=document.getElementById(id); if(el) el.remove();
-    });
-  }
-  function ensureEditorFallback(){
-    var existing=document.getElementById("srijaRibbonEditor");
-    if(existing){
-      var complete=existing.querySelector('[data-tab="home"]')&&existing.querySelector('[data-tab="edit"]')&&existing.querySelector('[data-tab="insert"]')&&existing.querySelector('[data-tab="design"]');
-      if(complete)return true;
-      existing.remove();
-    }
-    var r=document.createElement("div"); r.id="srijaRibbonEditor";
-    r.innerHTML='<div class="srija-ribbon"><div class="srija-brand">SRIJA Editor</div><button type="button" data-tab="home">Home</button><button type="button" data-tab="edit">Edit</button><button type="button" data-tab="insert">Insert</button><button type="button" data-tab="design">Design</button><button type="button" id="srijaFallbackSave">Save</button><button type="button" id="srijaFallbackLogout">Logout</button></div><div class="srija-context"><span id="srijaFallbackContext">Editor চালু হয়েছে — এখন যে অংশ পরিবর্তন করবেন সেটিতে চাপুন</span></div>';
-    document.body.appendChild(r); document.body.classList.add("srija-editing");
-    r.querySelectorAll("[data-tab]").forEach(function(b){b.onclick=function(){
-      var tab=b.getAttribute("data-tab"), ctx=document.getElementById("srijaFallbackContext");
-      if(ctx)ctx.textContent=tab==="home"?"Home: সাইটের মূল পেজ":tab==="edit"?"Edit: যে অংশ পরিবর্তন করবেন সেটি নির্বাচন করুন":tab==="insert"?"Insert: নতুন Box / Text / Image যোগ করুন":"Design: Background / Size / Position পরিবর্তন করুন";
-      try{if(typeof newPanel==="function")newPanel();}catch(e){}
-    }});
-    var s=document.getElementById("srijaFallbackSave"); if(s)s.onclick=function(){try{if(typeof newPanel==="function")newPanel();}catch(e){} alert("Save অপশন প্রস্তুত আছে।")};
-    var l=document.getElementById("srijaFallbackLogout"); if(l)l.onclick=function(){sessionStorage.removeItem("srija_owner_logged_in");sessionStorage.removeItem("srijaSecondEdit");location.reload()};
-    return true;
-  }
-  function openEditorDirect(){
-    function fullEditorReady(){
-      var r=document.getElementById("srijaRibbonEditor");
-      if(!r)return false;
-      return !!(r.querySelector('[data-tab="home"]')&&r.querySelector('[data-tab="edit"]')&&r.querySelector('[data-tab="insert"]')&&r.querySelector('[data-tab="design"]')&&r.querySelector("#srijaSave")&&r.querySelector("#srijaLogout"));
-    }
-    function openFull(){
-      try{
-        if(typeof window.srijaOpenEditor==="function") window.srijaOpenEditor();
-        else if(typeof newPanel==="function") newPanel();
-      }catch(e){console.error(e);}
-      document.body.classList.add("srija-editing");
-    }
-    try{
-      cleanupOverlays();
-      openFull();
-      if(!fullEditorReady()){
-        setTimeout(function(){
-          if(sessionStorage.getItem("srija_owner_logged_in")==="1" && !fullEditorReady()) openFull();
-        },150);
-      }
-      [400,900,1600].forEach(function(ms){
-        setTimeout(function(){
-          if(sessionStorage.getItem("srija_owner_logged_in")==="1"){
-            if(!fullEditorReady()) openFull();
-            if(!fullEditorReady()) ensureEditorFallback();
-            document.body.classList.add("srija-editing");
-          }
-        },ms);
-      });
-    }catch(e){
-      console.error(e);
-      try{openFull();}catch(_){}
-      if(!fullEditorReady()) ensureEditorFallback();
-    }
-  }
-  function showLogin(ev){
-    if(ev && ev.target && ev.target.closest && !ev.target.closest("#settingsBtn")) return;
-    if(ev){ev.preventDefault();ev.stopImmediatePropagation();}
-    var old=document.getElementById("srijaLoginOverlay"); if(old) old.remove();
-    cleanupOverlays();
-    var p=document.createElement("div");
-    p.id="srijaLoginOverlay";
-    p.style.cssText="position:fixed!important;inset:0!important;background:rgba(0,0,0,.55)!important;z-index:2147483647!important;display:flex!important;align-items:center!important;justify-content:center!important;pointer-events:auto!important;touch-action:auto!important;";
-    p.innerHTML='<div style="width:340px;max-width:92vw;background:#fff;border-radius:12px;padding:22px;box-sizing:border-box;box-shadow:0 12px 40px rgba(0,0,0,.35)"><h3 style="margin:0 0 14px;color:#173b8f">🔐 Settings Login</h3><label>User ID</label><input id="srijaFinalUid" type="text" autocomplete="username" style="width:100%;padding:10px;margin:5px 0 10px;box-sizing:border-box"><label>Password</label><input id="srijaFinalPw" type="password" autocomplete="current-password" style="width:100%;padding:10px;margin:5px 0 10px;box-sizing:border-box"><button id="srijaFinalLogin" type="button" style="padding:10px 18px;background:#173b8f;color:#fff;border:0;border-radius:7px">Login</button><button id="srijaFinalClose" type="button" style="padding:10px 18px;margin-left:6px;background:#777;color:#fff;border:0;border-radius:7px">Close</button><div id="srijaFinalMsg" style="color:#b42318;margin-top:8px;min-height:18px"></div></div>';
-    document.body.appendChild(p);
-    p.addEventListener("pointerdown",function(e){e.stopPropagation();},true);
-    p.addEventListener("click",function(e){e.stopPropagation();},true);
-    var uid=document.getElementById("srijaFinalUid"), pw=document.getElementById("srijaFinalPw");
-    [uid,pw].forEach(function(x){
-      x.disabled=false; x.readOnly=false; x.style.pointerEvents="auto"; x.style.touchAction="auto";
-      x.addEventListener("pointerdown",function(e){e.stopPropagation();},true);
-      x.addEventListener("click",function(e){e.stopPropagation();},true);
-    });
-    function login(){
-      var u=(uid.value||"").trim(), pass=pw.value||"";
-      if(u==="srija" && pass==="srija1234"){
-        sessionStorage.setItem("srija_owner_logged_in","1");
-        sessionStorage.setItem("srijaSecondEdit","1");
-        cleanupOverlays();
-        document.body.classList.remove("srija-editing");
-        location.replace(new URL("./editor.html", document.baseURI).href + "?v=" + Date.now());
-      }else{
-        document.getElementById("srijaFinalMsg").textContent="User ID বা Password ভুল।";
-        pw.value=""; pw.focus();
-      }
-    }
-    document.getElementById("srijaFinalLogin").onclick=login;
-    pw.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();login();}};
-    document.getElementById("srijaFinalClose").onclick=function(){p.remove();};
-    uid.focus();
-  }
-  function bind(){
-    var b=document.getElementById("settingsBtn");
-    if(!b)return;
-    b.href="#srija-login";
-    b.onclick=showLogin;
-    b.addEventListener("click",showLogin,true);
-  }
-  function autoOpenAfterLoad(){
-    try{
-      if(sessionStorage.getItem("srija_owner_logged_in")!=="1") return;
-      if(document.getElementById("srijaRibbonEditor")) return;
-      setTimeout(function(){
-        if(!document.getElementById("srijaRibbonEditor")) openEditorDirect();
-      },250);
-    }catch(e){console.error(e);}
-  }
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",function(){bind();autoOpenAfterLoad();},{once:true});
-  else {bind();autoOpenAfterLoad();}
+"use strict";
+function showLogin(ev){
+ if(ev){ev.preventDefault();ev.stopPropagation();}
+ var old=document.getElementById("srijaLoginOverlay");if(old)old.remove();
+ var p=document.createElement("div");p.id="srijaLoginOverlay";
+ p.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2147483647;display:flex;align-items:center;justify-content:center";
+ p.innerHTML='<div style="width:340px;max-width:92vw;background:#fff;border-radius:12px;padding:22px;box-sizing:border-box;box-shadow:0 12px 40px rgba(0,0,0,.35)"><h3>🔐 Settings Login</h3><label>User ID</label><input id="srijaFinalUid" type="text" style="width:100%;padding:10px;box-sizing:border-box"><label>Password</label><input id="srijaFinalPw" type="password" style="width:100%;padding:10px;box-sizing:border-box"><button id="srijaFinalLogin" type="button" style="padding:10px 18px;cursor:pointer">Login</button><button id="srijaFinalClose" type="button" style="padding:10px 18px;cursor:pointer">Close</button><div id="srijaFinalMsg"></div></div>';
+ document.body.appendChild(p);
+ var uid=document.getElementById("srijaFinalUid"),pw=document.getElementById("srijaFinalPw");
+ function login(){
+  if((uid.value||"").trim()==="srija"&&(pw.value||"")==="srija1234"){
+   sessionStorage.setItem("srija_owner_logged_in","1");
+   sessionStorage.setItem("srijaSecondEdit","1");
+   location.href="./editor.html?v="+Date.now();
+  }else{document.getElementById("srijaFinalMsg").textContent="User ID বা Password ভুল।";pw.value="";pw.focus();}
+ }
+ document.getElementById("srijaFinalLogin").onclick=login;
+ pw.onkeydown=function(e){if(e.key==="Enter")login();};
+ document.getElementById("srijaFinalClose").onclick=function(){p.remove();};
+ uid.focus();
+}
+function bind(){var b=document.getElementById("settingsBtn");if(!b)return;b.href="#";b.onclick=showLogin;}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});else bind();
 })();
 </script><!-- Legacy embedded editor script 8 disabled. --><!-- Legacy embedded editor script 9 disabled. --><!-- Legacy embedded editor script 10 disabled. -->
 <script id="SRIJA_UNIFIED_VISUAL_EDITOR_V1">
