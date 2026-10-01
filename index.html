@@ -758,5 +758,37 @@ function restore(){try{var s=localStorage.getItem(key);if(s){document.body.inner
 restore();build();bind();
 })();
 </script>
+<script id="SRIJA_EDITOR_FINAL_COORDINATOR_V1">
+(function(){
+"use strict";
+if(sessionStorage.getItem("srija_owner_logged_in")!=="1")return;
+function activate(){
+  document.body.classList.add("srija-complete-editing");
+  if(window.srijaStartUnifiedEditor)try{window.srijaStartUnifiedEditor()}catch(e){}
+  var ed=document.getElementById("srijaCompleteEditor");
+  if(!ed){
+    var u=document.getElementById("srijaUnifiedEditor");
+    if(u)u.style.display="block";
+  }
+}
+function saveAll(){
+  try{
+    var k="srija_complete_saved_"+location.pathname;
+    var b=document.body.cloneNode(true);
+    ["srijaCompleteEditor","srijaUnifiedEditor","srijaRibbonEditor","srijaLoginOverlay","srijaEmergencyLogin"].forEach(function(id){var x=b.querySelector("#"+id);if(x)x.remove()});
+    b.querySelectorAll("script").forEach(function(x){x.remove()});
+    localStorage.setItem(k,b.innerHTML);
+    localStorage.setItem("srija_last_saved_page",location.pathname);
+    var old=localStorage.getItem("srija_visual_editor_saved");
+    if(old)localStorage.setItem("srija_visual_editor_saved",b.innerHTML);
+  }catch(e){}
+}
+document.addEventListener("click",function(e){
+ var b=e.target&&e.target.closest?e.target.closest("button"):null;
+ if(b && /save/i.test((b.textContent||"").trim()))setTimeout(saveAll,50);
+},true);
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",activate,{once:true});else setTimeout(activate,80);
+})();
+</script>
 </body>
 </html>
