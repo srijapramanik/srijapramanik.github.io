@@ -180,7 +180,7 @@ function showLogin(ev){
  document.getElementById("srijaFinalClose").onclick=function(){p.remove();};
  uid.focus();
 }
-window.SRIJA_OPEN_LOGIN=showLogin;function bind(){var b=document.getElementById("settingsBtn");if(!b)return;b.href="#";b.onclick=showLogin;}
+window.SRIJA_OPEN_LOGIN=showLogin;function bind(){var b=document.getElementById("settingsBtn");if(!b)return;b.href="#";b.onclick=function(ev){return window.SRIJA_DIRECT_LOGIN?window.SRIJA_DIRECT_LOGIN(ev):showLogin(ev)};}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});else bind();
 })();
 </script><!-- Legacy embedded editor script 8 disabled. --><!-- Legacy embedded editor script 9 disabled. --><!-- Legacy embedded editor script 10 disabled. -->
