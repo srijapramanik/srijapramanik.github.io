@@ -395,4 +395,61 @@ document.addEventListener("keydown",function(e){if(!selected||e.target.closest("
     }
   },false);
 })();
-</script>\n</body></html>
+</script>\n<style id="SRIJA_COMPLETE_EDITOR_CSS_V2">
+#srijaCompleteEditor{position:fixed;left:0;right:0;top:0;z-index:2147483647;background:#fff;border-bottom:2px solid #173b8f;box-shadow:0 3px 16px #0004;font-family:Arial,sans-serif}
+#srijaCompleteEditor .cebar{display:flex;gap:5px;align-items:center;flex-wrap:wrap;padding:7px;max-height:150px;overflow:auto}
+#srijaCompleteEditor button,#srijaCompleteEditor select,#srijaCompleteEditor input{font-size:14px;padding:7px;border:1px solid #bbb;border-radius:6px;background:#fff}
+#srijaCompleteEditor .ceinfo{font-size:12px;padding:2px 8px 7px}
+.srija-ce-selected{outline:2px solid #1677ff!important;outline-offset:2px!important}
+body.srija-complete-editing{padding-top:105px!important}
+</style>
+<script id="SRIJA_COMPLETE_EDITOR_V2">
+(function(){
+"use strict";
+if(sessionStorage.getItem("srija_owner_logged_in")!=="1")return;
+var sel=null,clip=null,hist=[],future=[],key="srija_complete_saved_"+location.pathname;
+function ignore(e){return e.closest&&e.closest("#srijaCompleteEditor,#srijaUnifiedEditor,#srijaRibbonEditor")}
+function select(el){if(!el||ignore(el))return;if(sel)sel.classList.remove("srija-ce-selected");sel=el;sel.classList.add("srija-ce-selected");}
+function snap(){hist.push(document.body.innerHTML);if(hist.length>25)hist.shift();future=[]}
+function bind(){
+ document.querySelectorAll("body *").forEach(function(el){
+  if(ignore(el)||el.dataset.ceBound)return;el.dataset.ceBound="1";
+  el.addEventListener("pointerdown",function(e){if(ignore(e.target))return;e.preventDefault();e.stopPropagation();select(el)},true);
+  el.addEventListener("dblclick",function(e){if(ignore(e.target))return;e.preventDefault();e.stopPropagation();select(el);if(el.tagName!=="IMG"){el.contentEditable="true";el.focus()}},true);
+ });
+}
+function addText(){snap();var e=document.createElement("div");e.textContent="এখানে লেখা লিখুন";e.contentEditable="true";e.style.cssText="padding:10px;min-height:35px";document.body.appendChild(e);bind();select(e);e.focus()}
+function addBox(){snap();var e=document.createElement("div");e.innerHTML="<strong>নতুন Box</strong><div>এখানে লেখা বা তথ্য দিন</div>";e.contentEditable="true";e.style.cssText="padding:18px;margin:12px;min-height:70px;border:2px solid #2457c5;border-radius:10px;background:#fff;resize:both;overflow:auto";document.body.appendChild(e);bind();select(e);e.focus()}
+function addImage(){var i=document.createElement("input");i.type="file";i.accept="image/*";i.onchange=function(){var f=i.files[0];if(!f)return;var r=new FileReader();r.onload=function(){snap();if(sel&&sel.tagName==="IMG")sel.src=r.result;else{var x=document.createElement("img");x.src=r.result;x.style.maxWidth="100%";x.style.display="block";document.body.appendChild(x);select(x)}bind();save()};r.readAsDataURL(f)};i.click()}
+function style(k,v){if(!sel)return;snap();sel.style[k]=v}
+function move(dx,dy){if(!sel)return;snap();if(getComputedStyle(sel).position==="static")sel.style.position="relative";sel.style.left=(parseInt(sel.style.left)||0)+dx+"px";sel.style.top=(parseInt(sel.style.top)||0)+dy+"px"}
+function size(d){if(!sel)return;snap();var w=sel.getBoundingClientRect().width;sel.style.width=Math.max(40,w+d)+"px"}
+function clean(){var b=document.body.cloneNode(true);["srijaCompleteEditor","srijaUnifiedEditor","srijaRibbonEditor","srijaLoginOverlay","srijaEmergencyLogin"].forEach(function(id){var x=b.querySelector("#"+id);if(x)x.remove()});b.querySelectorAll("script").forEach(function(x){x.remove()});b.querySelectorAll("[data-ce-bound]").forEach(function(x){x.removeAttribute("data-ce-bound")});return b.innerHTML}
+function save(){try{localStorage.setItem(key,clean());localStorage.setItem("srija_last_saved_page",location.pathname);var st=document.getElementById("ceStatus");if(st)st.textContent="Saved ✓";}catch(e){alert("Save করা যায়নি")}}
+function undo(){if(!hist.length)return;future.push(document.body.innerHTML);document.body.innerHTML=hist.pop();sel=null;bind();build()}
+function redo(){if(!future.length)return;hist.push(document.body.innerHTML);document.body.innerHTML=future.pop();sel=null;bind();build()}
+function build(){
+ var old=document.getElementById("srijaCompleteEditor");if(old)old.remove();
+ var p=document.createElement("div");p.id="srijaCompleteEditor";
+ p.innerHTML='<div class="cebar"><b>SRIJA EDITOR</b><button data-a="text">+ Text</button><button data-a="box">+ Box</button><button data-a="img">+ Image</button><button data-a="bold"><b>B</b></button><button data-a="italic"><i>I</i></button><button data-a="under"><u>U</u></button><button data-a="left">Left</button><button data-a="center">Center</button><button data-a="right">Right</button><button data-a="smaller">A−</button><button data-a="larger">A+</button><select data-a="font"><option value="">Font</option><option>Arial</option><option>Georgia</option><option>Verdana</option><option>Tahoma</option><option>Courier New</option></select><input data-a="color" type="color" title="Text color"><input data-a="bg" type="color" title="Background"><button data-a="minus">− Size</button><button data-a="plus">+ Size</button><button data-a="copy">Copy</button><button data-a="paste">Paste</button><button data-a="del">Delete</button><button data-a="undo">Undo</button><button data-a="redo">Redo</button><button data-a="save">SAVE</button><button data-a="home">Home</button><button data-a="logout">Logout</button><span id="ceStatus">Ready</span></div><div class="ceinfo">Click/Touch = select • Double-click = edit text • Drag/Arrow keys = move • Box/Image selected হলে size পরিবর্তন করুন</div>';
+ document.body.appendChild(p);document.body.classList.add("srija-complete-editing");
+ p.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a;
+ if(a==="text")return addText();if(a==="box")return addBox();if(a==="img")return addImage();if(a==="home")return location.href="./";if(a==="save")return save();if(a==="logout"){sessionStorage.clear();return location.reload()}
+ if(a==="copy"){if(sel)clip=sel.cloneNode(true);return}if(a==="paste"){if(!clip||!sel)return;snap();var n=clip.cloneNode(true);n.removeAttribute("id");sel.parentNode.insertBefore(n,sel.nextSibling);bind();select(n);return}
+ if(a==="del"){if(sel){snap();sel.remove();sel=null}return}if(a==="undo")return undo();if(a==="redo")return redo();if(!sel)return;
+ if(a==="bold")return style("fontWeight",getComputedStyle(sel).fontWeight==="700"?"normal":"bold");
+ if(a==="italic")return style("fontStyle",getComputedStyle(sel).fontStyle==="italic"?"normal":"italic");
+ if(a==="under")return style("textDecoration",getComputedStyle(sel).textDecoration.includes("underline")?"none":"underline");
+ if(["left","center","right"].includes(a))return style("textAlign",a);
+ if(a==="smaller"||a==="larger"){var z=parseFloat(getComputedStyle(sel).fontSize)||16;return style("fontSize",Math.max(8,z+(a==="larger"?2:-2))+"px")}
+ if(a==="minus")return size(-10);if(a==="plus")return size(10);
+ if(a==="font"&&b.value)return style("fontFamily",b.value);
+ if(a==="color")return style("color",b.value);if(a==="bg")return style("backgroundColor",b.value);
+ });
+}
+document.addEventListener("keydown",function(e){if(!sel||e.target.closest&&e.target.closest("#srijaCompleteEditor"))return;if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key)){e.preventDefault();move(e.shiftKey?10:3,e.key==="ArrowLeft"?0:e.key==="ArrowRight"?0:e.key==="ArrowUp"?0:0);if(e.key==="ArrowLeft")move(-((e.shiftKey?10:3)*2),0);if(e.key==="ArrowRight")move(0,0);if(e.key==="ArrowUp")move(0,-(e.shiftKey?10:3));if(e.key==="ArrowDown")move(0,e.shiftKey?10:3)}});
+function restore(){try{var s=localStorage.getItem(key);if(s){document.body.innerHTML=s}}catch(e){}}
+restore();build();bind();
+})();
+</script>
+</body></html>
