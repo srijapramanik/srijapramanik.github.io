@@ -10,7 +10,7 @@
 #bar input{width:70px;padding:8px;border-radius:7px;border:0}#file{display:none}
 #status{margin-left:auto;font-size:12px}
 #work{max-width:1100px;margin:16px auto;padding:18px;background:white;min-height:calc(100vh - 100px);border-radius:12px;box-shadow:0 2px 12px #0002}
-.item{position:relative;margin:10px;padding:12px;border:2px solid transparent;min-height:35px;cursor:pointer;touch-action:none}
+.item{position:relative;margin:10px;padding:12px;border:2px solid transparent;min-height:35px;cursor:pointer;touch-action:none;user-select:text;overflow:auto}.item.box-edit{resize:both;overflow:auto;min-width:80px;min-height:50px}
 .item.selected{border-color:#2457c5;outline:2px dashed #7aa0ef;outline-offset:2px}
 .item[contenteditable=true]{cursor:text}
 img.item{display:block;max-width:100%;height:auto}
@@ -37,10 +37,10 @@ img.item{display:block;max-width:100%;height:auto}
 const W=document.getElementById('work'),P=document.getElementById('panel'),S=document.getElementById('status');let sel=null,clip=null,undoStack=[],redoStack=[];
 const KEY='srija_visual_editor_v1';
 function snapshot(){undoStack.push(W.innerHTML);if(undoStack.length>40)undoStack.shift();redoStack=[]}
-function bind(el){el.classList.add('item');el.addEventListener('pointerdown',e=>{if(e.target===el||el.tagName==='IMG'){select(el);if(el.tagName==='IMG')e.preventDefault()}});el.addEventListener('dblclick',()=>{if(el.tagName!=='IMG'){el.contentEditable='true';el.focus()}});el.addEventListener('input',()=>snapshot());}
+function bind(el){el.classList.add('item');el.addEventListener('pointerdown',e=>{if(e.target===el||el.tagName==='IMG'){select(el);if(el.tagName==='IMG')e.preventDefault()}});el.addEventListener('dblclick',()=>{if(el.tagName!=='IMG'){el.contentEditable='true';el.classList.add('box-edit');el.focus()}});el.addEventListener('input',()=>snapshot());}
 function select(el){document.querySelectorAll('.selected').forEach(x=>x.classList.remove('selected'));sel=el;el.classList.add('selected');P.classList.add('show');document.getElementById('wd').value=Math.round(el.getBoundingClientRect().width)}
 function addText(){snapshot();let e=document.createElement('div');e.textContent='এখানে লেখা লিখুন';e.contentEditable='true';bind(e);W.appendChild(e);select(e);e.focus()}
-function addBox(){snapshot();let e=document.createElement('div');e.innerHTML='<strong>নতুন বক্স</strong><div>এখানে আপনার লেখা বা তথ্য দিন</div>';bind(e);e.style.background='#f4f7ff';e.style.minHeight='90px';W.appendChild(e);select(e)}
+function addBox(){snapshot();let e=document.createElement('div');e.innerHTML='<strong>নতুন বক্স</strong><div>এখানে আপনার লেখা বা তথ্য দিন</div>';e.classList.add('box-edit');e.contentEditable='true';bind(e);W.appendChild(e);select(e);e.focus()}
 function addImage(){document.getElementById('file').click()}
 function uploadImage(ev){let f=ev.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{snapshot();let e=document.createElement('img');e.src=rd.result;bind(e);W.appendChild(e);select(e);save()};rd.readAsDataURL(f);ev.target.value=''}
 function styleSel(k,v){if(!sel)return; snapshot();sel.style[k]=v}
