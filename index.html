@@ -593,5 +593,33 @@ if(sessionStorage.getItem("srija_owner_logged_in")==="1" && document.getElementB
   }
   document.addEventListener("click",openLogin,true);
 })();
+</script><script id="SRIJA_EDITOR_WATCHDOG_V1">
+(function(){
+  function fallback(){
+    if(document.getElementById("srijaRibbonEditor")) return true;
+    if(sessionStorage.getItem("srija_owner_logged_in")!=="1") return false;
+    var r=document.createElement("div"); r.id="srijaRibbonEditor";
+    r.innerHTML='<div class="srija-ribbon"><div class="srija-brand">SRIJA Editor</div><button type="button">Home</button><button type="button">Edit</button><button type="button">Insert</button><button type="button">Design</button><button type="button" id="wdSave">Save</button><button type="button" id="wdLogout">Logout</button></div><div class="srija-context"><span>Editor চালু হয়েছে — এখন সাইটের যে অংশ পরিবর্তন করবেন সেটিতে চাপুন।</span></div>';
+    document.body.appendChild(r); document.body.classList.add("srija-editing");
+    var bs=r.querySelectorAll("button");
+    bs[0].onclick=function(){};
+    bs[1].onclick=function(){ if(window.srijaOpenEditor){try{window.srijaOpenEditor()}catch(e){}} };
+    bs[2].onclick=function(){ alert("Insert: Settings-এর Insert থেকে Box / Text / Image যোগ করুন।"); };
+    bs[3].onclick=function(){ if(window.srijaOpenEditor){try{window.srijaOpenEditor()}catch(e){}} };
+    r.querySelector("#wdSave").onclick=function(){ if(window.srijaOpenEditor){try{window.srijaOpenEditor()}catch(e){}} };
+    r.querySelector("#wdLogout").onclick=function(){sessionStorage.removeItem("srija_owner_logged_in");sessionStorage.removeItem("srijaSecondEdit");location.reload();};
+    return true;
+  }
+  var tries=0;
+  var timer=setInterval(function(){
+    if(sessionStorage.getItem("srija_owner_logged_in")==="1"){
+      if(!document.getElementById("srijaRibbonEditor")){
+        try{ if(typeof window.srijaOpenEditor==="function") window.srijaOpenEditor(); }catch(e){}
+      }
+      if(document.getElementById("srijaRibbonEditor")){document.body.classList.add("srija-editing");clearInterval(timer);}
+      else if(++tries>=8){fallback();clearInterval(timer);}
+    }else if(++tries>=8){clearInterval(timer);}
+  },500);
+})();
 </script></body>
 </html>
