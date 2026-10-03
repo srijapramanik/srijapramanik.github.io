@@ -1,0 +1,5 @@
+{
+  "apiBase": "https://srijapramanikgithubio.vercel.app/api",
+  "healthEndpoint": "/health",
+  "permanentSaveReady": false
+}
