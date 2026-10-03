@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRIJA COMMUNICATION</title>
+<style>
+*{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f5f7fb;color:#172033}header h1,header p,.hero h2,.hero p,.card h3,.card p,footer,strong{max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+header{background:linear-gradient(135deg,#173b8f,#2457c5);color:white;padding:24px 18px;text-align:center}
+header h1{margin:0;font-size:32px}header p{margin:8px 0 0;font-size:16px}
+nav{background:white;padding:12px;text-align:center;box-shadow:0 2px 8px #0001;position:sticky;top:0;z-index:2}
+nav a{color:#173b8f;text-decoration:none;margin:0 12px;font-weight:bold}
+.hero{max-width:1000px;margin:35px auto;padding:45px 22px;text-align:center;background:white;border-radius:18px;box-shadow:0 8px 30px #0001}
+.hero h2{font-size:30px;margin:0 0 12px}.hero p{font-size:18px;line-height:1.7}
+.btn{display:inline-block;background:#173b8f;color:white;padding:13px 24px;border-radius:8px;text-decoration:none;margin-top:12px}
+.cards{max-width:1000px;margin:20px auto 45px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;padding:0 18px}
+.card{background:white;padding:25px;border-radius:14px;box-shadow:0 5px 20px #0001;text-align:center}.card h3{color:#173b8f}
+footer{text-align:center;background:#172033;color:white;padding:25px;line-height:1.7}
+ .notice{max-width:1000px;margin:20px auto 0;padding:14px 18px;background:#fff;border-radius:14px;box-shadow:0 5px 20px #0001;text-align:center;overflow:hidden}.notice-title{font-weight:bold;color:#173b8f;white-space:nowrap;display:inline-block;animation:srijaNotice 12s linear infinite}@keyframes srijaNotice{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+@media(max-width:600px){header h1{font-size:25px}.hero{margin:20px 12px;padding:30px 16px}.hero h2{font-size:24px}.hero p{font-size:16px}.cards{padding:0 12px}.card{padding:20px}nav a{display:inline-block;margin:5px 7px}.notice{margin:14px 12px 0}.admin-panel{position:fixed;top:20px;right:20px;width:300px;max-height:80vh;overflow-y:auto;background:#fff;border:2px solid #173b8f;border-radius:12px;box-shadow:0 8px 25px #0003;padding:12px;z-index:9999}.admin-panel h3{margin:0 0 8px;color:#173b8f;font-size:20px}.admin-panel label{display:block;margin:6px 0 3px;font-weight:600}.admin-panel input,.admin-panel textarea,.admin-panel select{width:100%;padding:6px;border:1px solid #ccd3df;border-radius:6px}.admin-panel button{margin:4px 3px 4px 0;padding:7px 9px;border:0;border-radius:6px;background:#173b8f;color:#fff;cursor:pointer}.admin-panel hr{border:0;border-top:1px solid #ddd;margin:10px 0}.admin-panel details{margin:6px 0;border:1px solid #d7dce5;border-radius:7px;overflow:hidden;background:#fff}.admin-panel details:not([open])>*:not(summary){display:none!important}.admin-panel summary{padding:9px 10px;background:#f4f6fa;color:#173b8f;font-weight:bold;cursor:pointer;list-style:none}.admin-panel summary::-webkit-details-marker{display:none}.admin-panel summary:before{content:"＋";display:inline-block;margin-right:6px}.admin-panel details[open] summary:before{content:"−"}.admin-panel details>*:not(summary){margin-left:10px;margin-right:10px}.admin-panel details label:first-of-type{margin-top:9px}.admin-panel details button:last-child{margin-bottom:9px}@media(max-width:600px){.admin-panel{top:6px;right:6px;max-height:calc(100vh - 12px);overflow:auto}}}<style id="srija-hand-pointer-fix">#slB,#slB *{cursor:pointer !important}</style></style>
+
+<style id="admin-style">
+.admin-only{display:none}.admin-panel{position:fixed;top:12px;right:12px;width:320px;max-width:calc(100vw - 24px);background:#fff;border-radius:14px;box-shadow:0 10px 35px #0003;padding:18px;z-index:9999;border:1px solid #ddd}.admin-panel h3{margin:0 0 12px;color:#173b8f}.admin-panel label{display:block;margin:9px 0 4px;font-weight:bold;font-size:13px}.admin-panel input,.admin-panel select{width:100%;padding:8px;border:1px solid #ccc;border-radius:7px}.admin-panel button{margin-top:10px;padding:9px 12px;border:0;border-radius:7px;background:#173b8f;color:#fff;cursor:pointer}.admin-help{font-size:12px;color:#555;margin:8px 0}.selected-edit{outline:3px dashed #f59e0b!important;outline-offset:3px}
+
+/* Simple Word/Excel-like private editor ribbon */
+.srija-editing{padding-top:86px!important}.srija-ribbon{position:fixed;top:0;left:0;right:0;z-index:100000;background:#fff;border-bottom:1px solid #ccd3df;box-shadow:0 3px 14px #0002;display:flex;align-items:center;gap:4px;padding:7px 10px;overflow-x:auto;white-space:nowrap}.srija-ribbon button{border:0;background:#f3f5f9;color:#173b8f;padding:9px 13px;border-radius:7px;font-weight:bold;cursor:pointer} .srija-tools button,.srija-tools select,.srija-tools input{cursor:pointer!important}.srija-brand{font-weight:800;color:#173b8f;margin-right:5px}.srija-context{position:fixed;top:48px;left:0;right:0;z-index:99999;min-height:38px;background:#eef4ff;border-bottom:1px solid #ccd3df;padding:6px 10px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap}.srija-tools{display:flex;gap:5px}.srija-tools button{border:0;border-radius:6px;padding:6px 9px;background:#fff;color:#173b8f;font-weight:bold}.srija-tools .danger{background:#b42318;color:#fff}.srija-selected{outline:3px dashed #f59e0b!important;outline-offset:3px;scroll-margin-top:100px}
+#settingsBtn{cursor:pointer!important}.s3login button,#s3loginBtn{cursor:pointer!important}</style><style id="srija-responsive-fix-v1">
+html,body{width:100%;min-width:0}
+body{overflow-x:hidden}
+header,nav,.notice,.hero,.cards,footer{width:auto;max-width:100%;margin-left:auto;margin-right:auto}
+header{padding-left:clamp(12px,4vw,24px);padding-right:clamp(12px,4vw,24px)}
+header h1{font-size:clamp(22px,5vw,32px);line-height:1.2}
+header p{font-size:clamp(14px,3vw,16px)}
+nav{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px;padding:10px 8px}
+nav a{display:inline-block;margin:4px 8px}
+.notice{margin-top:16px;margin-left:clamp(10px,3vw,20px);margin-right:clamp(10px,3vw,20px)}
+.hero{margin-top:24px;margin-bottom:24px;padding:clamp(24px,6vw,45px) clamp(14px,4vw,22px)}
+.hero h2{font-size:clamp(22px,5vw,30px);line-height:1.3}
+.hero p{font-size:clamp(15px,3.5vw,18px)}
+.cards{grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));padding-left:clamp(10px,3vw,18px);padding-right:clamp(10px,3vw,18px)}
+.card{min-width:0;overflow-wrap:anywhere}
+footer{overflow-wrap:anywhere}
+img{max-width:100%;height:auto}
+@media(max-width:768px){
+ .hero,.cards,.notice{width:calc(100% - 20px)}
+ nav a{margin:3px 5px;font-size:14px}
+}
+@media(min-width:769px){
+ .hero,.cards,.notice{width:calc(100% - 36px)}
+}
+</style><script>(function(){try{var K=["srija_ribbon_state_v2","srija_editor_content_v3","srija_editor_styles_v3","srija_first_page_styles","srija_site_text","srija_hero_text","srija_hero_button","srija_services_text","srija_services_desc","srija_footer_text","srija_page_background","srija_site_logo","srija_first_page_scroll","srija_notice_settings"];if(localStorage.getItem("srija_clean_state_v1")!=="1"){K.forEach(function(k){localStorage.removeItem(k)});localStorage.setItem("srija_clean_state_v1","1");location.reload()}}catch(e){}})();</script><style id="SRIJA_EDITOR_VISIBILITY_FIX_V2">#srijaRibbonEditor{display:block!important;visibility:visible!important;opacity:1!important;position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:2147483646!important}#srijaRibbonEditor .srija-ribbon{display:flex!important;visibility:visible!important;opacity:1!important;position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:2147483647!important}#srijaRibbonEditor .srija-context{display:flex!important;visibility:visible!important;opacity:1!important;position:fixed!important;top:48px!important;left:0!important;right:0!important;z-index:2147483646!important}</style><style id="SRIJA_LOGIN_CURSOR_FIX_V2">#srijaEmergencyLogin,#srijaEmergencyLogin *{cursor:default!important}#srijaEmergencyLogin button,#srijaEmergencyLogin button:hover,#srijaFinalLogin,#srijaFinalClose,#emLogin,#emClose{cursor:pointer!important}#srijaEmergencyLogin input{cursor:text!important}</style><style id="SRIJA_PUBLIC_LOGIN_RIBBON_FIX">#srijaRibbonEditor{display:none!important}</style><style id="SRIJA_LOGIN_POINTER_FIX_V1">nav,#settingsBtn{position:relative!important;z-index:2147483647!important;pointer-events:auto!important}</style><script id="SRIJA_LOGIN_POINTER_FIX_V1_SCRIPT">(function(){function go(e){var b=e.target.closest&&e.target.closest("#settingsBtn");if(!b)return;if(typeof window.SRIJA_DIRECT_LOGIN==="function"){e.preventDefault();e.stopImmediatePropagation();window.SRIJA_DIRECT_LOGIN(e)}}document.addEventListener("pointerdown",go,true)})();</script></head>
+<body>
+<header style="position:relative"><img id="siteLogo" data-edit-id="id:siteLogo" alt="SRIJA COMMUNICATION logo" style="display:none;width:auto;max-width:180px;max-height:100px;height:auto;margin:0 auto 10px;border-radius:10px;object-fit:contain"><h1>SRIJA COMMUNICATION</h1><p>আপনার ডিজিটাল পরিষেবার সহজ ঠিকানা</p></header>
+<nav><a href="./">হোম</a><a href="#contact">যোগাযোগ</a><a href="#srija-login" id="settingsBtn" role="button" onclick="return SRIJA_DIRECT_LOGIN(event)">🔐 Login</a></nav>
+<section class="notice" id="notice"><div class="notice-title" id="noticeText">বিজ্ঞপ্তি / আপডেট</div></section>
+<section class="hero" id="home">
+<h2>স্বাগতম SRIJA COMMUNICATION-এ</h2>
+<p>অনলাইন ও ডিজিটাল পরিষেবা সংক্রান্ত কাজে আপনাকে সহজ ও দ্রুত সহায়তা দেওয়ার জন্য আমাদের এই ওয়েবসাইট।</p>
+<a class="btn" href="#contact">যোগাযোগ করুন</a>
+</section>
+<section class="cards" id="services">
+<div class="card"><a href="links.html" style="display:block;color:inherit;text-decoration:none"><h3>🌐 প্রয়োজনীয় ওয়েবসাইট</h3><p>গুরুত্বপূর্ণ সরকারি ও প্রয়োজনীয় ওয়েবসাইট এক জায়গায়।</p></a></div>
+<div class="card"><h3>📝 ডকুমেন্ট সহায়তা</h3><p>ফর্ম, ডকুমেন্ট ও ডিজিটাল কাজের সহায়তা।</p></div>
+<div class="card"><h3>📱 অনলাইন সহায়তা</h3><p>দৈনন্দিন অনলাইন পরিষেবা ব্যবহারে সহায়তা।</p></div>
+</section>
+<footer id="contact"><strong>যোগাযোগ</strong><br>সন্তু প্রামানিক<br>ফোন: 7003979575<br>দক্ষিণ জালখুড়া, বড়ুয়া পাড়া, মহেশতলা, কলকাতা - 700141<br><br>© 2026 SRIJA COMMUNICATION</footer>
+
+<script>
+(function(){
+const key="srija_first_page_styles"; const noticeKey="srija_notice_settings"; const copyKey="srija_copied_element"; const scrollKey="srija_first_page_scroll"; const logoKey="srija_site_logo"; let logoMemory="";
+let selected=null;
+function showLogo(v){if(!v)return;try{localStorage.setItem(logoKey,v)}catch(e){}let img=document.getElementById("siteLogo");const h=document.querySelector("header");if(!img&&h){img=document.createElement("img");img.id="siteLogo";img.alt="SRIJA COMMUNICATION logo";h.insertBefore(img,h.firstChild)}if(img){img.dataset.editId="id:siteLogo";img.src=v;img.style.setProperty("display","block","important");img.style.setProperty("width","auto","important");img.style.setProperty("max-width","180px","important");img.style.setProperty("max-height","100px","important");img.style.setProperty("height","auto","important");img.style.setProperty("margin","0 auto 10px","important");img.style.setProperty("object-fit","contain","important")}return img} function applyLogo(){try{const st=JSON.parse(localStorage.getItem("srija_ribbon_state_v2")||"{}");const v=st.logo||localStorage.getItem(logoKey);if(v)showLogo(v)}catch(e){}} function saveLogoFile(file,done){const rd=new FileReader();rd.onload=()=>{const data=String(rd.result||"");if(!data.startsWith("data:image/")){done(false);return}const put=(v)=>{const img=showLogo(v);if(!img){done(false);return}img.setAttribute("src",v);img.style.setProperty("display","block","important");try{localStorage.setItem(logoKey,v)}catch(e){}try{const st=JSON.parse(localStorage.getItem("srija_ribbon_state_v2")||'{"items":{},"deleted":[],"dynamic":[]}');st.logo=v;st.items=st.items||{};st.items["id:siteLogo"]={html:"",style:img.getAttribute("style")||"",src:v};st.deleted=Array.isArray(st.deleted)?st.deleted.filter(k=>k!=="id:siteLogo"):[];localStorage.setItem("srija_ribbon_state_v2",JSON.stringify(st))}catch(e){}done(true)};if(data.length<=30000){put(data);return}const im=new Image();im.onload=()=>{const s=Math.min(1,300/Math.max(im.naturalWidth,im.naturalHeight));const cv=document.createElement("canvas");cv.width=Math.max(1,Math.round(im.naturalWidth*s));cv.height=Math.max(1,Math.round(im.naturalHeight*s));cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);let out=cv.toDataURL("image/jpeg",0.5);if(out.length>30000)out=cv.toDataURL("image/jpeg",0.35);put(out)};im.onerror=()=>put(data);im.src=data};rd.onerror=()=>done(false);rd.readAsDataURL(file)}    function applyNotice(){try{const n=JSON.parse(localStorage.getItem(noticeKey)||"{}");if(n.text)document.getElementById("noticeText").textContent=n.text;document.getElementById("noticeText").style.animation=n.scroll==="off"?"none":""}catch(e){}}
+function applyPageBackground(){try{const v=localStorage.getItem("srija_page_background");if(v){document.body.style.setProperty("background-image","url(\""+v+"\")","important");document.body.style.setProperty("background-size","cover","important");document.body.style.setProperty("background-position","center","important");document.body.style.setProperty("background-attachment","fixed","important");document.body.style.setProperty("background-repeat","no-repeat","important")}}catch(e){}}
+function applyPageScroll(){const on=localStorage.getItem(scrollKey)==="on";document.querySelectorAll("header h1,header p,nav a,.hero h2,.hero p,.btn,.card h3,.card p,footer").forEach(e=>e.classList.toggle("srija-scroll-text",on));if(on&&!document.getElementById("srija-scroll-css")){const s=document.createElement("style");s.id="srija-scroll-css";s.textContent=".srija-scroll-text{white-space:nowrap;overflow:hidden;display:inline-block;max-width:100%;animation:srijaGlobalScroll 14s linear infinite}@keyframes srijaGlobalScroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}";document.head.appendChild(s)}}
+function applySaved(){
+ try{
+  const saved=JSON.parse(localStorage.getItem(key)||"{}");
+  Object.keys(saved).forEach((id)=>{const el=document.querySelector('[data-edit-id="'+id+'"]');if(el)Object.assign(el.style,saved[id]);});
+ }catch(e){}
+}
+function saveStyle(id,styles){
+ try{
+  const saved=JSON.parse(localStorage.getItem(key)||"{}");
+  saved[id]=styles;
+  localStorage.setItem(key,JSON.stringify(saved));
+  return true;
+ }catch(e){
+  alert("সেটিংস সংরক্ষণ করা যায়নি। আগের সাইট নিরাপদ রাখা হয়েছে।");
+  return false;
+ }
+}
+function setupSelectableElements(){
+ document.querySelectorAll("header,.hero,.hero h2,.hero p,.btn,.card,.card h3,.card p,footer").forEach((el,i)=>{
+  el.dataset.editId="el"+i;
+ });
+}
+function admin(){
+ if(location.hash!=="#admin")return;
+ document.body.insertAdjacentHTML("beforeend",'<div class="admin-panel" id="adminPanel"><button id="settingsCloseTop" type="button" style="float:right;margin:0 0 8px 8px;background:#777">✕</button><h3>সবকিছু পরিচালনা</h3><div class="admin-help">যে অংশ পরিবর্তন করবেন সেটিতে ক্লিক করুন।</div><div id="selectedName">কিছু নির্বাচন করা হয়নি</div><details><summary>নির্বাচিত অংশের ডিজাইন</summary><label>Text / Content</label><textarea id="elText" rows="3"></textarea><label>Font Size</label><input id="fontSize" type="number" min="8" max="100" value="16"><label>Font Color</label><input id="fontColor" type="color" value="#172033"><label>Background Color</label><input id="bgColor" type="color" value="#ffffff"><label>Element Width (%)</label><input id="elWidth" type="number" min="10" max="100" value="100"><label>Element Height (px)</label><input id="elHeight" type="number" min="0" max="1000" value="0"><label>Font Style</label><select id="fontFamily"><option value="Arial, Noto Sans Bengali, sans-serif">Arial / Bengali</option><option value="Georgia, serif">Georgia</option><option value="Verdana, sans-serif">Verdana</option><option value="Tahoma, sans-serif">Tahoma</option></select><button id="applyBtn">প্রয়োগ করুন</button><button id="copyBtn">Copy</button><button id="pasteBtn">Paste</button><button id="resetBtn">নির্বাচিত অংশ Reset</button></details><details><summary>বিজ্ঞপ্তি ও Scrolling</summary><label>বিজ্ঞপ্তি / আপডেট</label><input id="noticeInput" type="text"><label><input id="noticeScroll" type="checkbox" checked style="width:auto"> বিজ্ঞপ্তি scrolling</label><label><input id="pageScroll" type="checkbox" style="width:auto"> সব লেখা scrolling</label><button id="noticeSave">বিজ্ঞপ্তি সংরক্ষণ</button></details><details><summary>Logo</summary><input id="logoFile" type="file" accept="image/*"><button id="logoSave">Logo সংরক্ষণ</button><button id="logoRemove">Logo সরান</button></details><details><summary>হেডার ও ফুটার</summary><label>সাইটের নাম <input id="siteTitleEdit" type="text"></label><label>সাবটাইটেল <input id="siteSubEdit" type="text"></label><button id="siteTextSave">সাইটের লেখা সংরক্ষণ</button><label>ফুটারের লেখা <input id="footerEdit" type="text"></label><button id="footerSave">ফুটারের লেখা সংরক্ষণ</button></details><details><summary>পরিষেবা</summary><label>পরিষেবা ১ <input id="service1Edit" type="text"></label><label>পরিষেবা ২ <input id="service2Edit" type="text"></label><label>পরিষেবা ৩ <input id="service3Edit" type="text"></label><button id="servicesSave">পরিষেবা লেখা সংরক্ষণ</button><label>পরিষেবা ১-এর বর্ণনা <textarea id="service1Desc" rows="2"></textarea></label><label>পরিষেবা ২-এর বর্ণনা <textarea id="service2Desc" rows="2"></textarea></label><label>পরিষেবা ৩-এর বর্ণনা <textarea id="service3Desc" rows="2"></textarea></label><button id="serviceDescSave">পরিষেবার বর্ণনা সংরক্ষণ</button></details><details><summary>Hero</summary><label>Hero শিরোনাম <input id="heroTitleEdit" type="text"></label><label>Hero বর্ণনা <textarea id="heroDescEdit" rows="2"></textarea></label><button id="heroSave">Hero লেখা সংরক্ষণ</button><label>Hero বাটনের লেখা <input id="heroBtnEdit" type="text"></label><label>Hero বাটনের লিংক <input id="heroBtnUrl" type="text"></label><button id="heroBtnSave">Hero বাটন সংরক্ষণ</button></details><details><summary>অন্যান্য</summary><button id="resetAllBtn">সব ডিজাইন Reset</button><button id="closeBtn">সাধারণ সাইট</button></details></div>');;
+ document.querySelectorAll("header,.hero,.hero h2,.hero p,.btn,.card,.card h3,.card p,footer").forEach((el)=>{
+  el.addEventListener("click",function(e){
+   if(e.target.closest("#adminPanel"))return;
+   e.preventDefault();e.stopPropagation();
+   if(selected)selected.classList.remove("selected-edit");
+   selected=this;this.classList.add("selected-edit");
+   document.getElementById("selectedName").textContent="নির্বাচিত: "+(this.tagName==="DIV"?"বক্স":this.innerText.trim().slice(0,30));
+   const cs=getComputedStyle(this);
+   document.getElementById("fontSize").value=parseInt(cs.fontSize)||16;document.getElementById("elText").value=selected?selected.innerText:"";
+   document.getElementById("fontColor").value=rgbToHex(cs.color);
+   document.getElementById("fontFamily").value=[...document.getElementById("fontFamily").options].some(o=>o.value===cs.fontFamily)?cs.fontFamily:document.getElementById("fontFamily").options[0].value;document.getElementById("bgColor").value=rgbToHex(cs.backgroundColor);document.getElementById("elWidth").value=parseInt(cs.width)||100;document.getElementById("elHeight").value=cs.height==="auto"?0:parseInt(cs.height)||0;
+  },true);
+ });
+ document.getElementById("copyBtn").onclick=function(){if(!selected){alert("আগে একটি অংশ নির্বাচন করুন।");return}localStorage.setItem(copyKey,selected.outerHTML);alert("নির্বাচিত অংশ Copy হয়েছে")};
+ document.getElementById("resetAllBtn").onclick=()=>{if(!confirm("প্রথম পেজের সব সংরক্ষিত ডিজাইন Reset করবেন?"))return;localStorage.removeItem(key);location.reload()};document.getElementById("resetBtn").onclick=()=>{if(!selected){alert("আগে একটি অংশ নির্বাচন করুন।");return}selected.removeAttribute("style");try{const a=JSON.parse(localStorage.getItem(key)||"{}");delete a[selected.dataset.editId];localStorage.setItem(key,JSON.stringify(a))}catch(e){}alert("নির্বাচিত অংশের ডিজাইন Reset হয়েছে")};document.getElementById("pasteBtn").onclick=function(){if(!selected){alert("আগে যেখানে বসাবেন সেটি নির্বাচন করুন।");return}const html=localStorage.getItem(copyKey);if(!html){alert("আগে Copy করুন।");return}const box=document.createElement("div");box.innerHTML=html;const clone=box.firstElementChild;if(!clone){return}clone.dataset.editId="copy"+Date.now();clone.classList.remove("selected-edit");selected.parentNode.insertBefore(clone,selected.nextSibling);alert("Copy করা অংশ Paste হয়েছে")};
+ document.getElementById("logoSave").onclick=()=>{const f=document.getElementById("logoFile").files[0];if(!f)return alert("আগে একটি ছবি নির্বাচন করুন");saveLogoFile(f,ok=>{if(ok){applyLogo();applyPageBackground();alert("Logo সংরক্ষণ হয়েছে")}else alert("Logo সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।")})};document.getElementById("logoRemove").onclick=()=>{localStorage.removeItem(logoKey);const i=document.getElementById("siteLogo");if(i){i.src="";i.style.display="none"}alert("Logo সরানো হয়েছে")};document.getElementById("noticeSave").onclick=function(){const n={text:document.getElementById("noticeInput").value.trim()||"বিজ্ঞপ্তি / আপডেট",scroll:document.getElementById("noticeScroll").checked?"on":"off"};localStorage.setItem(noticeKey,JSON.stringify(n));applyNotice();alert("বিজ্ঞপ্তি সংরক্ষণ হয়েছে")};
+ const heroBtnKey="srija_hero_button";const hb=JSON.parse(localStorage.getItem(heroBtnKey)||"{}");const heroBtn=document.querySelector(".hero .btn");document.getElementById("heroBtnEdit").value=hb.text||heroBtn?.innerText||"";document.getElementById("heroBtnUrl").value=hb.url||heroBtn?.getAttribute("href")||"links.html";document.getElementById("heroBtnSave").onclick=()=>{const n={text:document.getElementById("heroBtnEdit").value.trim()||"প্রয়োজনীয় ওয়েবসাইট",url:document.getElementById("heroBtnUrl").value.trim()||"links.html"};localStorage.setItem(heroBtnKey,JSON.stringify(n));if(heroBtn){heroBtn.innerText=n.text;heroBtn.setAttribute("href",n.url)}alert("Hero বাটন সংরক্ষণ হয়েছে")};const heroKey="srija_hero_text";const hv=JSON.parse(localStorage.getItem(heroKey)||"{}");document.getElementById("heroTitleEdit").value=hv.title||document.querySelector(".hero h2")?.innerText||"";document.getElementById("heroDescEdit").value=hv.desc||document.querySelector(".hero p")?.innerText||"";document.getElementById("heroSave").onclick=()=>{const n={title:document.getElementById("heroTitleEdit").value.trim()||"আপনার প্রয়োজনীয় তথ্য ও পরিষেবা",desc:document.getElementById("heroDescEdit").value.trim()||"সহজে তথ্য খুঁজুন এবং প্রয়োজনীয় ওয়েবসাইটে প্রবেশ করুন।"};localStorage.setItem(heroKey,JSON.stringify(n));document.querySelector(".hero h2").innerText=n.title;document.querySelector(".hero p").innerText=n.desc;alert("Hero লেখা সংরক্ষণ হয়েছে")};const serviceDescKey="srija_services_desc";const sd=JSON.parse(localStorage.getItem(serviceDescKey)||"{}");const descs=[...document.querySelectorAll(".card p")];["service1Desc","service2Desc","service3Desc"].forEach((id,i)=>document.getElementById(id).value=sd["d"+(i+1)]||descs[i]?.innerText||"");document.getElementById("serviceDescSave").onclick=()=>{const n={d1:document.getElementById("service1Desc").value.trim()||"পরিষেবার বিবরণ",d2:document.getElementById("service2Desc").value.trim()||"পরিষেবার বিবরণ",d3:document.getElementById("service3Desc").value.trim()||"পরিষেবার বিবরণ"};localStorage.setItem(serviceDescKey,JSON.stringify(n));descs.forEach((e,i)=>e.innerText=n["d"+(i+1)]);alert("পরিষেবার বর্ণনা সংরক্ষণ হয়েছে")};const serviceKey="srija_services_text";const sv=JSON.parse(localStorage.getItem(serviceKey)||"{}");const cards=[...document.querySelectorAll(".card h3")];["service1Edit","service2Edit","service3Edit"].forEach((id,i)=>document.getElementById(id).value=sv["s"+(i+1)]||cards[i]?.innerText||"");document.getElementById("servicesSave").onclick=()=>{const n={s1:document.getElementById("service1Edit").value.trim()||"পরিষেবা ১",s2:document.getElementById("service2Edit").value.trim()||"পরিষেবা ২",s3:document.getElementById("service3Edit").value.trim()||"পরিষেবা ৩"};localStorage.setItem(serviceKey,JSON.stringify(n));cards.forEach((e,i)=>e.innerText=n["s"+(i+1)]);alert("পরিষেবা লেখা সংরক্ষণ হয়েছে")};const footerKey="srija_footer_text";const fv=localStorage.getItem(footerKey);document.getElementById("footerEdit").value=fv||document.querySelector("footer").innerText;document.getElementById("footerSave").onclick=()=>{const t=document.getElementById("footerEdit").value.trim()||"© 2026 SRIJA COMMUNICATION";localStorage.setItem(footerKey,t);document.querySelector("footer").innerText=t;alert("ফুটারের লেখা সংরক্ষণ হয়েছে")};const siteKey="srija_site_text";const ss=JSON.parse(localStorage.getItem(siteKey)||"{}");document.getElementById("siteTitleEdit").value=ss.title||document.querySelector("header h1").innerText;document.getElementById("siteSubEdit").value=ss.sub||document.querySelector("header p").innerText;document.getElementById("siteTextSave").onclick=()=>{const n={title:document.getElementById("siteTitleEdit").value.trim()||"SRIJA COMMUNICATION",sub:document.getElementById("siteSubEdit").value.trim()||"সেবা ও তথ্যের সহজ ঠিকানা"};localStorage.setItem(siteKey,JSON.stringify(n));document.querySelector("header h1").innerText=n.title;document.querySelector("header p").innerText=n.sub;alert("সাইটের লেখা সংরক্ষণ হয়েছে")};const ns=JSON.parse(localStorage.getItem(noticeKey)||"{}");document.getElementById("noticeInput").value=ns.text||"বিজ্ঞপ্তি / আপডেট";document.getElementById("noticeScroll").checked=ns.scroll!=="off";document.getElementById("pageScroll").checked=localStorage.getItem(scrollKey)==="on";document.getElementById("pageScroll").onchange=function(){localStorage.setItem(scrollKey,this.checked?"on":"off");applyPageScroll()};
+ document.getElementById("applyBtn").onclick=function(){
+  if(!selected){alert("আগে একটি অংশ নির্বাচন করুন।");return;}
+  const newText=document.getElementById("elText").value;if(selected && selected.children.length===0 && newText.trim()!=="") selected.innerText=newText;const styles={fontSize:document.getElementById("fontSize").value+"px",color:document.getElementById("fontColor").value,fontFamily:document.getElementById("fontFamily").value,backgroundColor:document.getElementById("bgColor").value,width:document.getElementById("elWidth").value+"%",...(document.getElementById("elHeight").value>0?{height:document.getElementById("elHeight").value+"px"}:{height:""})};
+  Object.assign(selected.style,styles);
+  saveStyle(selected.dataset.editId,styles);
+ };
+ document.getElementById("closeBtn").onclick=function(){location.hash="";location.reload()};document.getElementById("settingsCloseTop").onclick=function(){location.hash="";location.reload()};
+}
+function rgbToHex(rgb){const m=rgb.match(/\d+/g)||[23,32,51];return"#"+m.slice(0,3).map(x=>("0"+parseInt(x).toString(16)).slice(-2)).join("")}
+const savedHeroBtn=JSON.parse(localStorage.getItem("srija_hero_button")||"{}");const hbEl=document.querySelector(".hero .btn");if(hbEl){if(savedHeroBtn.text)hbEl.innerText=savedHeroBtn.text;if(savedHeroBtn.url)hbEl.setAttribute("href",savedHeroBtn.url)}const savedHero=JSON.parse(localStorage.getItem("srija_hero_text")||"{}");if(savedHero.title&&document.querySelector(".hero h2"))document.querySelector(".hero h2").innerText=savedHero.title;if(savedHero.desc&&document.querySelector(".hero p"))document.querySelector(".hero p").innerText=savedHero.desc;const savedServiceDesc=JSON.parse(localStorage.getItem("srija_services_desc")||"{}");document.querySelectorAll(".card p").forEach((e,i)=>{const v=savedServiceDesc["d"+(i+1)];if(v)e.innerText=v});const savedServices=JSON.parse(localStorage.getItem("srija_services_text")||"{}");document.querySelectorAll(".card h3").forEach((e,i)=>{const v=savedServices["s"+(i+1)];if(v)e.innerText=v});const ft=localStorage.getItem("srija_footer_text");if(ft)document.querySelector("footer").innerText=ft;const stx=JSON.parse(localStorage.getItem("srija_site_text")||"{}");if(stx.title)document.querySelector("header h1").innerText=stx.title;if(stx.sub)document.querySelector("header p").innerText=stx.sub;setupSelectableElements();
+applyNotice();
+applyPageScroll();
+applySaved();
+applyLogo();
+/* V3 Settings handles #admin; legacy admin panel disabled. */
+})();
+</script>
+<style id="srija-settings-v3-style">
+#srijaSettingsV3{position:fixed;inset:0;background:transparent;z-index:100000;display:flex;align-items:flex-start;justify-content:flex-end;padding:10px;pointer-events:none;overflow:auto} #srijaSettingsV3 .s3box{pointer-events:auto}
+#srijaSettingsV3 .s3box{width:min(360px,calc(100vw - 20px));max-height:80vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 18px 60px #0006;padding:16px}
+#srijaSettingsV3 h3{margin:0;color:#173b8f;font-size:21px}.s3top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.s3close{background:#666!important}.s3section{border:1px solid #d9deea;border-radius:10px;margin:9px 0;overflow:hidden}
+.s3section>summary{cursor:pointer;padding:11px;background:#f5f7fb;color:#173b8f;font-weight:700;list-style:none}.s3section>summary::-webkit-details-marker{display:none}.s3section>summary:before{content:"＋";margin-right:7px}.s3section[open]>summary:before{content:"−"}
+.s3body{padding:10px}.s3body label{display:block;font-size:13px;font-weight:700;margin:7px 0 4px}.s3body input[type=text],.s3body input[type=number],.s3body select,.s3body textarea{width:100%;padding:8px;border:1px solid #cbd2df;border-radius:7px}.s3row{display:flex;gap:6px;flex-wrap:wrap}.s3row>*{flex:1;min-width:70px}
+#srijaSettingsV3 button{border:0;border-radius:7px;padding:8px 10px;background:#173b8f;color:#fff;margin:4px 2px;cursor:pointer}#srijaSettingsV3 button.alt{background:#697386}
+.s3selected{outline:3px dashed #f59e0b!important;outline-offset:3px;max-width:100%;overflow-wrap:anywhere;word-break:break-word}.s3hint{font-size:12px;color:#667085;margin:6px 0}.s3login{max-width:390px;margin:12vh auto}.s3msg{font-size:13px;color:#b42318;min-height:18px}
+</style>
+<!-- Removed broken legacy editor script; unified editor scripts remain active. -->
+<script>
+(function(){
+ function boxCursor(ev){
+  if(ev.target && ev.target.closest && ev.target.closest("#srijaEmergencyLogin,#srijaFinalLogin,#srijaFinalClose,#emLogin,#emClose,#emUid,#emPw")){document.documentElement.style.cursor="pointer";return}
+  const el=ev.target.closest&&ev.target.closest(".box,.card,.linkbox,[class*='box'],[class*='card']");
+  if(!el){document.documentElement.style.cursor="";return}
+  const r=el.getBoundingClientRect(),z=12,x=ev.clientX-r.left,y=ev.clientY-r.top;
+  if(x<0||y<0||x>r.width||y>r.height){document.documentElement.style.cursor="";return}
+  const l=x<=z,R=x>=r.width-z,t=y<=z,b=y>=r.height-z;
+  document.documentElement.style.cursor=(l&&t||R&&b)?"nwse-resize":(R&&t||l&&b)?"nesw-resize":(l||R)?"ew-resize":(t||b)?"ns-resize":"";
+ }
+ document.addEventListener("mousemove",boxCursor,true);
+})();
+</script><!-- Legacy embedded editor script 3 disabled. --><!-- Legacy embedded editor script 4 disabled. -->
+<!-- Legacy embedded editor script 5 disabled. --><!-- Legacy embedded editor script 6 disabled. -->
+<script id="SRIJA_SINGLE_LOGIN_V2">
+(function(){
+"use strict";
+function showLogin(ev){
+ if(ev){ev.preventDefault();ev.stopPropagation();}
+ var old=document.getElementById("srijaLoginOverlay");if(old)old.remove();
+ var p=document.createElement("div");p.id="srijaLoginOverlay";
+ p.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2147483647;display:flex;align-items:center;justify-content:center";
+ p.innerHTML='<div style="width:340px;max-width:92vw;background:#fff;border-radius:12px;padding:22px;box-sizing:border-box;box-shadow:0 12px 40px rgba(0,0,0,.35)"><h3>🔐 Settings Login</h3><label>User ID</label><input id="srijaFinalUid" type="text" style="width:100%;padding:10px;box-sizing:border-box"><label>Password</label><input id="srijaFinalPw" type="password" style="width:100%;padding:10px;box-sizing:border-box"><button id="srijaFinalLogin" type="button" style="padding:10px 18px;cursor:pointer">Login</button><button id="srijaFinalClose" type="button" style="padding:10px 18px;cursor:pointer">Close</button><div id="srijaFinalMsg"></div></div>';
+ document.body.appendChild(p);
+ var uid=document.getElementById("srijaFinalUid"),pw=document.getElementById("srijaFinalPw");
+ function login(){
+  if((uid.value||"").trim()==="srija"&&(pw.value||"")==="srija1234"){
+   sessionStorage.setItem("srija_owner_logged_in","1");
+   sessionStorage.setItem("srijaSecondEdit","1");
+   location.href="./editor.html?v="+Date.now();
+  }else{document.getElementById("srijaFinalMsg").textContent="User ID বা Password ভুল।";pw.value="";pw.focus();}
+ }
+ document.getElementById("srijaFinalLogin").onclick=login;
+ pw.onkeydown=function(e){if(e.key==="Enter")login();};
+ document.getElementById("srijaFinalClose").onclick=function(){p.remove();};
+ uid.focus();
+}
+window.SRIJA_OPEN_LOGIN=showLogin;function bind(){var b=document.getElementById("settingsBtn");if(!b)return;b.href="#";b.onclick=function(ev){return window.SRIJA_DIRECT_LOGIN?window.SRIJA_DIRECT_LOGIN(ev):showLogin(ev)};}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});else bind();
+})();
+</script><!-- Legacy embedded editor script 8 disabled. --><!-- Legacy embedded editor script 9 disabled. --><!-- Legacy embedded editor script 10 disabled. -->
+<!-- Legacy unified editor disabled: standalone editor.html is used after Login. -->
+<script id="SRIJA_DIRECT_TOUCH_RESIZE_V1">(function(){if(!sessionStorage.getItem("srija_owner_logged_in"))return;var active=null,sx=0,sy=0,sl=0,st=0,sw=0,sh=0;function prep(){document.querySelectorAll("body *").forEach(function(el){if(el.id==="srijaUnifiedEditor"||el.closest("#srijaUnifiedEditor")||el.dataset.srijaDragBound)return;el.dataset.srijaDragBound="1";el.style.touchAction="none";el.addEventListener("pointerdown",function(e){if(e.button!==undefined&&e.button!==0)return;if(el.closest("button,input,select,textarea,a")&&!el.dataset.srijaEditable)return;active=el;sx=e.clientX;sy=e.clientY;var r=el.getBoundingClientRect();sl=r.left;st=r.top;sw=r.width;sh=r.height;try{el.setPointerCapture(e.pointerId)}catch(x){}},true);el.addEventListener("pointermove",function(e){if(active!==el)return;var dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)<3)return;if(el.tagName!=="IMG"&&el.dataset.srijaEditable!=="1"&&el.children.length===0&&el.textContent.trim()!=="")el.style.position="relative";if(el.style.position==="static"||!el.style.position)el.style.position="relative";el.style.left=(parseFloat(el.dataset.dragX)||0)+dx+"px";el.style.top=(parseFloat(el.dataset.dragY)||0)+dy+"px";el.dataset.dragX=(parseFloat(el.dataset.dragX)||0)+dx;el.dataset.dragY=(parseFloat(el.dataset.dragY)||0)+dy;sx=e.clientX;sy=e.clientY},true);el.addEventListener("pointerup",function(){if(active===el)active=null},true)});}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",prep);else setTimeout(prep,100);})();</script>\n<!-- Legacy embedded editor script 13 disabled. -->\n<style id="SRIJA_COMPLETE_EDITOR_CSS_V2">
+#srijaCompleteEditor{position:fixed;left:0;right:0;top:0;z-index:2147483647;background:#fff;border-bottom:2px solid #173b8f;box-shadow:0 3px 16px #0004;font-family:Arial,sans-serif}
+#srijaCompleteEditor .cebar{display:flex;gap:5px;align-items:center;flex-wrap:wrap;padding:7px;max-height:150px;overflow:auto}
+#srijaCompleteEditor button,#srijaCompleteEditor select,#srijaCompleteEditor input{font-size:14px;padding:7px;border:1px solid #bbb;border-radius:6px;background:#fff}
+#srijaCompleteEditor .ceinfo{font-size:12px;padding:2px 8px 7px}
+.srija-ce-selected{outline:2px solid #1677ff!important;outline-offset:2px!important}
+body.srija-complete-editing{padding-top:105px!important}
+</style>
+<!-- Legacy embedded editor script 14 disabled. -->
+<!-- Legacy embedded editor script 15 disabled. -->
+<!-- SRIJA_LOGIN_FINAL_CAPTURE_V1 disabled: Login uses direct inline handler. --><!-- SRIJA_EDITOR_SAVED_CONTENT_RESTORE_V1 --><script>(function(){try{var x=localStorage.getItem("srija_editor_page_v9");if(!x||x.indexOf("<header")===-1||x.indexOf("<footer")===-1)return;var saved=document.createElement("div");saved.innerHTML=x;var main=document.querySelector("main");if(!main)return;var sh=saved.querySelector("header"),sn=saved.querySelector("nav"),so=saved.querySelector(".notice"),sv=saved.querySelector(".hero"),sc=saved.querySelector(".cards"),sf=saved.querySelector("footer");if(sh){var h=document.querySelector("header");if(h)h.replaceWith(sh.cloneNode(true))}/* Keep the original Home nav so Login handler remains stable after saved-design restore. */if(so){var o=document.querySelector(".notice");if(o)o.replaceWith(so.cloneNode(true))}if(sv){var v=document.querySelector(".hero");if(v)v.replaceWith(sv.cloneNode(true))}if(sc){var q=document.querySelector(".cards");if(q)q.replaceWith(sc.cloneNode(true))}if(sf){var f=document.querySelector("footer");if(f)f.replaceWith(sf.cloneNode(true))}}catch(e){console.warn("SRIJA saved design restore skipped",e)}})();</script><script id="SRIJA_DIRECT_LOGIN_V1">(function(){window.SRIJA_DIRECT_LOGIN=function(e){if(e)e.preventDefault();var old=document.getElementById("srijaDirectLogin");if(old)old.remove();var p=document.createElement("div");p.id="srijaDirectLogin";p.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2147483647;display:flex;align-items:center;justify-content:center";p.innerHTML='<div style="width:340px;max-width:92vw;background:#fff;padding:22px;border-radius:12px"><h3>🔐 Settings Login</h3><input id="dlUid" placeholder="User ID" style="width:100%;padding:10px;margin:6px 0;box-sizing:border-box"><input id="dlPw" type="password" placeholder="Password" style="width:100%;padding:10px;margin:6px 0;box-sizing:border-box"><button id="dlGo" type="button" style="padding:10px 18px">Login</button> <button id="dlClose" type="button" style="padding:10px 18px">Close</button><div id="dlMsg"></div></div>';document.body.appendChild(p);document.getElementById("dlGo").onclick=function(){var u=document.getElementById("dlUid"),pw=document.getElementById("dlPw");if(u.value==="srija"&&pw.value==="srija1234"){sessionStorage.setItem("srija_owner_logged_in","1");location.href="./editor.html?v="+Date.now()}else{document.getElementById("dlMsg").textContent="User ID বা Password ভুল";}};document.getElementById("dlClose").onclick=function(){p.remove()};document.getElementById("dlUid").focus();return false};})();</script><!-- SRIJA_LOGIN_REPEAT_FIX_V1 --><script>(function(){document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("#settingsBtn");if(!b)return;if(typeof window.SRIJA_DIRECT_LOGIN==="function"){e.preventDefault();e.stopImmediatePropagation();window.SRIJA_DIRECT_LOGIN(e)}},true)})();</script></body>
+</html>
