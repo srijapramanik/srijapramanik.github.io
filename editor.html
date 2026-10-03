@@ -104,7 +104,7 @@ function act(a){if(["color","bg","bgimage","scroll","left","center","right"].inc
     }catch(e){console.warn("Permanent save load skipped",e)}
   })();
 })();
-</script></body></html>
+</script><script id="SRIJA_PERMANENT_SAVE_V3">(function(){var c=document.getElementById("canvas"),s=document.getElementById("status");if(!c)return;async function save(page,html){var r=await fetch("./api/save?page="+encodeURIComponent(page),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({html:html})});var j=await r.json().catch(function(){return{}});if(!r.ok||!j.ok)throw new Error(j.error||"Save failed");}window.SRIJA_SAVE_CURRENT_PAGE=async function(){var p=window.SRIJA_CURRENT_PAGE||"home",h=c.innerHTML;try{s.textContent="⏳ GitHub-এ Save হচ্ছে…";await save(p,h);s.textContent="✓ স্থায়ীভাবে Save হয়েছে"}catch(e){s.textContent="Save হয়নি: "+(e.message||"API সমস্যা")}};(async function(){try{var p=window.SRIJA_CURRENT_PAGE||"home",r=await fetch("./api/save?page="+encodeURIComponent(p),{cache:"no-store"}),j=await r.json().catch(function(){return{}});if(j.ok&&j.html){c.innerHTML=j.html;if(typeof bind==="function")bind();if(typeof clear==="function")clear();s.textContent="✓ GitHub থেকে সর্বশেষ Save লোড হয়েছে"}}catch(e){}})()})();</script></body></html>
 <script id="SRIJA_DRAFT_STATUS_V1">window.SRIJA_DRAFT_STATUS_V1=1;</script><script id="SRIJA_LINKS_EDITOR_CONNECT_V1">window.SRIJA_LINKS_EDITOR_CONNECT_V1=1;</script><script id="SRIJA_PAGE_SELECTOR_V1">window.SRIJA_PAGE_SELECTOR_V1=1;</script><script id="SRIJA_PAGE_TAB_FUNCTION_V1">
 (function(){
  var tabs=document.querySelectorAll("#pageTabs button[data-page]");
