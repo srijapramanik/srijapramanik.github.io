@@ -1,0 +1,7 @@
+{
+  "status": "planned",
+  "storage": "github",
+  "frontendSave": "existing-localStorage",
+  "apiHealth": "https://srijapramanikgithubio.vercel.app/api/health",
+  "protectedWrite": true
+}
